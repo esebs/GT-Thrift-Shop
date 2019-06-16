@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.github.esebs.cs2340project.spacetrader.views.ConfigurationActivity;
 import com.github.esebs.cs2340project.spacetrader.R;
 
 
