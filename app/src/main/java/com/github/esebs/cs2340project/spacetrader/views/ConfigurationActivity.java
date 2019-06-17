@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.esebs.cs2340project.spacetrader.R;
@@ -22,6 +23,10 @@ public class ConfigurationActivity extends AppCompatActivity {
 
 
     private EditText editPlayerName;
+    private TextView pilotPoints1;
+    private TextView engineerPoints1;
+    private TextView fighterPoints1;
+    private TextView traderPoints1;
     private SeekBar editPilotPoints;
     private SeekBar editEngineerPoints;
     private SeekBar editFighterPoints;
@@ -33,6 +38,11 @@ public class ConfigurationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_player);
+
+        pilotPoints1 = findViewById(R.id.pilotLabel);
+        engineerPoints1 = findViewById(R.id.engineerLabel);
+        fighterPoints1 = findViewById(R.id.fighterLabel);
+        traderPoints1 = findViewById(R.id.traderLabel);
 
         editPlayerName = findViewById(R.id.playerName);
         editPilotPoints = findViewById(R.id.pilotBar);
@@ -47,6 +57,12 @@ public class ConfigurationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);
 
+
+        editPilotPoints.setOnSeekBarChangeListener(pilotListener);
+        editEngineerPoints.setOnSeekBarChangeListener(engineerListener);
+        editFighterPoints.setOnSeekBarChangeListener(fighterListener);
+        editTraderPoints.setOnSeekBarChangeListener(traderListener);
+
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +72,6 @@ public class ConfigurationActivity extends AppCompatActivity {
                 int engineerPoints = editEngineerPoints.getProgress();
                 int sumPoints = pilotPoints + fighterPoints + traderPoints
                         + engineerPoints;
-
                 if (sumPoints != 20) {
                     Toast.makeText(ConfigurationActivity.this,
                             "Points must sum to 20", Toast.LENGTH_LONG).show();
@@ -76,6 +91,82 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
 
     }
+
+    SeekBar.OnSeekBarChangeListener pilotListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+            pilotPoints1.setText("Pilot: " + progress);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // called after the user finishes moving the SeekBar
+        }
+    };
+
+    SeekBar.OnSeekBarChangeListener engineerListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+            engineerPoints1.setText("Engineer: " + progress);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // called after the user finishes moving the SeekBar
+        }
+    };
+
+    SeekBar.OnSeekBarChangeListener fighterListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+            fighterPoints1.setText("Fighter " + progress);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // called after the user finishes moving the SeekBar
+        }
+    };
+
+    SeekBar.OnSeekBarChangeListener traderListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+            traderPoints1.setText("Trader: " + progress);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // called after the user finishes moving the SeekBar
+        }
+    };
 
 
 }
