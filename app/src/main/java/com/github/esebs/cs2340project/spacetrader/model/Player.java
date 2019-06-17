@@ -3,6 +3,7 @@ package com.github.esebs.cs2340project.spacetrader.model;
 public class Player {
     private String name;
     private Difficulty difficulty;
+    private Ship ship;
     private int pilotPoints;
     private int fighterPoints;
     private int traderPoints;
@@ -19,6 +20,7 @@ public class Player {
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
+        this.ship = Ship.GNAT;
     }
 
     public String getName() {
@@ -51,8 +53,8 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Name: " + name + "; Difficulty: " + difficulty
-                + "; Pilot: " + pilotPoints + "; Fighter: "
+        return "Name: " + name + "; Difficulty: " + difficulty + "; Ship: "
+                + ship + "; Pilot: " + pilotPoints + "; Fighter: "
                 + fighterPoints + "; Trader: " + traderPoints
                 + "; Engineer: " + engineerPoints;
     }
