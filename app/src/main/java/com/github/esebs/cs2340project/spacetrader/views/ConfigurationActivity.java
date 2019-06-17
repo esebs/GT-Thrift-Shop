@@ -15,9 +15,12 @@ import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.model.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.model.Player;
 
+
 import java.util.Arrays;
 
 public class ConfigurationActivity extends AppCompatActivity {
+
+
     private EditText editPlayerName;
     private SeekBar editPilotPoints;
     private SeekBar editEngineerPoints;
@@ -37,7 +40,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         editFighterPoints = findViewById(R.id.fighterBar);
         editTraderPoints = findViewById(R.id.traderBar);
         difficultySpinner = findViewById(R.id.difficultySpinner);
-        startGame = findViewById(R.id.startGame);
+        startGame = findViewById(R.id.exitGame);
 
         ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 Arrays.asList(Difficulty.values()));
@@ -58,12 +61,16 @@ public class ConfigurationActivity extends AppCompatActivity {
                     Toast.makeText(ConfigurationActivity.this,
                             "Points must sum to 20", Toast.LENGTH_LONG).show();
                 } else {
-                    Player player = new Player(editPlayerName.toString(),
+                    Player player = new Player(editPlayerName.getText().toString(),
                             (Difficulty) difficultySpinner.getSelectedItem(),
                             pilotPoints,
                             fighterPoints,
                             traderPoints,
                             engineerPoints);
+                    System.out.println(player);
+                    Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

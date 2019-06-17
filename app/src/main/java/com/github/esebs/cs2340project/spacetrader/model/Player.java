@@ -7,6 +7,7 @@ public class Player {
     private int fighterPoints;
     private int traderPoints;
     private int engineerPoints;
+    private int credits;
     private final int MAX_POINTS = 20;
 
     public Player(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
@@ -17,6 +18,7 @@ public class Player {
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
+        this.credits = 1000;
     }
 
     public String getName() {
@@ -45,5 +47,13 @@ public class Player {
 
     public int getMAX_POINTS() {
         return MAX_POINTS;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "; Difficulty: " + difficulty
+                + "; Pilot: " + pilotPoints + "; Fighter: "
+                + fighterPoints + "; Trader: " + traderPoints
+                + "; Engineer: " + engineerPoints;
     }
 }
