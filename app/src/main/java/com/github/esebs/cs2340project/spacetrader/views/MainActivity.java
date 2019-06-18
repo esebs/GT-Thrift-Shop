@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
+
         startButton = findViewById(R.id.exitGame);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
