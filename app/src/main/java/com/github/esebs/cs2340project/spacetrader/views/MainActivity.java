@@ -16,6 +16,7 @@ import com.github.esebs.cs2340project.spacetrader.R;
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
 
+
     /**
      * Set up when activity starts
      * @param savedInstanceState current state

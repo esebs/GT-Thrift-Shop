@@ -52,6 +52,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     // Buttons
     private Button startGame;
+    private Button cancel;
 
     /**
      * Set up when activity starts
@@ -83,6 +84,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         // Finds Buttons
         startGame = findViewById(R.id.exitGame);
+        cancel = findViewById(R.id.goBack);
 
         ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 Arrays.asList(Difficulty.values()));
@@ -103,7 +105,6 @@ public class ConfigurationActivity extends AppCompatActivity {
         editTraderPoints.setOnSeekBarChangeListener(traderListener);
 
         // Creates player when button is selected
-
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +131,13 @@ public class ConfigurationActivity extends AppCompatActivity {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+
+        });
     }
 
     SeekBar.OnSeekBarChangeListener pilotListener = new SeekBar.OnSeekBarChangeListener() {
