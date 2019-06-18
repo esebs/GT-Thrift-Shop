@@ -1,5 +1,9 @@
 package com.github.esebs.cs2340project.spacetrader.model;
-
+/**
+ * All possible difficulties
+ * @version 1.0
+ * @author Sebastian Escobar
+ */
 public enum Difficulty {
     BABY ("Baby", 0),
     EASY ("Easy",1),

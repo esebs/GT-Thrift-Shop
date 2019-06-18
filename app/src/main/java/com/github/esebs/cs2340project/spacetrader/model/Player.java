@@ -1,5 +1,9 @@
 package com.github.esebs.cs2340project.spacetrader.model;
-
+/**
+ * Creates player class
+ * @version 1.0
+ * @author Sebastian Escobar
+ */
 public class Player {
     private String name;
     private Difficulty difficulty;
