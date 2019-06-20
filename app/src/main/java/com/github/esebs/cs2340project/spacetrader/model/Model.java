@@ -2,6 +2,10 @@ package com.github.esebs.cs2340project.spacetrader.model;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
 
+/**
+ * @version 1.0
+ * @author Travis Adams
+ */
 public class Model {
 
     // The player of the game
