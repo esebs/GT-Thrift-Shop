@@ -1,4 +1,4 @@
-package com.github.esebs.cs2340project.spacetrader.model;
+package com.github.esebs.cs2340project.spacetrader.entities;
 
 /**
  * Enum with all possible ships, and there respective characteristics

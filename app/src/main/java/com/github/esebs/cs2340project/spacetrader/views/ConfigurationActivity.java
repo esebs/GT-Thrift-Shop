@@ -13,8 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.esebs.cs2340project.spacetrader.R;
-import com.github.esebs.cs2340project.spacetrader.model.Difficulty;
-import com.github.esebs.cs2340project.spacetrader.model.Player;
+import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
+import com.github.esebs.cs2340project.spacetrader.entities.Player;
+import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
 
 
 import java.util.Arrays;
@@ -24,6 +25,8 @@ import java.util.Arrays;
  * @author Sebastian Escobar
  */
 public class ConfigurationActivity extends AppCompatActivity {
+
+    private PlayerViewModel viewModel = new PlayerViewModel();
 
     // Player Name
     private EditText editPlayerName;
@@ -117,13 +120,12 @@ public class ConfigurationActivity extends AppCompatActivity {
                     Toast.makeText(ConfigurationActivity.this,
                             "Points must sum to 20", Toast.LENGTH_LONG).show();
                 } else {
-                    Player player = new Player(editPlayerName.getText().toString(),
+                    viewModel.setPlayer(editPlayerName.getText().toString(),
                             (Difficulty) difficultySpinner.getSelectedItem(),
                             pilotPoints,
                             fighterPoints,
                             traderPoints,
                             engineerPoints);
-                    System.out.println(player);
                     Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                     finish();

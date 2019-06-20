@@ -1,7 +1,45 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
+
+import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
+import com.github.esebs.cs2340project.spacetrader.entities.Player;
+import com.github.esebs.cs2340project.spacetrader.model.Model;
+
 /**
  * @version 1.0
  * @author Sebastian Escobar
  */
 public class PlayerViewModel {
+
+    /**
+     * Gets the player for the game
+     * @return the player
+     */
+    public Player getPlayer() {
+        return Model.getModelInstance().getPlayer();
+    }
+
+    /**
+     * Sets the player for the game
+     *
+     * @param name Player's name
+     * @param difficulty easy, medium, hard, Bob Waters
+     * @param pilotPoints Piloting Skill Points
+     * @param fighterPoints Fighting Skill Points
+     * @param traderPoints Trader Skill Points
+     * @param engineerPoints Engineering Skill Points
+     */
+    public void setPlayer(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
+                  int traderPoints, int engineerPoints) {
+
+        Player player = new Player(name,
+                                   difficulty,
+                                   pilotPoints,
+                                   fighterPoints,
+                                   traderPoints,
+                                   engineerPoints);
+
+        System.out.println(player);
+
+        Model.getModelInstance().setPlayer(player);
+    }
 }
