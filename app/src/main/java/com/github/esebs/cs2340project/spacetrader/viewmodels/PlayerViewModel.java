@@ -1,5 +1,7 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
+import android.util.Log;
+
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
@@ -31,14 +33,10 @@ public class PlayerViewModel {
     public void setPlayer(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
                   int traderPoints, int engineerPoints) {
 
-        Player player = new Player(name,
-                                   difficulty,
-                                   pilotPoints,
-                                   fighterPoints,
-                                   traderPoints,
-                                   engineerPoints);
+        Player player = new Player(name, difficulty, pilotPoints, fighterPoints, traderPoints,
+                engineerPoints);
 
-        System.out.println(player);
+        Log.d("APP", "PlayerViewModel: created player: " + player);
 
         Model.getModelInstance().setPlayer(player);
     }
