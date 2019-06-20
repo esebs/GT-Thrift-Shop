@@ -9,14 +9,26 @@ import android.widget.Button;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 
-
+/**
+ * @version 1.0
+ * @author Sebastian Escobar
+ */
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
 
+
+    /**
+     * Set up when activity starts
+     * @param savedInstanceState current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
 
         startButton = findViewById(R.id.exitGame);
         startButton.setOnClickListener(new View.OnClickListener() {
