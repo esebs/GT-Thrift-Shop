@@ -1,4 +1,4 @@
-package com.github.esebs.cs2340project.spacetrader.model;
+package com.github.esebs.cs2340project.spacetrader.entities;
 /**
  * Creates player class
  * @version 1.0

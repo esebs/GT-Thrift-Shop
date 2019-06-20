@@ -1,4 +1,4 @@
-package com.github.esebs.cs2340project.spacetrader.model;
+package com.github.esebs.cs2340project.spacetrader.entities;
 /**
  * All possible difficulties
  * @version 1.0
