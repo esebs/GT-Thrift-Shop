@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
-import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
 
 
