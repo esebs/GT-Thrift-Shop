@@ -25,7 +25,6 @@ public enum Ship {
     Ship(String shipType, int fuelRange, int cargoSize, int hullStrength, int health) {
         this.shipType = shipType;
         this.fuelRange = fuelRange;
-        this.fuelRange = fuelRange;
         this.cargoSize = cargoSize;
         this.hullStrength = hullStrength;
         this.health = health;
