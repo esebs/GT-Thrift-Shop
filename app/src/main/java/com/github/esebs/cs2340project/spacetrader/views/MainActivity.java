@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.esebs.cs2340project.spacetrader.R;
+import com.github.esebs.cs2340project.spacetrader.viewmodels.CreateUniverseViewModel;
+
 
 /**
  * @version 1.0
@@ -15,7 +17,7 @@ import com.github.esebs.cs2340project.spacetrader.R;
  */
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
-
+    private CreateUniverseViewModel viewModel = new CreateUniverseViewModel();
 
     /**
      * Set up when activity starts
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
         }
@@ -34,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewModel.createUniverse();
                 Intent intent = new Intent(MainActivity.this, ConfigurationActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
     }
