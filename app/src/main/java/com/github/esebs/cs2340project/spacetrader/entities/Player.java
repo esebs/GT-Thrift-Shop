@@ -172,11 +172,22 @@ public class Player {
         return MAX_POINTS;
     }
 
+    /**
+     * toString method for Player
+     *
+     * @return string representation of this Player
+     */
     @Override
     public String toString() {
-        return "Name: " + name + "; Difficulty: " + difficulty + "; Ship: "
-                + ship + "; Pilot: " + pilotPoints + "; Fighter: "
-                + fighterPoints + "; Trader: " + traderPoints
-                + "; Engineer: " + engineerPoints;
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", difficulty=" + difficulty +
+                ", ship=" + ship +
+                ", pilotPoints=" + pilotPoints +
+                ", fighterPoints=" + fighterPoints +
+                ", traderPoints=" + traderPoints +
+                ", engineerPoints=" + engineerPoints +
+                ", credits=" + credits +
+                '}';
     }
 }

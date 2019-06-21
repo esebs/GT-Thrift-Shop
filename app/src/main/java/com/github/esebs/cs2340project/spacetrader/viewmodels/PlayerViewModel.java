@@ -12,6 +12,8 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class PlayerViewModel {
 
+    private Model model = Model.getModelInstance();
+
     /**
      * Gets the player for the game
      * @return the player
@@ -38,6 +40,8 @@ public class PlayerViewModel {
 
         Log.d("APP", "PlayerViewModel: created player: " + player);
 
-        Model.getModelInstance().setPlayer(player);
+        model.setPlayer(player);
+
+        Log.d("APP", "PlayerViewModel: universe: " + model);
     }
 }
