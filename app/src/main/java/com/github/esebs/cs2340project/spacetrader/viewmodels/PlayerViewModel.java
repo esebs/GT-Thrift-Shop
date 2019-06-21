@@ -42,6 +42,5 @@ public class PlayerViewModel {
 
         model.setPlayer(player);
 
-        Log.d("APP", "PlayerViewModel: universe: " + model);
     }
 }
