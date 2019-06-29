@@ -4,11 +4,8 @@ import android.util.Log;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
-<<<<<<< HEAD
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
-=======
 import com.github.esebs.cs2340project.spacetrader.entities.Resource;
->>>>>>> 4c733096580d742c6701438d5a0900f3222edad8
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 import java.util.HashMap;
