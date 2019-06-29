@@ -42,8 +42,8 @@ public class PlayerViewModel {
         Player player = new Player(name, difficulty, pilotPoints, fighterPoints, traderPoints,
                 engineerPoints);
 
-        // Instantiate the ship's cargo hold (0 of each resource)
-        player.getShip().setCargoHold(instantiateCargoHold());
+        // Instantiate the vehicle's cargo hold (0 of each resource)
+        player.getVehicle().setCargoHold(instantiateCargoHold());
 
         Log.d("APP", "PlayerViewModel: created player: " + player);
 

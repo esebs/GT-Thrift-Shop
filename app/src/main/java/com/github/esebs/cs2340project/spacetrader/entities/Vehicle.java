@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Enum with all possible ships, and there respective characteristics
+ * Enum with all possible vehicles, and there respective characteristics
  * @version 1.0
  * @author Sebastian Escobar
  */
-public enum Ship {
+public enum Vehicle {
     GNAT("Gnat", 14, 15, 100);
 
-    private String shipType;
+    private String vehicleType;
     private int fuelRange;
     private int cargoSize;
     private Map<Resource, Integer> cargoHold = new HashMap<>();
@@ -19,14 +19,14 @@ public enum Ship {
     private int currentHealth;
 
     /**
-     * Creates the ship required
-     * @param shipType name of ship type
+     * Creates the vehicle required
+     * @param vehicleType name of vehicle type
      * @param fuelRange range of fuel
      * @param cargoSize size of cargo
      * @param hullStrength maximum value of currentHealth
      */
-    Ship(String shipType, int fuelRange, int cargoSize, int hullStrength) {
-        this.shipType = shipType;
+    Vehicle(String vehicleType, int fuelRange, int cargoSize, int hullStrength) {
+        this.vehicleType = vehicleType;
         this.fuelRange = fuelRange;
         this.cargoSize = cargoSize;
         this.hullStrength = hullStrength;
@@ -35,15 +35,15 @@ public enum Ship {
     }
 
     /**
-     * Returns Ship's name
-     * @return shipType
+     * Returns Vehicle's name
+     * @return vehicleType
      */
-    public String getshipType() {
-        return shipType;
+    public String getVehicleType() {
+        return vehicleType;
     }
 
     /**
-     * Returns the fuel range of the ship type
+     * Returns the fuel range of the vehicle type
      * @return
      */
     public int getFuelRange() {
@@ -51,8 +51,8 @@ public enum Ship {
     }
 
     /**
-     * Sets the range of ship to a new range
-     * @param fuelRange range of ship
+     * Sets the range of vehicle to a new range
+     * @param fuelRange range of vehicle
      */
     public void setFuelRange(int fuelRange) {
         this.fuelRange = fuelRange;
@@ -91,7 +91,7 @@ public enum Ship {
     }
 
     /**
-     * Returns the max health of the ship
+     * Returns the max health of the vehicle
      * @return max health
      */
     public int getHullStrength() {
@@ -99,7 +99,7 @@ public enum Ship {
     }
 
     /**
-     * Sets the max health of ship
+     * Sets the max health of vehicle
      * @param hullStrength new max health
      */
     public void setHullStrength(int hullStrength) {
@@ -107,7 +107,7 @@ public enum Ship {
     }
 
     /**
-     * Returns ship's current health
+     * Returns vehicle's current health
      * @return current health
      */
     public int getCurrentHealth() {
@@ -115,7 +115,7 @@ public enum Ship {
     }
 
     /**
-     * Sets the ship's current health
+     * Sets the Vehicle's current health
      * @param currentHealth new health
      */
     public void setCurrentHealth(int currentHealth) {
@@ -123,13 +123,13 @@ public enum Ship {
     }
 
     /**
-     * Creates String representation of Ship
-     * @return name of ship
+     * Creates String representation of Vehicle
+     * @return name of vehicle
      */
     @Override
     public String toString() {
-        return "Ship{" +
-                "shipType='" + shipType + '\'' +
+        return "Vehicle{" +
+                "VehicleType='" + vehicleType + '\'' +
                 ", fuelRange=" + fuelRange +
                 ", cargoSize=" + cargoSize +
                 ", cargoHold=" + cargoHold +
