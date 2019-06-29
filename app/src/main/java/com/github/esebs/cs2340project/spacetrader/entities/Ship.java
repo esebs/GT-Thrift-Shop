@@ -1,33 +1,40 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Enum with all possible ships, and there respective characteristics
  * @version 1.0
  * @author Sebastian Escobar
  */
 public enum Ship {
-    GNAT("Gnat", 14, 15, 100, 100);
+    GNAT("Gnat", 14, 15, 100);
 
     private String shipType;
     private int fuelRange;
     private int cargoSize;
+    // 10 different resources
+    // private Map<Resource, Integer> cargoHold = new HashMap<>(10);
     private int hullStrength;
-    private int health;
+    private int currentHealth;
 
     /**
      * Creates the ship required
      * @param shipType name of ship type
      * @param fuelRange range of fuel
      * @param cargoSize size of cargo
-     * @param hullStrength maximum value of health
-     * @param health current health
+     * @param hullStrength maximum value of currentHealth
      */
-    Ship(String shipType, int fuelRange, int cargoSize, int hullStrength, int health) {
+    Ship(String shipType, int fuelRange, int cargoSize, int hullStrength) {
         this.shipType = shipType;
         this.fuelRange = fuelRange;
         this.cargoSize = cargoSize;
         this.hullStrength = hullStrength;
-        this.health = health;
+        // currentHealth always starts at its maximum, which is determined by hullStrength
+        this.currentHealth = hullStrength;
     }
 
     /**
@@ -70,6 +77,22 @@ public enum Ship {
         this.cargoSize = cargoSize;
     }
 
+//    /**
+//     * Gets the player's cargo items
+//     * @return a Map of the player's cargo items
+//     */
+//    public Map<Resource, Integer> getCargoHold() {
+//        return cargoHold;
+//    }
+//
+//    /**
+//     * Sets the player's cargo items
+//     * @param cargoHold a Map of the player's new cargo items
+//     */
+//    public void setCargoHold(Map<Resource, Integer> cargoHold) {
+//        this.cargoHold = cargoHold;
+//    }
+
     /**
      * Returns the max health of the ship
      * @return max health
@@ -79,7 +102,7 @@ public enum Ship {
     }
 
     /**
-     * Sets the max health of ship to a new value
+     * Sets the max health of ship
      * @param hullStrength new max health
      */
     public void setHullStrength(int hullStrength) {
@@ -87,19 +110,19 @@ public enum Ship {
     }
 
     /**
-     * returns ship's health
-     * @return health
+     * Returns ship's current health
+     * @return current health
      */
-    public int getHealth() {
-        return health;
+    public int getCurrentHealth() {
+        return currentHealth;
     }
 
     /**
-     * sets health to new health
-     * @param health
+     * Sets the ship's current health
+     * @param currentHealth new health
      */
-    public void setHealth(int health) {
-        this.health = health;
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
     }
 
     /**
