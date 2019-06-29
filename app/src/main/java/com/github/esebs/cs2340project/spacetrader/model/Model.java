@@ -2,9 +2,11 @@ package com.github.esebs.cs2340project.spacetrader.model;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
+import com.github.esebs.cs2340project.spacetrader.entities.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @version 1.0
@@ -76,5 +78,15 @@ public class Model {
         return "Model{" +
                 "buildings=" + buildings +
                 '}';
+    }
+
+    /**
+     * Returns a random room, used to initialize player
+     * @return random room
+     */
+    public Room getRandomRoom() {
+        Random rn = new Random();
+        int random = rn.nextInt(getBuildings().size());
+        return getBuildings().get(random).getRooms().get(0);
     }
 }
