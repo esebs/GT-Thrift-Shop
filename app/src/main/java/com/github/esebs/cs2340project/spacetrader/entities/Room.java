@@ -10,7 +10,7 @@ public class Room {
     private Size size;
     private TechLevel techLevel;
     private Government government;
-    private Resource resource;
+    private ResourceLevel resource;
     private PolicePresence policePresence;
 
     public Room(String name) {
@@ -18,7 +18,7 @@ public class Room {
         size = Size.generateSize();
         techLevel = TechLevel.generateTechLevel();
         government = Government.generateGovernment();
-        resource = Resource.generateResources();
+        resource = ResourceLevel.generateResources();
         policePresence = PolicePresence.generatePolicePresence();
     }
 

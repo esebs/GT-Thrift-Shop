@@ -12,10 +12,6 @@ import java.util.List;
 public class CreateUniverseViewModel {
     private Model model = Model.getModelInstance();
 
-    public List<Building> getBuildings() {
-        return Model.getModelInstance().getBuildings();
-    }
-
     public void createUniverse() {
         // Instantiate the universe's buildings
         model.setBuildings(createBuildings());
@@ -23,6 +19,10 @@ public class CreateUniverseViewModel {
         Log.d("APP", "BuildingViewModel: universe created: " + model);
     }
 
+    /**
+     * Creates the universe's buildings (along with their rooms)
+     * @return a list of the universe's buildings
+     */
     private List<Building> createBuildings() {
 
         List<Building> buildings = new ArrayList<>();
