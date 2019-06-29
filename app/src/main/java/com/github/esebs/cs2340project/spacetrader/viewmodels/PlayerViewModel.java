@@ -4,8 +4,15 @@ import android.util.Log;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
+<<<<<<< HEAD
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
+=======
+import com.github.esebs.cs2340project.spacetrader.entities.Resource;
+>>>>>>> 4c733096580d742c6701438d5a0900f3222edad8
 import com.github.esebs.cs2340project.spacetrader.model.Model;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @version 1.0
@@ -40,9 +47,24 @@ public class PlayerViewModel {
         Player player = new Player(name, difficulty, current, pilotPoints,fighterPoints, traderPoints,
                 engineerPoints);
 
+        // Instantiate the vehicle's cargo hold (0 of each resource)
+        player.getVehicle().setCargoHold(instantiateCargoHold());
+
         Log.d("APP", "PlayerViewModel: created player: " + player);
 
         model.setPlayer(player);
 
+    }
+
+    /**
+     * Creates an empty cargo hold
+     * @return a map of the possible resources, each with a value (quantity) of 0
+     */
+    private Map<Resource, Integer> instantiateCargoHold() {
+        Map<Resource, Integer> cargoHold = new HashMap<>();
+        for (Resource resource : Resource.values()) {
+            cargoHold.put(resource, 0);
+        }
+        return cargoHold;
     }
 }
