@@ -1,8 +1,6 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,8 +14,7 @@ public enum Ship {
     private String shipType;
     private int fuelRange;
     private int cargoSize;
-    // 10 different resources
-    // private Map<Resource, Integer> cargoHold = new HashMap<>(10);
+    private Map<Resource, Integer> cargoHold = new HashMap<>();
     private int hullStrength;
     private int currentHealth;
 
@@ -77,21 +74,21 @@ public enum Ship {
         this.cargoSize = cargoSize;
     }
 
-//    /**
-//     * Gets the player's cargo items
-//     * @return a Map of the player's cargo items
-//     */
-//    public Map<Resource, Integer> getCargoHold() {
-//        return cargoHold;
-//    }
-//
-//    /**
-//     * Sets the player's cargo items
-//     * @param cargoHold a Map of the player's new cargo items
-//     */
-//    public void setCargoHold(Map<Resource, Integer> cargoHold) {
-//        this.cargoHold = cargoHold;
-//    }
+    /**
+     * Gets the player's cargo items
+     * @return a Map of the player's cargo items
+     */
+    public Map<Resource, Integer> getCargoHold() {
+        return cargoHold;
+    }
+
+    /**
+     * Sets the player's cargo items
+     * @param cargoHold a Map of the player's new cargo items
+     */
+    public void setCargoHold(Map<Resource, Integer> cargoHold) {
+        this.cargoHold = cargoHold;
+    }
 
     /**
      * Returns the max health of the ship
@@ -131,6 +128,13 @@ public enum Ship {
      */
     @Override
     public String toString() {
-        return shipType;
+        return "Ship{" +
+                "shipType='" + shipType + '\'' +
+                ", fuelRange=" + fuelRange +
+                ", cargoSize=" + cargoSize +
+                ", cargoHold=" + cargoHold +
+                ", hullStrength=" + hullStrength +
+                ", currentHealth=" + currentHealth +
+                '}';
     }
 }
