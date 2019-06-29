@@ -7,7 +7,7 @@ package com.github.esebs.cs2340project.spacetrader.entities;
 public class Player {
     private String name;
     private Difficulty difficulty;
-    private Ship ship;
+    private Vehicle vehicle;
     private int pilotPoints;
     private int fighterPoints;
     private int traderPoints;
@@ -33,7 +33,7 @@ public class Player {
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
-        this.ship = Ship.GNAT;
+        this.vehicle = Vehicle.GNAT;
     }
 
     /**
@@ -69,19 +69,19 @@ public class Player {
     }
 
     /**
-     * Gets the ship
-     * @return ship
+     * Gets the vehicle
+     * @return vehicle
      */
-    public Ship getShip() {
-        return ship;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     /**
-     * Sets ship to a new value
-     * @param ship new ship
+     * Sets vehicle to a new value
+     * @param vehicle new vehicle
      */
-    public void setShip(Ship ship) {
-        this.ship = ship;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     /**
@@ -182,7 +182,7 @@ public class Player {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", difficulty=" + difficulty +
-                ", ship=" + ship +
+                ", vehicle=" + vehicle +
                 ", pilotPoints=" + pilotPoints +
                 ", fighterPoints=" + fighterPoints +
                 ", traderPoints=" + traderPoints +
