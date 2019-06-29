@@ -68,11 +68,16 @@ public class Building {
      */
     @Override
     public String toString() {
+        String temp = "";
+        for (Room room : rooms) {
+            temp += "\n\t" + room.toString();
+        }
+
         return "\nBuilding{" +
                 "name='" + name + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", rooms=" + rooms +
+                ", rooms=" + temp +
                 "}\n";
     }
 }

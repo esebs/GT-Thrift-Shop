@@ -36,6 +36,7 @@ public class Room {
         return rooms;
     }
 
+
     /**
      * toString method for Room
      *
@@ -43,7 +44,7 @@ public class Room {
      */
     @Override
     public String toString() {
-        return "\nRoom{" +
+        return "Room{" +
                 "name='" + name + '\'' +
                 ", size=" + size +
                 ", techLevel=" + techLevel +
