@@ -15,7 +15,7 @@ public class Room {
     private ResourceLevel resource;
     private PolicePresence policePresence;
 
-    // Room trading maps
+    // Room trading arrays
     private int[] sellToRoomPrices;
     private int[] buyFromRoomPrices;
     private int[] buyFromRoomQuantities;

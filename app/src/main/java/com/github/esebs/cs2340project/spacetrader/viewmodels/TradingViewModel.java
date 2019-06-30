@@ -15,6 +15,8 @@ public class TradingViewModel {
      *  -Number that the Player can purchase with their credits
      *  -Number of cargo spaces left in the Player's Vehicle
      *
+     *  Returns -1 if the Resource cannot be bought from the current Room
+     *
      * @param resource the resource being purchased
      * @return the max buyable number of the given resource
      */
@@ -35,6 +37,8 @@ public class TradingViewModel {
     /**
      * Calculates the maximum number of a certain Resource that the Player can sell
      * (just the number of that resource that they have in their cargoHold)
+     *
+     * Returns -1 if the Resource cannot be sold to the current Room
      *
      * @param resource the resource being purchased
      * @return the max sellable number of the given resource

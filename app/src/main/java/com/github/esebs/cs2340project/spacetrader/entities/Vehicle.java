@@ -1,8 +1,6 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Enum with all possible vehicles, and there respective characteristics
