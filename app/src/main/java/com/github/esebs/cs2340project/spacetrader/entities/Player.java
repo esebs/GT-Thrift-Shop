@@ -31,12 +31,12 @@ public class Player {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;
-        this.vehicle = Vehicle.GNAT;
         this.pilotPoints = pilotPoints;
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
+        this.vehicle = Vehicle.SCOOTER;
     }
 
     /**

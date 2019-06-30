@@ -10,7 +10,11 @@ import java.util.Map;
  * @author Sebastian Escobar
  */
 public enum Vehicle {
-    GNAT("Gnat", 14, 15, 100);
+    UNICYCLE("Unicycle", 10, 10, 25),
+    SCOOTER("Scooter", 14, 15, 100),
+    BIKE("Bike", 20, 20, 200),
+    GOLFCART("Golf Cart", 25, 60, 400),
+    MOPED("Moped", 30, 35, 350);
 
     private String vehicleType;
     private int fuelRange;
