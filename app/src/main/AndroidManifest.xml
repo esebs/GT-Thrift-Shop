@@ -26,6 +26,7 @@
         <activity
             android:name=".views.WelcomeActivity"
             android:parentActivityName=".views.ConfigurationActivity" />
+
     </application>
 
 </manifest>
