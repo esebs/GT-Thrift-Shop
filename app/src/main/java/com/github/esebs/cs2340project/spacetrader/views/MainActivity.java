@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         sectionsPageAdapeter = new SectionsPageAdapeter(getSupportFragmentManager());
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.refreshDrawableState();
         setupViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

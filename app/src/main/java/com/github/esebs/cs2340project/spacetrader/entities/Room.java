@@ -68,6 +68,49 @@ public class Room {
     }
 
     /**
+     * @return name of the room
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return size of the room
+     */
+    public Size getSize() {
+        return size;
+    }
+
+    /**
+     * @return the tech level of the room
+     */
+    public TechLevel getTechLevel() {
+        return techLevel;
+    }
+
+    /**
+     * @return the government type of the room
+     */
+    public Government getGovernment() {
+        return government;
+    }
+
+    /**
+     * @return get the resource level of the room
+     */
+    public ResourceLevel getResource() {
+        return resource;
+    }
+
+    /**
+     * @return get the police presence
+     */
+    public PolicePresence getPolicePresence() {
+        return policePresence;
+    }
+
+
+    /**
      * Sets the room's resource quantities
      * @param buyFromRoomQuantities array of resource quantities
      */

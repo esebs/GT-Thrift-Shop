@@ -81,7 +81,6 @@ public class BuyFragment extends Fragment {
         View view = inflater.inflate(R.layout.buy_fragment, container,false);
         final View dialog = inflater.inflate(R.layout.dialog, container,false);
 
-
         waterButton = view.findViewById(R.id.water_qty);
         waterPrice = view.findViewById(R.id.water_price);
 
@@ -101,7 +100,7 @@ public class BuyFragment extends Fragment {
 
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 int maxBuyable = tradingViewModel.calculateMaxBuyable(Resource.WATER);
 
@@ -130,6 +129,7 @@ public class BuyFragment extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.buyResources(Resource.WATER, waterQuanity);
                                 waterButton.setText("" + tradingViewModel.getBuyQuantity(Resource.WATER));
+
                                 System.out.println(model.getPlayer());
                             }
 
@@ -1012,6 +1012,14 @@ public class BuyFragment extends Fragment {
             // called after the user finishes moving the SeekBar
         }
     };
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
 
 
 }
