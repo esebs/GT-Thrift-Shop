@@ -14,7 +14,7 @@ public enum Vehicle {
     private String vehicleType;
     private int fuelRange;
     private int cargoSize;
-    private Map<Resource, Integer> cargoHold = new HashMap<>();
+    private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int hullStrength;
     private int currentHealth;
 
@@ -78,7 +78,7 @@ public enum Vehicle {
      * Gets the player's cargo items
      * @return a Map of the player's cargo items
      */
-    public Map<Resource, Integer> getCargoHold() {
+    public int[] getCargoHold() {
         return cargoHold;
     }
 
@@ -86,7 +86,7 @@ public enum Vehicle {
      * Sets the player's cargo items
      * @param cargoHold a Map of the player's new cargo items
      */
-    public void setCargoHold(Map<Resource, Integer> cargoHold) {
+    public void setCargoHold(int[] cargoHold) {
         this.cargoHold = cargoHold;
     }
 
