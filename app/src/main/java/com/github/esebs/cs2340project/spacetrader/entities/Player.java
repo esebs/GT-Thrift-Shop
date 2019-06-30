@@ -13,6 +13,7 @@ public class Player {
     private int traderPoints;
     private int engineerPoints;
     private int credits;
+    private Room current;
     private final int MAX_POINTS = 20;
 
     /**
@@ -24,10 +25,11 @@ public class Player {
      * @param traderPoints Trader Skill Points
      * @param engineerPoints Engineering Skill Points
      */
-    public Player(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
+    public Player(String name, Difficulty difficulty, Room current,int pilotPoints, int fighterPoints,
                   int traderPoints, int engineerPoints) {
         this.name = name;
         this.difficulty = difficulty;
+        this.current = current;
         this.pilotPoints = pilotPoints;
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
@@ -183,6 +185,7 @@ public class Player {
                 "name='" + name + '\'' +
                 ", difficulty=" + difficulty +
                 ", vehicle=" + vehicle +
+                ", Room=" + current +
                 ", pilotPoints=" + pilotPoints +
                 ", fighterPoints=" + fighterPoints +
                 ", traderPoints=" + traderPoints +

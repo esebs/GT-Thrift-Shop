@@ -46,6 +46,7 @@ public class Room {
         return rooms;
     }
 
+
     /**
      * Calculates the sell price for each resource based on the Room's tech level
      * @return an array of the resources' sell prices
@@ -110,7 +111,7 @@ public class Room {
      */
     @Override
     public String toString() {
-        return "\nRoom{" +
+        return "Room{" +
                 "name='" + name + '\'' +
                 ", size=" + size +
                 ", techLevel=" + techLevel +
