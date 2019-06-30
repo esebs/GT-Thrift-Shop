@@ -137,23 +137,4 @@ public class TradingViewModel {
                 + numToSell * getSellPrice(resource) + " total)");
     }
 
-    /**
-    * Gets the quantity of a resource at a room
-    *
-    * @param resource the Resource at the room
-     */
-
-    public int getBuyQuantity(Resource resource) {
-        return model.getPlayer().getCurrent().getBuyFromRoomQuantities()[resource.ordinal()];
-    }
-
-    /**
-     * Gets the quantity of a resource at a room
-     *
-     * @param resource the Resource at the room
-     */
-
-    public int getBuyPrice(Resource resource) {
-        return model.getPlayer().getCurrent().getBuyFromRoomPrices()[resource.ordinal()];
-    }
 }
