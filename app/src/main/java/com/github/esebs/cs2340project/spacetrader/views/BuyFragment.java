@@ -408,11 +408,13 @@ public class BuyFragment extends Fragment {
         return view;
     }
 
+
+    //SeekBar handler for Buying Water
     SeekBar.OnSeekBarChangeListener seekerListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes pilot points to new value and updates Points Remaining
-         * @param seekBar editPilotPoints
-         * @param progress current progress of pilot bar
+         * @param seekBar seekBar for Alert
+         * @param progress current progress of the buy water seekbar
          * @param fromUser if progress is from user
          */
         @Override
