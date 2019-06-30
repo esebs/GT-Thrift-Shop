@@ -49,16 +49,16 @@ public class SellFragment extends Fragment {
     private TextView robotsPrice;
 
     //The amount the player wants to sell
-    private int waterQuanity = 0;
-    private int fursQuanity = 0;
-    private int foodQuanity = 0;
-    private int oreQuanity = 0;
-    private int gamesQuanity = 0;
-    private int firearmsQuanity = 0;
-    private int medicineQuanity = 0;
-    private int machinesQuanity = 0;
-    private int narcoticsQuanity = 0;
-    private int robotsQuanity = 0;
+    private int waterQuanity;
+    private int fursQuanity;
+    private int foodQuanity;
+    private int oreQuanity;
+    private int gamesQuanity;
+    private int firearmsQuanity;
+    private int medicineQuanity;
+    private int machinesQuanity;
+    private int narcoticsQuanity;
+    private int robotsQuanity;
 
     private TextView textView1;
     private TextView textView2;
@@ -75,6 +75,7 @@ public class SellFragment extends Fragment {
         //Selling Water
         waterButton = view.findViewById(R.id.water_qty);
         waterPrice = view.findViewById(R.id.water_price);
+        waterQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.WATER) == -1) {
@@ -143,6 +144,7 @@ public class SellFragment extends Fragment {
         //Selling Furs
         fursButton = view.findViewById(R.id.furs_qty);
         fursPrice = view.findViewById(R.id.furs_price);
+        fursQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.FURS) == -1) {
@@ -211,6 +213,7 @@ public class SellFragment extends Fragment {
         //Selling Food
         foodButton = view.findViewById(R.id.food_qty);
         foodPrice = view.findViewById(R.id.food_price);
+        foodQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.FOOD) == -1) {
@@ -279,6 +282,7 @@ public class SellFragment extends Fragment {
         //Selling Ore
         oreButton = view.findViewById(R.id.ore_qty);
         orePrice = view.findViewById(R.id.ore_price);
+        oreQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.ORE) == -1) {
@@ -347,6 +351,7 @@ public class SellFragment extends Fragment {
         //Selling Games
         gamesButton = view.findViewById(R.id.games_qty);
         gamesPrice = view.findViewById(R.id.games_price);
+        gamesQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.GAMES) == -1) {
@@ -415,6 +420,7 @@ public class SellFragment extends Fragment {
         //Selling Firearms
         firearmsButton = view.findViewById(R.id.firearms_qty);
         firearmsPrice = view.findViewById(R.id.firearms_price);
+        firearmsQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.FIREARMS) == -1) {
@@ -483,6 +489,7 @@ public class SellFragment extends Fragment {
         //Selling Medicine
         medicineButton = view.findViewById(R.id.medicine_qty);
         medicinePrice = view.findViewById(R.id.medicine_price);
+        medicineQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.MEDICINE) == -1) {
@@ -550,6 +557,7 @@ public class SellFragment extends Fragment {
         //Selling Machine
         machinesButton = view.findViewById(R.id.machine_qty);
         machinesPrice = view.findViewById(R.id.machine_price);
+        machinesQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.MACHINES) == -1) {
@@ -618,6 +626,7 @@ public class SellFragment extends Fragment {
         //Selling Narcotics
         narcoticsButton = view.findViewById(R.id.narcotics_qty);
         narcoticsPrice = view.findViewById(R.id.narcotics_price);
+        narcoticsQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.NARCOTICS) == -1) {
@@ -686,6 +695,7 @@ public class SellFragment extends Fragment {
         //Selling Robots
         robotsButton = view.findViewById(R.id.robots_qty);
         robotsPrice = view.findViewById(R.id.robots_price);
+        robotsQuanity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.ROBOTS) == -1) {
