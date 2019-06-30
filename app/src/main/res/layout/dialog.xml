@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_view_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -17,14 +17,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="You can buy up to 15 bays of Water."
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/text_view_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,19 +41,29 @@
         app:layout_constraintVertical_bias="0.282" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seek_bar"
         android:layout_width="236dp"
         android:layout_height="27dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="352dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="0 bayes"
+        app:layout_constraintBottom_toTopOf="@+id/seek_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_2"
+        app:layout_constraintVertical_bias="0.435" />
+
 </android.support.constraint.ConstraintLayout>
