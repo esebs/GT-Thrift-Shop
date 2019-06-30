@@ -86,4 +86,24 @@ public class TradingViewModel {
         int payPerUnit = model.getPlayer().getCurrent().getSellToRoomPrices()[resource.ordinal()];
         model.getPlayer().setCredits(credits + (numToSell * payPerUnit));
     }
+
+    /**
+    * Gets the quantity of a resource at a room
+    *
+    * @param resource the Resource at the room
+     */
+
+    public int getBuyQuantity(Resource resource) {
+        return model.getPlayer().getCurrent().getBuyFromRoomQuantities()[resource.ordinal()];
+    }
+
+    /**
+     * Gets the quantity of a resource at a room
+     *
+     * @param resource the Resource at the room
+     */
+
+    public int getBuyPrice(Resource resource) {
+        return model.getPlayer().getCurrent().getBuyFromRoomPrices()[resource.ordinal()];
+    }
 }

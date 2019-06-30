@@ -19,8 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.esebs.cs2340project.spacetrader.R;
+import com.github.esebs.cs2340project.spacetrader.entities.Resource;
+import com.github.esebs.cs2340project.spacetrader.model.Model;
+import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
 
 public class BuyFragment extends Fragment {
+    private Model model = Model.getModelInstance();
+    private TradingViewModel tradingViewModel = new TradingViewModel();
+
     private Button waterButton;
     private Button fursButton;
     private Button foodButton;
@@ -32,6 +38,17 @@ public class BuyFragment extends Fragment {
     private Button narcoticsButton;
     private Button robotsButton;
 
+    private TextView waterPrice;
+    private TextView fursPrice;
+    private TextView foodPrice;
+    private TextView orePrice;
+    private TextView gamesPrice;
+    private TextView firearmsPrice;
+    private TextView medicinePrice;
+    private TextView machinesPrice;
+    private TextView nacorticsPrice;
+    private TextView robotsPrice;
+
     private int waterQuanity;
     private int fursQuanity;
     private int foodQuanity;
@@ -42,7 +59,6 @@ public class BuyFragment extends Fragment {
     private int machinesQuanity;
     private int nacorticsQuanity;
     private int robotsQuanity;
-
 
     private TextView textView1;
     private TextView textView2;
@@ -58,23 +74,29 @@ public class BuyFragment extends Fragment {
         final View dialog = inflater.inflate(R.layout.dialog, container,false);
 
         waterButton = view.findViewById(R.id.water_qty);
+        waterButton.setText("" + tradingViewModel.getBuyQuantity(Resource.WATER));
+        waterPrice = view.findViewById(R.id.water_price);
+        waterPrice.setText("" + tradingViewModel.getBuyPrice(Resource.WATER) + " cr.");
+
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                int maxBuyable = tradingViewModel.calculateMaxBuyable(Resource.WATER);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
                 textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can buy up to " + 2 + " bayes of Water.");
+                textView1.setText("You can buy up to " + maxBuyable + " bayes of Water.");
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
+                seekBar.setMax(maxBuyable);
+
                 waterQuanity = seekBar.getProgress();
 
                 textView3 = (TextView) dialog.findViewById(R.id.quantity);
                 textView3.setText(waterQuanity + " bayes");
-
 
                 seekBar.setOnSeekBarChangeListener(seekerListener);
 
@@ -83,7 +105,10 @@ public class BuyFragment extends Fragment {
                         .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
+                                tradingViewModel.buyResources(Resource.WATER, waterQuanity);
+                                waterButton.setText("" + tradingViewModel.getBuyQuantity(Resource.WATER));
+
+                                System.out.println(model.getPlayer());
                             }
 
                         })
@@ -393,8 +418,8 @@ public class BuyFragment extends Fragment {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            int quantity = seekBar.getProgress();
-            textView3.setText(quantity + " bayes");
+            waterQuanity = seekBar.getProgress();
+            textView3.setText(waterQuanity + " bayes");
         }
 
         @Override
