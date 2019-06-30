@@ -12,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 
@@ -59,7 +62,6 @@ public class BuyFragment extends Fragment {
             }
        });
 
-        final View dialog = LayoutInflater.from(getActivity()).inflate(R.layout.dialog, null );
 
         fursButton = view.findViewById(R.id.furs_qty);
         fursButton.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +69,7 @@ public class BuyFragment extends Fragment {
             public void onClick(View view) {
                 Log.d("BUTTON", "Pressed");
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                alertDialog.setView(dialog)
+                alertDialog.setView(R.layout.dialog)
                         .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -87,4 +89,5 @@ public class BuyFragment extends Fragment {
         });
         return view;
     }
+
 }
