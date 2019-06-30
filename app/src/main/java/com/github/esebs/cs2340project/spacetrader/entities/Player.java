@@ -7,7 +7,8 @@ package com.github.esebs.cs2340project.spacetrader.entities;
 public class Player {
     private String name;
     private Difficulty difficulty;
-    private Ship ship;
+    private Room current;
+    private Vehicle vehicle;
     private int pilotPoints;
     private int fighterPoints;
     private int traderPoints;
@@ -19,21 +20,23 @@ public class Player {
      * Creates a new instance of a player
      * @param name Player's name
      * @param difficulty easy, medium, hard, Bob Waters
+     * @param current the starting Room
      * @param pilotPoints Piloting Skill Points
      * @param fighterPoints Fighting Skill Points
      * @param traderPoints Trader Skill Points
      * @param engineerPoints Engineering Skill Points
      */
-    public Player(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
+    public Player(String name, Difficulty difficulty, Room current, int pilotPoints, int fighterPoints,
                   int traderPoints, int engineerPoints) {
         this.name = name;
         this.difficulty = difficulty;
+        this.current = current;
         this.pilotPoints = pilotPoints;
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
-        this.ship = Ship.GNAT;
+        this.vehicle = Vehicle.SCOOTER;
     }
 
     /**
@@ -53,7 +56,7 @@ public class Player {
     }
 
     /**
-     * Return's current difficulty
+     * Returns current difficulty
      * @return difficulty
      */
     public Difficulty getDifficulty() {
@@ -69,19 +72,35 @@ public class Player {
     }
 
     /**
-     * Gets the ship
-     * @return ship
+     * Gets the Player's current location
+     * @return Player's current Room
      */
-    public Ship getShip() {
-        return ship;
+    public Room getCurrent() {
+        return current;
     }
 
     /**
-     * Sets ship to a new value
-     * @param ship new ship
+     * Sets the Player's current location
+     * @param current The Player's new Room
      */
-    public void setShip(Ship ship) {
-        this.ship = ship;
+    public void setCurrent(Room current) {
+        this.current = current;
+    }
+
+    /**
+     * Gets the vehicle
+     * @return vehicle
+     */
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    /**
+     * Sets vehicle to a new value
+     * @param vehicle new vehicle
+     */
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     /**
@@ -182,7 +201,8 @@ public class Player {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", difficulty=" + difficulty +
-                ", ship=" + ship +
+                ", vehicle=" + vehicle +
+                ", Room=" + current +
                 ", pilotPoints=" + pilotPoints +
                 ", fighterPoints=" + fighterPoints +
                 ", traderPoints=" + traderPoints +

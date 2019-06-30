@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
+import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 /**
@@ -34,8 +35,9 @@ public class PlayerViewModel {
      */
     public void setPlayer(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
                   int traderPoints, int engineerPoints) {
+        Room current = model.getRandomRoom();
 
-        Player player = new Player(name, difficulty, pilotPoints, fighterPoints, traderPoints,
+        Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints, traderPoints,
                 engineerPoints);
 
         Log.d("APP", "PlayerViewModel: created player: " + player);
