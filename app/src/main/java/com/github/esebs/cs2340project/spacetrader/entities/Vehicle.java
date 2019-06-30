@@ -1,5 +1,6 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,18 @@ public enum Vehicle {
         this.hullStrength = hullStrength;
         // currentHealth always starts at its maximum, which is determined by hullStrength
         this.currentHealth = hullStrength;
+    }
+
+    /**
+     * Calculates the number of cargo space left in this Vehicle based on cargoHold's contents
+     * @return number of remaining cargo space
+     */
+    public int calculateRemainingCargoSpace() {
+        int spacesUsed = 0;
+        for (int quantity : cargoHold) {
+            spacesUsed += quantity;
+        }
+        return cargoSize - spacesUsed;
     }
 
     /**
@@ -124,15 +137,16 @@ public enum Vehicle {
 
     /**
      * Creates String representation of Vehicle
+     *
      * @return name of vehicle
      */
     @Override
     public String toString() {
         return "Vehicle{" +
-                "VehicleType='" + vehicleType + '\'' +
+                "vehicleType='" + vehicleType + '\'' +
                 ", fuelRange=" + fuelRange +
                 ", cargoSize=" + cargoSize +
-                ", cargoHold=" + cargoHold +
+                ", cargoHold=" + Arrays.toString(cargoHold) +
                 ", hullStrength=" + hullStrength +
                 ", currentHealth=" + currentHealth +
                 '}';

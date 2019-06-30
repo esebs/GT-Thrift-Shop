@@ -46,6 +46,34 @@ public class Room {
         return rooms;
     }
 
+    /**
+     * @return the prices to sell to this Room
+     */
+    public int[] getSellToRoomPrices() {
+        return sellToRoomPrices;
+    }
+
+    /**
+     * @return the prices to buy from this Room
+     */
+    public int[] getBuyFromRoomPrices() {
+        return buyFromRoomPrices;
+    }
+
+    /**
+     * @return the quantities of resources being sold
+     */
+    public int[] getBuyFromRoomQuantities() {
+        return buyFromRoomQuantities;
+    }
+
+    /**
+     * Sets the room's resource quantities
+     * @param buyFromRoomQuantities array of resource quantities
+     */
+    public void setBuyFromRoomQuantities(int[] buyFromRoomQuantities) {
+        this.buyFromRoomQuantities = buyFromRoomQuantities;
+    }
 
     /**
      * Calculates the sell price for each resource based on the Room's tech level

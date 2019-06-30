@@ -7,35 +7,36 @@ package com.github.esebs.cs2340project.spacetrader.entities;
 public class Player {
     private String name;
     private Difficulty difficulty;
+    private Room current;
     private Vehicle vehicle;
     private int pilotPoints;
     private int fighterPoints;
     private int traderPoints;
     private int engineerPoints;
     private int credits;
-    private Room current;
     private final int MAX_POINTS = 20;
 
     /**
      * Creates a new instance of a player
      * @param name Player's name
      * @param difficulty easy, medium, hard, Bob Waters
+     * @param current the starting Room
      * @param pilotPoints Piloting Skill Points
      * @param fighterPoints Fighting Skill Points
      * @param traderPoints Trader Skill Points
      * @param engineerPoints Engineering Skill Points
      */
-    public Player(String name, Difficulty difficulty, Room current,int pilotPoints, int fighterPoints,
+    public Player(String name, Difficulty difficulty, Room current, int pilotPoints, int fighterPoints,
                   int traderPoints, int engineerPoints) {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;
+        this.vehicle = Vehicle.GNAT;
         this.pilotPoints = pilotPoints;
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
-        this.vehicle = Vehicle.GNAT;
     }
 
     /**
@@ -55,7 +56,7 @@ public class Player {
     }
 
     /**
-     * Return's current difficulty
+     * Returns current difficulty
      * @return difficulty
      */
     public Difficulty getDifficulty() {
@@ -68,6 +69,22 @@ public class Player {
      */
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    /**
+     * Gets the Player's current location
+     * @return Player's current Room
+     */
+    public Room getCurrent() {
+        return current;
+    }
+
+    /**
+     * Sets the Player's current location
+     * @param current The Player's new Room
+     */
+    public void setCurrent(Room current) {
+        this.current = current;
     }
 
     /**
