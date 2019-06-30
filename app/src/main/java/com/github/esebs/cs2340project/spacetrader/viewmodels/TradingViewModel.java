@@ -1,11 +1,53 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
+import android.util.Log;
+
 import com.github.esebs.cs2340project.spacetrader.entities.Resource;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 public class TradingViewModel {
 
     private Model model = Model.getModelInstance();
+
+    /**
+     * Gets how many of a resource is offered by the Player's current Room
+     *
+     * @param resource a Resource
+     * @return the quantity of the resource offered
+     */
+    public int getBuyQuantity(Resource resource) {
+        return model.getPlayer().getCurrent().getBuyFromRoomQuantities()[resource.ordinal()];
+    }
+
+    /**
+     * Gets how many of a resource are in the Player's cargoHold
+     *
+     * @param resource a Resource
+     * @return the quantity of the resource owned by the Player
+     */
+    public int getSellQuantity(Resource resource) {
+        return model.getPlayer().getVehicle().getCargoHold()[resource.ordinal()];
+    }
+
+    /**
+     * Gets the buying price of a resource in the Player's current Room
+     *
+     * @param resource a Resource
+     * @return the buy price of the resource
+     */
+    public int getBuyPrice(Resource resource) {
+        return model.getPlayer().getCurrent().getBuyFromRoomPrices()[resource.ordinal()];
+    }
+
+    /**
+     * Gets the selling price of a resource in the Player's current Room
+     *
+     * @param resource a Resource
+     * @return the sell price of the resource
+     */
+    public int getSellPrice(Resource resource) {
+        return model.getPlayer().getCurrent().getSellToRoomPrices()[resource.ordinal()];
+    }
 
     /**
      * Calculates the maximum number of a certain Resource that the Player can buy
@@ -68,6 +110,10 @@ public class TradingViewModel {
         int[] quantities = model.getPlayer().getCurrent().getBuyFromRoomQuantities();
         quantities[resource.ordinal()] -= numToBuy;
         model.getPlayer().getCurrent().setBuyFromRoomQuantities(quantities);
+
+        Log.d("BUY", numToBuy + " " + resource.name()
+                + "(s) bought for " + getBuyPrice(resource) + " credits each ("
+                + numToBuy * getBuyPrice(resource) + " total)");
     }
 
     /**
@@ -85,5 +131,9 @@ public class TradingViewModel {
         int credits = model.getPlayer().getCredits();
         int payPerUnit = model.getPlayer().getCurrent().getSellToRoomPrices()[resource.ordinal()];
         model.getPlayer().setCredits(credits + (numToSell * payPerUnit));
+
+        Log.d("SELL", numToSell + " " + resource.name()
+                + "(s) sold for " + getSellPrice(resource) + " credits each ("
+                + numToSell * getSellPrice(resource) + " total)");
     }
 }

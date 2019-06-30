@@ -112,7 +112,7 @@ public class Room {
     }
 
     /**
-     * Sets the room's resources to random quantities within [0, 50)
+     * Sets the room's resources to random quantities within [1, 50]
      * If the Room cannot produce a resource, that resource's quantity will be -1
      *
      * @return an array of the resources' quantities
@@ -123,7 +123,7 @@ public class Room {
         for (Resource resource: Resource.values()) {
             int quantity;
             if (techLevel.ordinal() >= resource.getMtlp().ordinal()) {
-                quantity = r.nextInt(50);
+                quantity = r.nextInt(50) + 1;
             } else {
                 quantity = -1;
             }
