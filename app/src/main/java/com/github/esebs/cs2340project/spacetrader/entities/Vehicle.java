@@ -1,7 +1,6 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * Enum with all possible vehicles, and there respective characteristics
@@ -18,7 +17,7 @@ public enum Vehicle {
     private String vehicleType;
     private int fuelRange;
     private int cargoSize;
-    private Map<Resource, Integer> cargoHold = new HashMap<>();
+    private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int hullStrength;
     private int currentHealth;
 
@@ -36,6 +35,18 @@ public enum Vehicle {
         this.hullStrength = hullStrength;
         // currentHealth always starts at its maximum, which is determined by hullStrength
         this.currentHealth = hullStrength;
+    }
+
+    /**
+     * Calculates the number of cargo space left in this Vehicle based on cargoHold's contents
+     * @return number of remaining cargo space
+     */
+    public int calculateRemainingCargoSpace() {
+        int spacesUsed = 0;
+        for (int quantity : cargoHold) {
+            spacesUsed += quantity;
+        }
+        return cargoSize - spacesUsed;
     }
 
     /**
@@ -82,7 +93,7 @@ public enum Vehicle {
      * Gets the player's cargo items
      * @return a Map of the player's cargo items
      */
-    public Map<Resource, Integer> getCargoHold() {
+    public int[] getCargoHold() {
         return cargoHold;
     }
 
@@ -90,7 +101,7 @@ public enum Vehicle {
      * Sets the player's cargo items
      * @param cargoHold a Map of the player's new cargo items
      */
-    public void setCargoHold(Map<Resource, Integer> cargoHold) {
+    public void setCargoHold(int[] cargoHold) {
         this.cargoHold = cargoHold;
     }
 
@@ -128,15 +139,16 @@ public enum Vehicle {
 
     /**
      * Creates String representation of Vehicle
+     *
      * @return name of vehicle
      */
     @Override
     public String toString() {
         return "Vehicle{" +
-                "VehicleType='" + vehicleType + '\'' +
+                "vehicleType='" + vehicleType + '\'' +
                 ", fuelRange=" + fuelRange +
                 ", cargoSize=" + cargoSize +
-                ", cargoHold=" + cargoHold +
+                ", cargoHold=" + Arrays.toString(cargoHold) +
                 ", hullStrength=" + hullStrength +
                 ", currentHealth=" + currentHealth +
                 '}';

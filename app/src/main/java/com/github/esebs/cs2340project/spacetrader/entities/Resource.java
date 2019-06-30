@@ -44,4 +44,21 @@ public enum Resource {
         int techDiff = tech.ordinal() - mtlu.ordinal();
         return (int)(basePrice + varCalc() + techDiff*incPerLevel);
     }
+
+    /**
+     * Gets the minimum tech level required to produce this Resource
+     * @return the resource's mltp
+     */
+    public TechLevel getMtlp() {
+        return mtlp;
+    }
+
+    /**
+     * Gets the minimum tech level required to use this Resource
+     * @return the resource's mltu
+     */
+    public TechLevel getMtlu() {
+        return mtlu;
+    }
+
 }

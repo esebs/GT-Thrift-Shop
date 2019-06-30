@@ -125,7 +125,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                             fighterPoints,
                             traderPoints,
                             engineerPoints);
-                    Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
+                    Intent intent = new Intent(ConfigurationActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -135,7 +135,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(ConfigurationActivity.this,MainActivity.class);
+                Intent intent =new Intent(ConfigurationActivity.this, StartActivity.class);
                 startActivity(intent);
                 finish();
             }
