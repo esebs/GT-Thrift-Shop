@@ -35,7 +35,7 @@ public class Player {
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
-        this.vehicle = Vehicle.GNAT;
+        this.vehicle = Vehicle.SCOOTER;
     }
 
     /**
