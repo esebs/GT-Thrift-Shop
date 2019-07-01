@@ -136,4 +136,5 @@ public class TradingViewModel {
                 + "(s) sold for " + getSellPrice(resource) + " credits each ("
                 + numToSell * getSellPrice(resource) + " total)");
     }
+
 }
