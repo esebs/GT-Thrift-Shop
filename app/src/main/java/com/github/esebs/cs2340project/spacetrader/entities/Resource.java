@@ -37,12 +37,12 @@ public enum Resource {
 
     public int buyPriceCalc(TechLevel tech) {
         int techDiff = tech.ordinal() - mtlp.ordinal();
-        return (int)(basePrice + varCalc() + techDiff*incPerLevel);
+        return Math.max((int)(basePrice + varCalc() + techDiff*incPerLevel),10);
     }
 
     public int sellPriceCalc(TechLevel tech) {
         int techDiff = tech.ordinal() - mtlu.ordinal();
-        return (int)(basePrice + varCalc() + techDiff*incPerLevel);
+        return Math.max((int)(basePrice + varCalc() + techDiff*incPerLevel), 10);
     }
 
     /**
