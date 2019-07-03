@@ -512,6 +512,7 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
+
                 textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellable + " units of Medicine.");
                 textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
