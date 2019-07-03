@@ -8,33 +8,36 @@ import java.util.Arrays;
  * @author Sebastian Escobar
  */
 public enum Vehicle {
-    UNICYCLE("Unicycle", 10, 10, 25),
-    SCOOTER("Scooter", 14, 15, 100),
-    BIKE("Bike", 20, 20, 200),
-    GOLFCART("Golf Cart", 25, 60, 400),
-    MOPED("Moped", 30, 35, 350);
+    UNICYCLE("Unicycle", 10, 10, 25, 2000),
+    SCOOTER("Scooter", 14, 15, 100, 10000),
+    BIKE("Bike", 20, 20, 200, 25000),
+    GOLFCART("Golf Cart", 25, 60, 400, 50000),
+    MOPED("Moped", 50, 35, 350, 75000);
 
     private String vehicleType;
     private int fuelRange;
     private int cargoSize;
     private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private int hullStrength;
+    private int maxHealth;
     private int currentHealth;
+    private int price;
 
     /**
      * Creates the vehicle required
      * @param vehicleType name of vehicle type
      * @param fuelRange range of fuel
      * @param cargoSize size of cargo
-     * @param hullStrength maximum value of currentHealth
+     * @param maxHealth maximum value of currentHealth
+     * @param price the vehicle's price
      */
-    Vehicle(String vehicleType, int fuelRange, int cargoSize, int hullStrength) {
+    Vehicle(String vehicleType, int fuelRange, int cargoSize, int maxHealth, int price) {
         this.vehicleType = vehicleType;
         this.fuelRange = fuelRange;
         this.cargoSize = cargoSize;
-        this.hullStrength = hullStrength;
-        // currentHealth always starts at its maximum, which is determined by hullStrength
-        this.currentHealth = hullStrength;
+        this.maxHealth = maxHealth;
+        // currentHealth always starts at its maximum, which is determined by maxHealth
+        this.currentHealth = maxHealth;
+        this.price = price;
     }
 
     /**
@@ -109,16 +112,16 @@ public enum Vehicle {
      * Returns the max health of the vehicle
      * @return max health
      */
-    public int getHullStrength() {
-        return hullStrength;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     /**
      * Sets the max health of vehicle
-     * @param hullStrength new max health
+     * @param maxHealth new max health
      */
-    public void setHullStrength(int hullStrength) {
-        this.hullStrength = hullStrength;
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     /**
@@ -138,6 +141,14 @@ public enum Vehicle {
     }
 
     /**
+     * Gets the cost to purchase this vehicle
+     * @return vehicle price
+     */
+    public int getPrice() {
+        return price;
+    }
+
+    /**
      * Creates String representation of Vehicle
      *
      * @return name of vehicle
@@ -149,8 +160,9 @@ public enum Vehicle {
                 ", fuelRange=" + fuelRange +
                 ", cargoSize=" + cargoSize +
                 ", cargoHold=" + Arrays.toString(cargoHold) +
-                ", hullStrength=" + hullStrength +
+                ", maxHealth=" + maxHealth +
                 ", currentHealth=" + currentHealth +
+                ", price=" + price +
                 '}';
     }
 }

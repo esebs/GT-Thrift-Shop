@@ -16,8 +16,8 @@ public class Room {
     private PolicePresence policePresence;
 
     // Room trading arrays
-    private int[] sellToRoomPrices;
     private int[] buyFromRoomPrices;
+    private int[] sellToRoomPrices;
     private int[] buyFromRoomQuantities;
 
     public Room(String name) {
@@ -27,8 +27,8 @@ public class Room {
         government = Government.generateGovernment();
         resource = ResourceLevel.generateResources();
         policePresence = PolicePresence.generatePolicePresence();
-        sellToRoomPrices = createSellToRoomPrices();
         buyFromRoomPrices = createBuyFromRoomPrices();
+        sellToRoomPrices = createSellToRoomPrices();
         buyFromRoomQuantities = createRandomQuantities();
     }
 
@@ -47,17 +47,17 @@ public class Room {
     }
 
     /**
-     * @return the prices to sell to this Room
-     */
-    public int[] getSellToRoomPrices() {
-        return sellToRoomPrices;
-    }
-
-    /**
      * @return the prices to buy from this Room
      */
     public int[] getBuyFromRoomPrices() {
         return buyFromRoomPrices;
+    }
+
+    /**
+     * @return the prices to sell to this Room
+     */
+    public int[] getSellToRoomPrices() {
+        return sellToRoomPrices;
     }
 
     /**
@@ -119,24 +119,6 @@ public class Room {
     }
 
     /**
-     * Calculates the sell price for each resource based on the Room's tech level
-     * @return an array of the resources' sell prices
-     */
-    private int[] createSellToRoomPrices() {
-        int[] sellPrices = new int[10];
-        for (Resource resource: Resource.values()) {
-            int price;
-            if (techLevel.ordinal() >= resource.getMtlu().ordinal()) {
-                price = resource.sellPriceCalc(techLevel);
-            } else {
-                price = -1;
-            }
-            sellPrices[resource.ordinal()] = price;
-        }
-        return sellPrices;
-    }
-
-    /**
      * Calculates the buy price for each resource based on the Room's tech level
      * @return an array of the resources' buy prices
      */
@@ -152,6 +134,34 @@ public class Room {
             buyPrices[resource.ordinal()] = price;
         }
         return buyPrices;
+    }
+
+    /**
+     * The sell price is simply 95% of the buy price (if the Room has the tech level required
+     * to sell that resource, otherwise i's -1)
+     * @return an array of the resources' sell prices
+     */
+    private int[] createSellToRoomPrices() {
+        int[] sellPrices = new int[10];
+        for (Resource resource: Resource.values()) {
+            int price;
+            // If the Player can sell this resource to the Room
+            if (techLevel.ordinal() >= resource.getMtlu().ordinal()) {
+                int buyPrice = buyFromRoomPrices[resource.ordinal()];
+                // If the Player cannot buy this resource from the Room, then calculate a sell price
+                if (buyPrice == -1) {
+                    price = resource.sellPriceCalc(techLevel);
+                    // Otherwise, the sell price is just a discount of the current buy price
+                } else {
+                    price = (int) (buyPrice * 0.95);
+                }
+                // If the Player cannot sell this resource to the Room
+            } else {
+                price = -1;
+            }
+            sellPrices[resource.ordinal()] = price;
+        }
+        return sellPrices;
     }
 
     /**
