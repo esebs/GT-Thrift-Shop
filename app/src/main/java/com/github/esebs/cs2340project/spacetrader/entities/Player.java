@@ -198,16 +198,16 @@ public class Player {
      */
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", difficulty=" + difficulty +
-                ", vehicle=" + vehicle +
-                ", Room=" + current +
-                ", pilotPoints=" + pilotPoints +
-                ", fighterPoints=" + fighterPoints +
-                ", traderPoints=" + traderPoints +
-                ", engineerPoints=" + engineerPoints +
-                ", credits=" + credits +
-                '}';
+        return "Player {" +
+                "\n\tname: '" + name + '\'' +
+                "\n\tdifficulty:" + difficulty +
+                "\n\tvehicle: " + vehicle.getVehicleType() +
+                "\n\tRoom: " + current.getName() +
+                "\n\tpilotPoints: " + pilotPoints +
+                "\n\tfighterPoints: " + fighterPoints +
+                "\n\ttraderPoints: " + traderPoints +
+                "\n\tengineerPoints: " + engineerPoints +
+                "\n\tcredits: " + credits +
+                "\n }";
     }
 }
