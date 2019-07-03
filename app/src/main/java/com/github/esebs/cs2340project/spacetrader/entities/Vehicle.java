@@ -15,7 +15,8 @@ public enum Vehicle {
     MOPED("Moped", 50, 35, 350, 75000);
 
     private String vehicleType;
-    private int fuelRange;
+    private int maxRange;
+    private int currentRange;
     private int cargoSize;
     private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int maxHealth;
@@ -25,14 +26,16 @@ public enum Vehicle {
     /**
      * Creates the vehicle required
      * @param vehicleType name of vehicle type
-     * @param fuelRange range of fuel
+     * @param maxRange maximum travel range
      * @param cargoSize size of cargo
-     * @param maxHealth maximum value of currentHealth
+     * @param maxHealth maximum vehicle health
      * @param price the vehicle's price
      */
-    Vehicle(String vehicleType, int fuelRange, int cargoSize, int maxHealth, int price) {
+    Vehicle(String vehicleType, int maxRange, int cargoSize, int maxHealth, int price) {
         this.vehicleType = vehicleType;
-        this.fuelRange = fuelRange;
+        this.maxRange = maxRange;
+        // currentRange always starts at its maximum, which is determined by maxRange
+        this.currentRange = maxRange;
         this.cargoSize = cargoSize;
         this.maxHealth = maxHealth;
         // currentHealth always starts at its maximum, which is determined by maxHealth
@@ -64,16 +67,32 @@ public enum Vehicle {
      * Returns the fuel range of the vehicle type
      * @return
      */
-    public int getFuelRange() {
-        return fuelRange;
+    public int getMaxRange() {
+        return maxRange;
     }
 
     /**
      * Sets the range of vehicle to a new range
-     * @param fuelRange range of vehicle
+     * @param maxRange range of vehicle
      */
-    public void setFuelRange(int fuelRange) {
-        this.fuelRange = fuelRange;
+    public void setMaxRange(int maxRange) {
+        this.maxRange = maxRange;
+    }
+
+    /**
+     * Gets the Vehicle's current range of travel
+     * @return current range
+     */
+    public int getCurrentRange() {
+        return currentRange;
+    }
+
+    /**
+     * Sets the Vehicle's current range of travel
+     * @param currentRange new current range
+     */
+    public void setCurrentRange(int currentRange) {
+        this.currentRange = currentRange;
     }
 
     /**
@@ -157,7 +176,7 @@ public enum Vehicle {
     public String toString() {
         return "Vehicle{" +
                 "vehicleType='" + vehicleType + '\'' +
-                ", fuelRange=" + fuelRange +
+                ", maxRange=" + maxRange +
                 ", cargoSize=" + cargoSize +
                 ", cargoHold=" + Arrays.toString(cargoHold) +
                 ", maxHealth=" + maxHealth +
