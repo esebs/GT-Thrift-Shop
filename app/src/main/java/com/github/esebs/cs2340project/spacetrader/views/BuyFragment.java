@@ -130,8 +130,6 @@ public class BuyFragment extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.buyResources(Resource.WATER, waterQuanity);
                                 waterButton.setText("" + tradingViewModel.getBuyQuantity(Resource.WATER));
-
-                                System.out.println(model.getPlayer());
                             }
 
                         })
@@ -199,7 +197,6 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 fursButton.setText("" + tradingViewModel.getBuyQuantity(Resource.FURS));
-                                System.out.println(model.getPlayer());
                             }
 
                         })
@@ -265,7 +262,6 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 foodButton.setText("" + tradingViewModel.getBuyQuantity(Resource.FOOD));
-                                System.out.println(model.getPlayer());
                             }
 
                         })
@@ -330,7 +326,6 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 oreButton.setText("" + tradingViewModel.getBuyQuantity(Resource.ORE));
-                                System.out.println(model.getPlayer());
                             }
 
                         })
@@ -397,7 +392,7 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 gamesButton.setText("" + tradingViewModel.getBuyQuantity(Resource.GAMES));
-                                System.out.println(model.getPlayer());
+
                             }
 
                         })
@@ -464,7 +459,7 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 firearmsButton.setText("" + tradingViewModel.getBuyQuantity(Resource.FIREARMS));
-                                System.out.println(model.getPlayer());
+
                             }
 
                         })
@@ -531,7 +526,7 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 medicineButton.setText("" + tradingViewModel.getBuyQuantity(Resource.MEDICINE));
-                                System.out.println(model.getPlayer());
+
                             }
 
                         })
@@ -598,7 +593,6 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 machinesButton.setText("" + tradingViewModel.getBuyQuantity(Resource.MACHINES));
-                                System.out.println(model.getPlayer());
                             }
 
                         })
@@ -665,7 +659,7 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 narcoticsButton.setText("" + tradingViewModel.getBuyQuantity(Resource.NARCOTICS));
-                                System.out.println(model.getPlayer());
+
                             }
 
                         })
@@ -733,7 +727,7 @@ public class BuyFragment extends Fragment {
 
                                 //Updates display
                                 robotsButton.setText("" + tradingViewModel.getBuyQuantity(Resource.ROBOTS));
-                                System.out.println(model.getPlayer());
+
                             }
 
                         })

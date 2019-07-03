@@ -113,7 +113,8 @@ public class TradingViewModel {
 
         Log.d("BUY", numToBuy + " " + resource.name()
                 + "(s) bought for " + getBuyPrice(resource) + " credits each ("
-                + numToBuy * getBuyPrice(resource) + " total)");
+                + numToBuy * getBuyPrice(resource) + " total). Player has "
+                + model.getPlayer().getCredits() + " credits remaining.");
     }
 
     /**
@@ -134,7 +135,8 @@ public class TradingViewModel {
 
         Log.d("SELL", numToSell + " " + resource.name()
                 + "(s) sold for " + getSellPrice(resource) + " credits each ("
-                + numToSell * getSellPrice(resource) + " total)");
+                + numToSell * getSellPrice(resource) + " total). Player has "
+                + model.getPlayer().getCredits() + " credits remaining.");
     }
 
 }

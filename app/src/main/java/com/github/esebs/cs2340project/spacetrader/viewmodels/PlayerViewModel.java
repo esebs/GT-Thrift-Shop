@@ -41,7 +41,7 @@ public class PlayerViewModel {
         Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints, traderPoints,
                 engineerPoints);
 
-        Log.d("APP", "PlayerViewModel: created player: " + player);
+        Log.d("APP", "PlayerViewModel: created player: \n" + player);
 
         model.setPlayer(player);
 
