@@ -1,17 +1,11 @@
 package com.github.esebs.cs2340project.spacetrader.views;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 
@@ -43,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new BuyFragment(), "Buy");
         adapter.addFragment(new SellFragment(), "Sell");
         adapter.addFragment(new VehicleFragment(), "Vehicle");
-        adapter.addFragment(new TravelFragment(), "Travel");
         viewPager.setAdapter(adapter);
 
     }
