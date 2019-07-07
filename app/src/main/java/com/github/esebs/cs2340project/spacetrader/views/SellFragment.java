@@ -68,7 +68,7 @@ public class SellFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sell_fragment, container, false);
-        final View dialog = inflater.inflate(R.layout.dialog, container,false);
+        final View dialog = inflater.inflate(R.layout.trade_dialog, container,false);
 
         //Selling Water
         waterButton = view.findViewById(R.id.water_qty);
@@ -113,7 +113,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(waterSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -182,7 +182,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(fursSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -251,7 +251,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(foodSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -320,7 +320,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(oreSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -389,7 +389,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(gamesSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -458,7 +458,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(firearmsSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -528,7 +528,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(medicineSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -596,7 +596,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(machinesSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -665,7 +665,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(narcoticsSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
@@ -734,7 +734,7 @@ public class SellFragment extends Fragment {
 
                 seekBar.setOnSeekBarChangeListener(robotsSeekBarListener);
 
-                //Sets up the dialog layout, "Buy" button, "Cancel" button.
+                //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
                 alertDialog.setView(dialog)
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {

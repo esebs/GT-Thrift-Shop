@@ -2,12 +2,9 @@ package com.github.esebs.cs2340project.spacetrader.views;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,10 +12,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ListAdapter;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Building;
+import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
 import com.google.android.gms.maps.CameraUpdate;
@@ -35,6 +33,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerClickListener {
@@ -42,17 +41,11 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
     private GoogleMap googleMap;
     private SupportMapFragment mapView;
     private View view;
+
     private Model model = Model.getModelInstance();
     private PlayerViewModel playerViewModel = new PlayerViewModel();
-
-    private static final LatLng PERTH = new LatLng(-31.952854, 115.857342);
-    private static final LatLng SYDNEY = new LatLng(-33.87365, 151.20689);
-    private static final LatLng BRISBANE = new LatLng(-27.47093, 153.0235);
-
-
-    private Marker mPerth;
-    private Marker mSydney;
-    private Marker mBrisbane;
+    private String selectedRoomName;
+    private Room selectedRoom;
 
 
     /**
@@ -123,8 +116,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
             LatLng currentBuilding = new LatLng(b.getLatitude(), b.getLongitude());
             Marker m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentBuilding));
-            m.setTag(0);
-
+            m.setTag(b);
         }
 
         //Set map zoom
@@ -142,37 +134,54 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
      */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-
-        // Retrieve the data from the marker.
-        Integer clickCount = (Integer) marker.getTag();
+        //check if we are at a marker
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        final Building building = (Building) marker.getTag();
+        final List<Room> rooms = building.getRooms();
+        final List<String> roomNamesList = new ArrayList<>();
 
-        // Check if a click count was set, then display the click count.
-        if (clickCount != null) {
-            clickCount = clickCount + 1;
-            marker.setTag(clickCount);
-
-            alertDialog.setMessage("Would you like to travel to " + marker.getTitle() + " ?")
-                    .setPositiveButton("Travel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //travel
-                            System.out.println("Traveling to " + marker.getTitle());
-
-                            //set new screen
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    })
-                    .create()
-                    .show();
+        for (Room r : rooms) {
+            roomNamesList.add(r.getName());
         }
+
+        final String[] roomNamesArray = roomNamesList.toArray(new String[roomNamesList.size()]);
+
+        alertDialog.setTitle("Select a room in the " + marker.getTitle() + ".")
+            //Display the radio buttons to select a room
+            .setSingleChoiceItems(roomNamesArray, -1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    selectedRoomName = roomNamesArray[i];
+                }
+            })
+            .setPositiveButton("Travel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //set the new location of the player
+
+                    //select the room object according to the name of the radio option selected
+                    if (selectedRoomName.equals(roomNamesList.get(0))) {
+                        selectedRoom = rooms.get(0);
+                    } else if (selectedRoomName.equals(roomNamesList.get(1))) {
+                        selectedRoom = rooms.get(1);
+                    }
+
+                    System.out.println("Traveling to " + selectedRoomName + " in the " + building.getName());
+
+                    //set new screen
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                }
+            })
+            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            })
+            .create()
+            .show();
+
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
