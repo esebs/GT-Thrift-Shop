@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new BuyFragment(), "Buy");
         adapter.addFragment(new SellFragment(), "Sell");
         adapter.addFragment(new VehicleFragment(), "Vehicle");
-        adapter.addFragment(new TravelFragment(), "Travel");
         viewPager.setAdapter(adapter);
 
     }
