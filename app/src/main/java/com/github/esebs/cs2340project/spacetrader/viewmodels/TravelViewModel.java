@@ -51,8 +51,11 @@ public class TravelViewModel {
 
     public void travelTo(Room newRoom) {
         model.getPlayer().setCurrent(newRoom);
+        model.getPlayer().getVehicle().setCurrentRange(
+                (model.getPlayer().getVehicle().getCurrentRange() - 5));
         Log.d("APP", "TravelViewModel: Player Travelled to: "
-                + model.getPlayer().getCurrent());
+                + model.getPlayer().getCurrent() + ". You have "
+                + model.getPlayer().getVehicle().getCurrentRange() + "fuel left.");
     }
 
 }

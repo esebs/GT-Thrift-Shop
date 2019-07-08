@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
+import android.widget.Toast;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Building;
@@ -170,11 +171,15 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
                         selectedRoom = rooms.get(1);
                     }
 
-                    viewModel.travelTo(selectedRoom);
+                    if (viewModel.getCurrentRange() < 5) {
+                        Toast.makeText(getActivity(),
+                                "Not enough fuel left to Travel", Toast.LENGTH_LONG).show();
+                    } else {
+                        viewModel.travelTo(selectedRoom);
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    }
 
-                    //set new screen
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
                 }
             })
             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
