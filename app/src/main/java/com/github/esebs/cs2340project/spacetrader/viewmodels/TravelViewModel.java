@@ -1,5 +1,8 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
+import android.util.Log;
+
+import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 public class TravelViewModel {
@@ -14,6 +17,10 @@ public class TravelViewModel {
         int maxRange = model.getPlayer().getVehicle().getMaxRange();
         int currentRange = model.getPlayer().getVehicle().getCurrentRange();
         return maxRange - currentRange;
+    }
+
+    public int getCredits() {
+        return model.getPlayer().getCredits();
     }
 
     /**
@@ -33,17 +40,32 @@ public class TravelViewModel {
         return calculateRangeUsed() == 0;
     }
 
+    public int getCostToRefuel() {
+        return this.calculateRangeUsed() * 5;
+    }
+
     /**
      * Brings the Player's Vehicle's range up to its max (charging the player to do so)
      */
     public void refillRange() {
         int maxRange = model.getPlayer().getVehicle().getMaxRange();
-        model.getPlayer().getVehicle().setCurrentRange(maxRange);
 
-        int credits = model.getPlayer().getCredits();
-        // 1 unit of range costs 1 credit, so the price to purchase n units of range is n credits
-        int price = calculateRangeUsed();
-        model.getPlayer().setCredits(credits - price);
+        model.getPlayer().setCredits(model.getPlayer().getCredits() - this.getCostToRefuel());
+        
+        model.getPlayer().getVehicle().setCurrentRange(maxRange);
+        Log.d("APP", "TravelViewModel: Player's range: "
+                + model.getPlayer().getVehicle().getCurrentRange() + ". Credits remaining "
+                + model.getPlayer().getCredits() + " cr.");
+
+    }
+
+    public void travelTo(Room newRoom) {
+        model.getPlayer().setCurrent(newRoom);
+        model.getPlayer().getVehicle().setCurrentRange(
+                (model.getPlayer().getVehicle().getCurrentRange() - 5));
+        Log.d("APP", "TravelViewModel: Player Travelled to: "
+                + model.getPlayer().getCurrent().getName() + ". You have "
+                + model.getPlayer().getVehicle().getCurrentRange() + "fuel left.");
     }
 
 }

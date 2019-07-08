@@ -215,4 +215,5 @@ public class Room {
                 ", buyFromRoomQuantities=" + Arrays.toString(buyFromRoomQuantities) +
                 '}';
     }
+
 }
