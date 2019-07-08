@@ -119,9 +119,18 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
 
         for (Building b : buildings) {
             LatLng currentBuilding = new LatLng(b.getLatitude(), b.getLongitude());
-            Marker m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()));
+            Marker m;
+
+            if (b.equals(playerViewModel.getPlayer().getCurrent().getBuilding())) {
+                m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                m.setTag(0);
+            } else {
+                m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()));
+                m.setTag(b);
+            }
+
+
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentBuilding));
-            m.setTag(b);
         }
 
         //Set map zoom
@@ -139,59 +148,71 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
      */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        //check if we are at a marker
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-        final Building building = (Building) marker.getTag();
-        final List<Room> rooms = building.getRooms();
-        final List<String> roomNamesList = new ArrayList<>();
+        if (marker.getTag().equals(0)) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
-        for (Room r : rooms) {
-            roomNamesList.add(r.getName());
+            alertDialog.setTitle("This is your current location!")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    })
+                    .create()
+                    .show();
+        } else {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+            final Building building = (Building) marker.getTag();
+            final List<Room> rooms = building.getRooms();
+            final List<String> roomNamesList = new ArrayList<>();
+
+            for (Room r : rooms) {
+                roomNamesList.add(r.getName());
+            }
+
+            final String[] roomNamesArray = roomNamesList.toArray(new String[roomNamesList.size()]);
+
+            alertDialog.setTitle("Select a room in the " + marker.getTitle() + ".")
+                    //Display the radio buttons to select a room
+                    .setSingleChoiceItems(roomNamesArray, 0, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            selectedRoomName = roomNamesArray[i];
+                        }
+                    })
+                    .setPositiveButton("Travel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //set the new location of the player
+
+                            //select the room object according to the name of the radio option selected
+                            if (selectedRoomName == null || selectedRoomName.equals(rooms.get(0).getName())) {
+                                selectedRoom = rooms.get(0);
+                            } else if (selectedRoomName.equals(rooms.get(1).getName())) {
+                                selectedRoom = rooms.get(1);
+                            }
+
+                            if (viewModel.getCurrentRange() < 5) {
+                                Toast.makeText(getActivity(),
+                                        "Not enough fuel left to Travel", Toast.LENGTH_LONG).show();
+                            } else {
+                                viewModel.travelTo(selectedRoom);
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                            }
+
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    })
+                    .create()
+                    .show();
+
         }
-
-        final String[] roomNamesArray = roomNamesList.toArray(new String[roomNamesList.size()]);
-
-        alertDialog.setTitle("Select a room in the " + marker.getTitle() + ".")
-            //Display the radio buttons to select a room
-            .setSingleChoiceItems(roomNamesArray, 0, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    selectedRoomName = roomNamesArray[i];
-                }
-            })
-            .setPositiveButton("Travel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    //set the new location of the player
-
-                    //select the room object according to the name of the radio option selected
-                    if (selectedRoomName == null || selectedRoomName.equals(rooms.get(0).getName())) {
-                        selectedRoom = rooms.get(0);
-                    } else if (selectedRoomName.equals(rooms.get(1).getName())) {
-                        selectedRoom = rooms.get(1);
-                    }
-
-                    if (viewModel.getCurrentRange() < 5) {
-                        Toast.makeText(getActivity(),
-                                "Not enough fuel left to Travel", Toast.LENGTH_LONG).show();
-                    } else {
-                        viewModel.travelTo(selectedRoom);
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
-                    }
-
-                }
-            })
-            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            })
-            .create()
-            .show();
-
-
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
