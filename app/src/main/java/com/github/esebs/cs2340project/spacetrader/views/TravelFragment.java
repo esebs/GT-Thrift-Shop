@@ -152,7 +152,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
 
         alertDialog.setTitle("Select a room in the " + marker.getTitle() + ".")
             //Display the radio buttons to select a room
-            .setSingleChoiceItems(roomNamesArray, -1, new DialogInterface.OnClickListener() {
+            .setSingleChoiceItems(roomNamesArray, 0, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     selectedRoomName = roomNamesArray[i];
@@ -164,9 +164,9 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
                     //set the new location of the player
 
                     //select the room object according to the name of the radio option selected
-                    if (selectedRoomName.equals(roomNamesList.get(0))) {
+                    if (selectedRoomName == null || selectedRoomName.equals(rooms.get(0).getName())) {
                         selectedRoom = rooms.get(0);
-                    } else if (selectedRoomName.equals(roomNamesList.get(1))) {
+                    } else if (selectedRoomName.equals(rooms.get(1).getName())) {
                         selectedRoom = rooms.get(1);
                     }
 
