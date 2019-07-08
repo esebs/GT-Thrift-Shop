@@ -49,11 +49,14 @@ public class TravelViewModel {
      */
     public void refillRange() {
         int maxRange = model.getPlayer().getVehicle().getMaxRange();
-        model.getPlayer().getVehicle().setCurrentRange(maxRange);
 
-        int credits = model.getPlayer().getCredits();
-        int price = getCostToRefuel();
-        model.getPlayer().setCredits(credits - price);
+        model.getPlayer().setCredits(model.getPlayer().getCredits() - this.getCostToRefuel());
+        
+        model.getPlayer().getVehicle().setCurrentRange(maxRange);
+        Log.d("APP", "TravelViewModel: Player's range: "
+                + model.getPlayer().getVehicle().getCurrentRange() + ". Credits remaining "
+                + model.getPlayer().getCredits() + " cr.");
+
     }
 
     public void travelTo(Room newRoom) {
@@ -61,7 +64,7 @@ public class TravelViewModel {
         model.getPlayer().getVehicle().setCurrentRange(
                 (model.getPlayer().getVehicle().getCurrentRange() - 5));
         Log.d("APP", "TravelViewModel: Player Travelled to: "
-                + model.getPlayer().getCurrent() + ". You have "
+                + model.getPlayer().getCurrent().getName() + ". You have "
                 + model.getPlayer().getVehicle().getCurrentRange() + "fuel left.");
     }
 
