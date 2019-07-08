@@ -19,6 +19,10 @@ public class TravelViewModel {
         return maxRange - currentRange;
     }
 
+    public int getCredits() {
+        return model.getPlayer().getCredits();
+    }
+
     /**
      * Gets the Player's Vehicle's remaining range
      * @return remaining range
@@ -36,6 +40,10 @@ public class TravelViewModel {
         return calculateRangeUsed() == 0;
     }
 
+    public int getCostToRefuel() {
+        return this.calculateRangeUsed() * 5;
+    }
+
     /**
      * Brings the Player's Vehicle's range up to its max (charging the player to do so)
      */
@@ -44,8 +52,7 @@ public class TravelViewModel {
         model.getPlayer().getVehicle().setCurrentRange(maxRange);
 
         int credits = model.getPlayer().getCredits();
-        // 1 unit of range costs 1 credit, so the price to purchase n units of range is n credits
-        int price = calculateRangeUsed();
+        int price = getCostToRefuel();
         model.getPlayer().setCredits(credits - price);
     }
 
