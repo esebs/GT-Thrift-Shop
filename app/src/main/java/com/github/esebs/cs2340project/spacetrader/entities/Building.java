@@ -22,7 +22,7 @@ public class Building {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.rooms = Room.createRooms(roomNumbers);
+        this.rooms = Room.createRooms(roomNumbers, this);
     }
 
     /**
