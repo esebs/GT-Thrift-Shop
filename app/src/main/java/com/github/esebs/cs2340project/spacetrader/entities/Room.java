@@ -38,6 +38,7 @@ public class Room {
      * Takes a List of room name strings and converts it to a list of Room objects
      *
      * @param roomNumbers a List of strings of the room numbers
+     * @param building the Building object the Room(s) are part of
      * @return a List of Room objects
      */
     public static List<Room> createRooms(List<String> roomNumbers, Building building) {
