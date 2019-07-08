@@ -9,6 +9,7 @@ public class Room {
 
     // Room characteristics
     private String name;
+    private Building building;
     private Size size;
     private TechLevel techLevel;
     private Government government;
@@ -20,8 +21,9 @@ public class Room {
     private int[] sellToRoomPrices;
     private int[] buyFromRoomQuantities;
 
-    public Room(String name) {
+    public Room(String name, Building building) {
         this.name = name;
+        this.building = building;
         size = Size.generateSize();
         techLevel = TechLevel.generateTechLevel();
         government = Government.generateGovernment();
@@ -36,12 +38,13 @@ public class Room {
      * Takes a List of room name strings and converts it to a list of Room objects
      *
      * @param roomNumbers a List of strings of the room numbers
+     * @param building the Building object the Room(s) are part of
      * @return a List of Room objects
      */
-    public static List<Room> createRooms(List<String> roomNumbers) {
+    public static List<Room> createRooms(List<String> roomNumbers, Building building) {
         List<Room> rooms = new ArrayList<>();
         for (String roomNumber : roomNumbers) {
-            rooms.add(new Room(roomNumber));
+            rooms.add(new Room(roomNumber, building));
         }
         return rooms;
     }
@@ -72,6 +75,13 @@ public class Room {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * @return Building this Room is inside of
+     */
+    public Building getBuilding() {
+        return building;
     }
 
     /**
@@ -194,6 +204,7 @@ public class Room {
     public String toString() {
         return "Room{" +
                 "name='" + name + '\'' +
+                ", building=" + building.getName() +
                 ", size=" + size +
                 ", techLevel=" + techLevel +
                 ", government=" + government +
