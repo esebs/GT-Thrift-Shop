@@ -1,5 +1,8 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
+import android.util.Log;
+
+import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 public class TravelViewModel {
@@ -44,6 +47,12 @@ public class TravelViewModel {
         // 1 unit of range costs 1 credit, so the price to purchase n units of range is n credits
         int price = calculateRangeUsed();
         model.getPlayer().setCredits(credits - price);
+    }
+
+    public void travelTo(Room newRoom) {
+        model.getPlayer().setCurrent(newRoom);
+        Log.d("APP", "TravelViewModel: Player Travelled to: "
+                + model.getPlayer().getCurrent());
     }
 
 }

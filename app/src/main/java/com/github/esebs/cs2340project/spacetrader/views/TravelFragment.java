@@ -19,6 +19,7 @@ import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
+import com.github.esebs.cs2340project.spacetrader.viewmodels.TravelViewModel;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
     private GoogleMap googleMap;
     private SupportMapFragment mapView;
     private View view;
+    private TravelViewModel viewModel;
 
     private Model model = Model.getModelInstance();
     private PlayerViewModel playerViewModel = new PlayerViewModel();
@@ -83,6 +86,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.travel_fragment, container, false);
+        viewModel = new TravelViewModel();
 
         mapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
@@ -166,7 +170,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
                         selectedRoom = rooms.get(1);
                     }
 
-                    System.out.println("Traveling to " + selectedRoomName + " in the " + building.getName());
+                    viewModel.travelTo(selectedRoom);
 
                     //set new screen
                     Intent intent = new Intent(getActivity(), MainActivity.class);
