@@ -12,20 +12,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.Toast;
-
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.TravelViewModel;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -34,18 +29,19 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class will generate and display the travel fragment
+ * when the 'Travel' tab is pressed
+ *
+ * @version 1.0
+ * @author Elio Gerges
+ */
 public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerClickListener {
 
-    private GoogleMap googleMap;
-    private SupportMapFragment mapView;
-    private View view;
     private TravelViewModel viewModel;
-
     private Model model = Model.getModelInstance();
     private PlayerViewModel playerViewModel = new PlayerViewModel();
     private String selectedRoomName;
@@ -66,11 +62,11 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
     /**
      * Sets up the view when the activity starts
      *
-     * @param view
-     * @param savedInstanceState
+     * @param view the current view
+     * @param savedInstanceState previous saved instance
      */
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -78,26 +74,30 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
     /**
      * OnCreateView is called when the user switches to the 'Vehicle' tab.
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * @param inflater the LayoutInflater
+     * @param container the container holding all View objects
+     * @param savedInstanceState previous saved instance
      * @return the view
      */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.travel_fragment, container, false);
+        View view = inflater.inflate(R.layout.travel_fragment, container, false);
         viewModel = new TravelViewModel();
 
-        mapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-        if (mapView == null) {
+        if (mapView == null && getFragmentManager() != null) {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             mapView = new SupportMapFragment();
             ft.replace(R.id.map, mapView).commit();
         }
-        mapView.getMapAsync(this);
+
+        if (mapView != null) {
+            mapView.getMapAsync(this);
+        }
+
         return view;
     }
 
@@ -112,32 +112,34 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(getContext());
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        if (getContext()!= null) {
+            MapsInitializer.initialize(getContext());
+            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        List<Building> buildings = model.getBuildings();
+            List<Building> buildings = model.getBuildings();
 
-        for (Building b : buildings) {
-            LatLng currentBuilding = new LatLng(b.getLatitude(), b.getLongitude());
-            Marker m;
+            for (Building b : buildings) {
+                LatLng currentBuilding = new LatLng(b.getLatitude(), b.getLongitude());
+                Marker m;
 
-            if (b.equals(playerViewModel.getPlayer().getCurrent().getBuilding())) {
-                m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                m.setTag(0);
-            } else {
-                m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()));
-                m.setTag(b);
+                if (b.equals(playerViewModel.getPlayer().getCurrent().getBuilding())) {
+                    m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    m.setTag(0);
+                } else {
+                    m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()));
+                    m.setTag(b);
+                }
+
+
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentBuilding));
             }
 
+            //Set map zoom
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
 
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentBuilding));
+            //Set a listener for marker click.
+            googleMap.setOnMarkerClickListener(this);
         }
-
-        //Set map zoom
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-
-        //Set a listener for marker click.
-        googleMap.setOnMarkerClickListener(this);
     }
 
 
@@ -148,7 +150,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
      */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        if (marker.getTag().equals(0)) {
+        if (marker.getTag() != null && marker.getTag().equals(0)) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
             alertDialog.setTitle("This is your current location!")
@@ -170,7 +172,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
                 roomNamesList.add(r.getName());
             }
 
-            final String[] roomNamesArray = roomNamesList.toArray(new String[roomNamesList.size()]);
+            final String[] roomNamesArray = roomNamesList.toArray(new String[2]);
 
             alertDialog.setTitle("Select a room in the " + marker.getTitle() + ".")
                     //Display the radio buttons to select a room

@@ -38,7 +38,7 @@ public class ConfigurationActivity extends AppCompatActivity {
     private TextView totalSkillPoints;
 
 
-    // Seekbars
+    // Seek bars
     private SeekBar editPilotPoints;
     private SeekBar editEngineerPoints;
     private SeekBar editFighterPoints;

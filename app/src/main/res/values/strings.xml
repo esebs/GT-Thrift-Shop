@@ -4,4 +4,19 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_travel_fragment">Map</string>
+    <string name="quantity_not_available">n/a</string>
+    <string name="price_not_available">--- cr.</string>
+    <string name="buy_resource_quantity">%1$d</string>
+    <string name="buy_resource_price">%1$d cr.</string>
+    <string name="buy_text_1">You can buy up to %1$d units of %2$s.</string>
+    <string name="buy_text_3">%1$d units</string>
+    <string name="current_building">Building: %1$s</string>
+    <string name="current_room">Room: %1$s</string>
+    <string name="current_credits">Total Credits: %1$d cr.</string>
+    <string name="current_space">Vehicle Capacity: %1$d/%2$d</string>
+
+    <string name="tank_range">You have enough range to travel %1$d meters.</string>
+    <string name="empty_tank">A full tank cost %1$d cr.</string>
+    <string name="full_tank">You have a full tank!</string>
+
 </resources>

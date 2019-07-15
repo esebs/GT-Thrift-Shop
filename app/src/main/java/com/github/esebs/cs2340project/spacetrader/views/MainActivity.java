@@ -4,41 +4,44 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 
+/**
+ * This class is tasked with displaying all tabs in
+ * this tabbed activity
+ *
+ * @version 1.0
+ * @author Elio Gerges
+ */
 public class MainActivity extends AppCompatActivity {
-
-    private SectionsPageAdapeter sectionsPageAdapeter;
-    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sectionsPageAdapeter = new SectionsPageAdapeter(getSupportFragmentManager());
+        SectionsPageAdapter sectionsPageAdapeter = new SectionsPageAdapter(getSupportFragmentManager());
+        System.out.println(sectionsPageAdapeter);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.refreshDrawableState();
         setupViewPager(viewPager);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
 
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapeter adapter = new SectionsPageAdapeter(getSupportFragmentManager());
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new SystemFragment(), "System");
         adapter.addFragment(new BuyFragment(), "Buy");
         adapter.addFragment(new SellFragment(), "Sell");
         adapter.addFragment(new VehicleFragment(), "Vehicle");
         adapter.addFragment(new TravelFragment(), "Travel");
         viewPager.setAdapter(adapter);
-
     }
 }
