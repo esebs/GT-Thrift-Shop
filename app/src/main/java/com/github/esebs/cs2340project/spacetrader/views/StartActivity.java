@@ -16,7 +16,6 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.CreateUniverseViewM
  * @author Sebastian Escobar
  */
 public class StartActivity extends AppCompatActivity {
-    private Button startButton;
     private final CreateUniverseViewModel viewModel = new CreateUniverseViewModel();
 
     /**
@@ -33,7 +32,7 @@ public class StartActivity extends AppCompatActivity {
             finish();
         }
 
-        startButton = findViewById(R.id.exitGame);
+        Button startButton = findViewById(R.id.exitGame);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

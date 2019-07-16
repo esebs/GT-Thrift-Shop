@@ -39,13 +39,6 @@ public class ConfigurationActivity extends AppCompatActivity {
     private TextView traderPointsLabel;
     private TextView totalSkillPoints;
 
-
-    // Seek bars
-    private SeekBar editPilotPoints;
-    private SeekBar editEngineerPoints;
-    private SeekBar editFighterPoints;
-    private SeekBar editTraderPoints;
-
     private int pilotPoints;
     private int fighterPoints;
     private int traderPoints;
@@ -53,10 +46,6 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     // Difficulty Spinner
     private Spinner difficultySpinner;
-
-    // Buttons
-    private Button startGame;
-    private Button cancel;
 
     /**
      * Set up when activity starts
@@ -78,17 +67,17 @@ public class ConfigurationActivity extends AppCompatActivity {
         totalSkillPoints = findViewById(R.id.skillPoints);
 
         // Finds all point seek bars
-        editPilotPoints = findViewById(R.id.pilotBar);
-        editEngineerPoints = findViewById(R.id.engineerBar);
-        editFighterPoints = findViewById(R.id.fighterBar);
-        editTraderPoints = findViewById(R.id.traderBar);
+        SeekBar editPilotPoints = findViewById(R.id.pilotBar);
+        SeekBar editEngineerPoints = findViewById(R.id.engineerBar);
+        SeekBar editFighterPoints = findViewById(R.id.fighterBar);
+        SeekBar editTraderPoints = findViewById(R.id.traderBar);
 
         // Finds Spinners
         difficultySpinner = findViewById(R.id.difficultySpinner);
 
         // Finds Buttons
-        startGame = findViewById(R.id.exitGame);
-        cancel = findViewById(R.id.goBack);
+        Button startGame = findViewById(R.id.exitGame);
+        Button cancel = findViewById(R.id.goBack);
 
         ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
@@ -117,8 +106,9 @@ public class ConfigurationActivity extends AppCompatActivity {
                 int sumPoints = pilotPoints + fighterPoints + traderPoints
                         + engineerPoints;
 
-                // Creates player when total points equals 20
-                if (sumPoints != 20) {
+                // Creates player when total points equals MAX_POINTS
+                final int MAX_POINTS = 20;
+                if (sumPoints != MAX_POINTS) {
                     Toast toast = Toast.makeText(ConfigurationActivity.this,
                             "Points must sum to 20", Toast.LENGTH_LONG);
                     toast.show();
@@ -148,7 +138,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
     }
 
-    private final SeekBar.OnSeekBarChangeListener pilotListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener pilotListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes pilot points to new value and updates Points Remaining
          * @param seekBar editPilotPoints
@@ -175,7 +166,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    private final SeekBar.OnSeekBarChangeListener engineerListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener engineerListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes engineer points to new value and updates Points Remaining
          * @param seekBar editEngineerPoints
@@ -202,7 +194,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    private final SeekBar.OnSeekBarChangeListener fighterListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener fighterListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes fighter points to new value and updates Points Remaining
          * @param seekBar editFighterPoints
@@ -229,7 +222,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    private final SeekBar.OnSeekBarChangeListener traderListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener traderListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes Trader points to new value and updates Points Remaining
          * @param seekBar editTraderPoints

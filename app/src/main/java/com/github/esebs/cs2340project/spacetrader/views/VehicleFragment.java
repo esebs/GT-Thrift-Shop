@@ -4,6 +4,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +64,9 @@ class VehicleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (viewModel.getCostToRefuel() > viewModel.getCredits()) {
-                    Toast.makeText(getActivity(), "Need more credits to refuel!",
-                            Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getActivity(), "Need more credits to refuel!",
+                            Toast.LENGTH_LONG);
+                    toast.show();
                 } else {
                     viewModel.refillRange();
                     fuelInfo.setText(getString(R.string.tank_range, viewModel.getCurrentRange()));
@@ -86,7 +90,11 @@ class VehicleFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && (getFragmentManager() != null)) {
-            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.detach(this);
+            transaction.attach(this);
+            transaction.commit();
         }
     }
 

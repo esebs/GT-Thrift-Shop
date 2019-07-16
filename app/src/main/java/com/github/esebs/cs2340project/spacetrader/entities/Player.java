@@ -14,7 +14,6 @@ public class Player {
     private final int traderPoints;
     private final int engineerPoints;
     private int credits;
-    // private final int MAX_POINTS = 20;
 
     /**
      * Creates a new instance of a player
@@ -182,14 +181,6 @@ public class Player {
     public void setCredits(int credits) {
         this.credits = credits;
     }
-
-//    /**
-//     * gets the max value for Skill Points
-//     * @return maximum skill points
-//     */
-//    public int getMAX_POINTS() {
-//        return MAX_POINTS;
-//    }
 
     /**
      * toString method for Player

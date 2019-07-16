@@ -22,7 +22,7 @@ public class Building {
      * @param longitude longitude of the Building
      * @param roomNumbers a List of strings of the building's room numbers
      */
-    public Building (String name, double latitude, double longitude, List<String> roomNumbers) {
+    public Building (String name, double latitude, double longitude, Iterable<String> roomNumbers) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

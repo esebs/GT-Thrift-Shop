@@ -34,7 +34,8 @@ public enum Resource {
         Random random = new Random();
         int varKey = random.nextInt(2);
         varKey = (varKey > 0) ? 1 : -1;
-        float var = (float)(random.nextInt(variance + 1) * .01) * basePrice;
+        final double percentToDecimal = 0.01;
+        float var = (float)(random.nextInt(variance + 1) * percentToDecimal) * basePrice;
         return var * varKey;
     }
 

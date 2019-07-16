@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Represents a room inside one of the map's buildings
  */
-public class Room {
+public final class Room {
 
     // Room characteristics
     private final String name;
@@ -44,7 +44,7 @@ public class Room {
      * @param building the Building object the Room(s) are part of
      * @return a List of Room objects
      */
-    public static List<Room> createRooms(List<String> roomNumbers, Building building) {
+    public static List<Room> createRooms(Iterable<String> roomNumbers, Building building) {
         List<Room> rooms = new ArrayList<>();
         for (String roomNumber : roomNumbers) {
             rooms.add(new Room(roomNumber, building));
@@ -157,6 +157,7 @@ public class Room {
      */
     private int[] createSellToRoomPrices() {
         int[] sellPrices = new int[10];
+        final double percentageOfBuyPrice = 0.95;
         for (Resource resource: Resource.values()) {
             int price;
             // If the Player can sell this resource to the Room
@@ -168,7 +169,7 @@ public class Room {
                     price = resource.sellPriceCalc(techLevel);
                     // Otherwise, the sell price is just a discount of the current buy price
                 } else {
-                    price = (int) (buyPrice * 0.95);
+                    price = (int) (buyPrice * percentageOfBuyPrice);
                 }
                 // If the Player cannot sell this resource to the Room
             } else {
@@ -188,11 +189,12 @@ public class Room {
     private int[] createRandomQuantities() {
         Random r = new Random();
         int[] quantities = new int[10];
+        final int maxQuantities = 50;
         for (Resource resource: Resource.values()) {
             int quantity;
             TechLevel mtlp = resource.getMtlp();
             if (techLevel.ordinal() >= mtlp.ordinal()) {
-                quantity = r.nextInt(50) + 1;
+                quantity = r.nextInt(maxQuantities) + 1;
             } else {
                 quantity = -1;
             }

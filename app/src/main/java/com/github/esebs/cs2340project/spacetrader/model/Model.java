@@ -13,7 +13,7 @@ import java.util.Random;
  * @version 1.0
  * @author Travis Adams
  */
-public class Model {
+public final class Model {
 
     // The player of the game
     private Player player;

@@ -7,6 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +19,6 @@ import android.widget.TextView;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Resource;
-import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
 
 /**
@@ -27,7 +29,6 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
  * @author Elio Gerges
  */
 class SellFragment extends Fragment {
-    private final Model model = Model.getModelInstance();
 
     private final TradingViewModel tradingViewModel = new TradingViewModel();
 
@@ -142,26 +143,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.WATER, waterQuantity);
                                 waterButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.WATER)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -214,26 +213,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.FURS, fursQuantity);
                                 fursButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.FURS)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -286,26 +283,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.FOOD, foodQuantity);
                                 foodButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.FOOD)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -358,26 +353,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.ORE, oreQuantity);
                                 oreButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.ORE)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -430,26 +423,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.GAMES, gamesQuantity);
                                 gamesButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.GAMES)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -502,26 +493,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.FIREARMS, firearmsQuantity);
                                 firearmsButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.FIREARMS)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -575,26 +564,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.MEDICINE, medicineQuantity);
                                 medicineButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.MEDICINE)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -646,26 +633,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.MACHINES, machinesQuantity);
                                 machinesButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.MACHINES)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -717,27 +702,25 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.NARCOTICS,
                                         narcoticsQuantity);
                                 narcoticsButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.NARCOTICS)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -790,26 +773,24 @@ class SellFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.sellResources(Resource.ROBOTS, robotsQuantity);
                                 robotsButton.setText(getString(R.string.sell_resource_quantity,
                                         tradingViewModel.getSellQuantity(Resource.ROBOTS)));
-
-                                System.out.println(model.getPlayer());
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -1102,10 +1083,15 @@ class SellFragment extends Fragment {
      *
      * @param isVisibleToUser is a boolean representing if a fragment is visible to the user
      */
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && (getFragmentManager() != null)) {
-            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.detach(this);
+            transaction.attach(this);
+            transaction.commit();
         }
     }
 }

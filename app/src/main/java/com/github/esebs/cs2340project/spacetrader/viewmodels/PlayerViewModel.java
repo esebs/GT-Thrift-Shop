@@ -14,13 +14,14 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
 public class PlayerViewModel {
 
     private final Model model = Model.getModelInstance();
+    private final Player player = model.getPlayer();
 
     /**
      * Gets the player for the game
      * @return the player
      */
     public Player getPlayer() {
-        return model.getPlayer();
+        return player;
     }
 
     /**
@@ -44,5 +45,13 @@ public class PlayerViewModel {
 
         model.setPlayer(player);
 
+    }
+
+    /**
+     * Get the player's current Room
+     * @return current Room
+     */
+    public Room getPlayerCurrentRoom() {
+        return player.getCurrent();
     }
 }

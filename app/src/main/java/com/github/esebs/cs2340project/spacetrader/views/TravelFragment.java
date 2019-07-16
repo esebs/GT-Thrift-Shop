@@ -140,7 +140,8 @@ class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerCli
             }
 
             //Set map zoom
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+            final float zoomVal = 15.0f;
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoomVal));
 
             //Set a listener for marker click.
             googleMap.setOnMarkerClickListener(this);
