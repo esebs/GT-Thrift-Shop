@@ -42,8 +42,8 @@ import java.util.List;
 public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerClickListener {
 
     private TravelViewModel viewModel;
-    private Model model = Model.getModelInstance();
-    private PlayerViewModel playerViewModel = new PlayerViewModel();
+    private final Model model = Model.getModelInstance();
+    private final PlayerViewModel playerViewModel = new PlayerViewModel();
     private String selectedRoomName;
     private Room selectedRoom;
 

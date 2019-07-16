@@ -1,22 +1,75 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="PluralsCandidate">
     <string name="app_name">GT Thrift Shop</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="title_activity_travel_fragment">Map</string>
+
+    <string name="trader">Trader: 1</string>
+    <string name="trader_points">Trader: %1$d</string>
+
+    <string name="fighter">Fighter: 1</string>
+    <string name="fighter_points">Fighter: %1$d</string>
+
+    <string name="pilot">Pilot: 1</string>
+    <string name="pilot_points">Pilot: %1$d</string>
+
+    <string name="engineer">Engineer: 1</string>
+    <string name="engineer_points">Engineer: %1$d</string>
+
+    <string name="points_remaining">Points Remaining: %1$d</string>
+
+    <string name="difficulty">Difficulty</string>
+    <string name="create_player">Create Player</string>
+    <string name="required_skill">Required Skill Points: 20</string>
+    <string name="enter_name">Enter Player Name</string>
+
     <string name="quantity_not_available">n/a</string>
     <string name="price_not_available">--- cr.</string>
     <string name="buy_resource_quantity">%1$d</string>
     <string name="buy_resource_price">%1$d cr.</string>
-    <string name="buy_text_1">You can buy up to %1$d units of %2$s.</string>
-    <string name="buy_text_3">%1$d units</string>
+    <string name="buy_text_1">You can buy up to %1$d unit(s) of %2$s.</string>
+    <string name="buy_text_2">How many would you like to buy?</string>
+    <string name="buy_text_3">%1$d unit(s)</string>
+    <string name="sell_resource_quantity">%1$d</string>
+    <string name="sell_resource_price">%1$d cr.</string>
+    <string name="sell_text_1">You can sell up to %1$d unit(s) of %2$s.</string>
+    <string name="sell_text_2">How many would you like to sell?</string>
     <string name="current_building">Building: %1$s</string>
     <string name="current_room">Room: %1$s</string>
     <string name="current_credits">Total Credits: %1$d cr.</string>
     <string name="current_space">Vehicle Capacity: %1$d/%2$d</string>
-
-    <string name="tank_range">You have enough range to travel %1$d meters.</string>
+    <string name="tank_range">You have enough range to travel %1$d meter(s).</string>
     <string name="empty_tank">A full tank cost %1$d cr.</string>
     <string name="full_tank">You have a full tank!</string>
+    <string name='start'>Start</string>
+    <string name='welcome'>Welcome to Space Traders</string>
+    <string name='exit'>Exit</string>
+    <string name="size">Size: </string>
+    <string name="tech_level">Tech Level: </string>
+    <string name="government">Government: </string>
+    <string name="resource">Resources: </string>
+    <string name="police">Police: </string>
+    <string name="pirates">Pirates: </string>
+    <string name="buy_cargo">Buy Cargo</string>
+    <string name="sell_cargo">Sell Cargo</string>
+    <string name="qty">Qty.</string>
+    <string name="item">Item</string>
+    <string name="price">Price</string>
+    <string name="water">Water</string>
+    <string name="furs">Furs</string>
+    <string name="food">Food</string>
+    <string name="ore">Ore</string>
+    <string name="games">Games</string>
+    <string name="firearms">Firearms</string>
+    <string name="medicine">Medicine</string>
+    <string name="machines">Machines</string>
+    <string name="narcotics">Narcotics</string>
+    <string name="robots">Robots</string>
+    <string name="vehicle_info">Vehicle Information</string>
+    <string name="repair">Repair</string>
+    <string name="refuel">Refuel</string>
+    <string name="view_vehicle_info">View Vehicle Info</string>
+    <string name="hull_strength">Your hull strength is at ---%.</string>
+    <string name="hull_repair">Full repairs will cost --- cr.</string>
+    <string name="content">TODO</string>
+
 
 </resources>

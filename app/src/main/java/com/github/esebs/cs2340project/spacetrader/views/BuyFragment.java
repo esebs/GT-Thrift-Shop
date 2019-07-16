@@ -26,7 +26,7 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
  * @author Elio Gerges
  */
 public class BuyFragment extends Fragment {
-    private TradingViewModel tradingViewModel = new TradingViewModel();
+    private final TradingViewModel tradingViewModel = new TradingViewModel();
 
     private Button waterButton;
     private Button fursButton;
@@ -52,6 +52,7 @@ public class BuyFragment extends Fragment {
     private int robotsQuantity;
 
     private TextView textView1;
+    private TextView textView2;
     private TextView textView3;
     private SeekBar seekBar;
 
@@ -84,6 +85,9 @@ public class BuyFragment extends Fragment {
         TextView robotsPrice;
         View view = inflater.inflate(R.layout.buy_fragment, container,false);
         final View dialog = inflater.inflate(R.layout.trade_dialog, container,false);
+
+        textView2 = dialog.findViewById(R.id.text_view_2);
+        textView2.setText(getString(R.string.buy_text_2));
 
         waterButton = view.findViewById(R.id.water_qty);
         waterPrice = view.findViewById(R.id.water_price);
@@ -763,7 +767,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Water
-    private SeekBar.OnSeekBarChangeListener waterSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener waterSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes water quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -790,7 +794,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Furs
-    private SeekBar.OnSeekBarChangeListener fursSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener fursSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes furs quantity to new value and updates seek bar counter
          *
@@ -818,7 +822,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Food
-    private SeekBar.OnSeekBarChangeListener foodSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener foodSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes food quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -845,7 +849,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Ore
-    private SeekBar.OnSeekBarChangeListener oreSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener oreSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes ore quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -872,7 +876,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Games
-    private SeekBar.OnSeekBarChangeListener gamesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener gamesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes games quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -899,7 +903,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Firearms
-    private SeekBar.OnSeekBarChangeListener firearmsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener firearmsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes firearms quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -926,7 +930,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Medicine
-    private SeekBar.OnSeekBarChangeListener medicineSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener medicineSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes medicine quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -952,7 +956,7 @@ public class BuyFragment extends Fragment {
     };
 
     //SeekBar handler for Buying Machines
-    private SeekBar.OnSeekBarChangeListener machinesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener machinesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes machines quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -979,7 +983,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Narcotics
-    private SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes narcotics quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -1006,7 +1010,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Robots
-    private SeekBar.OnSeekBarChangeListener robotsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener robotsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes robots quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert

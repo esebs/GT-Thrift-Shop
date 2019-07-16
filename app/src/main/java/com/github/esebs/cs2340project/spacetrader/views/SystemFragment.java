@@ -22,7 +22,7 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
  * @author Elio Gerges
  */
 public class SystemFragment extends Fragment {
-    private PlayerViewModel playerViewModel = new PlayerViewModel();
+    private final PlayerViewModel playerViewModel = new PlayerViewModel();
 
     @Nullable
     @Override
