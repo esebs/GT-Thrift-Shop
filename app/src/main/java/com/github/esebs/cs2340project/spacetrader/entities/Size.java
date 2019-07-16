@@ -1,8 +1,10 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
-import android.media.MediaExtractor;
 
 import java.util.Random;
 
+/**
+ * Enum for possible building sizes
+ */
 public enum Size {
     TINY,
     SMALL,
@@ -10,6 +12,10 @@ public enum Size {
     LARGE,
     HUGE;
 
+    /**
+     * Chooses a random building size
+     * @return size
+     */
     public static Size generateSize() {
         Random random = new Random();
         int key = random.nextInt(9);

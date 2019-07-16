@@ -2,12 +2,21 @@ package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
 import android.util.Log;
 
+import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.entities.Resource;
+import com.github.esebs.cs2340project.spacetrader.entities.Room;
+import com.github.esebs.cs2340project.spacetrader.entities.Vehicle;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
+/**
+ * ViewModel for trading
+ */
 public class TradingViewModel {
 
-    private Model model = Model.getModelInstance();
+    private final Model model = Model.getModelInstance();
+    private final Player player = model.getPlayer();
+    private final Room currentRoom = player.getCurrent();
+    private final Vehicle vehicle = player.getVehicle();
 
     /**
      * Gets how many of a resource is offered by the Player's current Room
@@ -16,7 +25,7 @@ public class TradingViewModel {
      * @return the quantity of the resource offered
      */
     public int getBuyQuantity(Resource resource) {
-        return model.getPlayer().getCurrent().getBuyFromRoomQuantities()[resource.ordinal()];
+        return currentRoom.getBuyFromRoomQuantities()[resource.ordinal()];
     }
 
     /**
@@ -26,7 +35,7 @@ public class TradingViewModel {
      * @return the quantity of the resource owned by the Player
      */
     public int getSellQuantity(Resource resource) {
-        return model.getPlayer().getVehicle().getCargoHold()[resource.ordinal()];
+        return vehicle.getCargoHold()[resource.ordinal()];
     }
 
     /**
@@ -36,7 +45,7 @@ public class TradingViewModel {
      * @return the buy price of the resource
      */
     public int getBuyPrice(Resource resource) {
-        return model.getPlayer().getCurrent().getBuyFromRoomPrices()[resource.ordinal()];
+        return currentRoom.getBuyFromRoomPrices()[resource.ordinal()];
     }
 
     /**
@@ -46,7 +55,7 @@ public class TradingViewModel {
      * @return the sell price of the resource
      */
     public int getSellPrice(Resource resource) {
-        return model.getPlayer().getCurrent().getSellToRoomPrices()[resource.ordinal()];
+        return currentRoom.getSellToRoomPrices()[resource.ordinal()];
     }
 
     /**
@@ -63,15 +72,15 @@ public class TradingViewModel {
      * @return the max buy quantity of the given resource`
      */
     public int calculateMaxBuyQuantity(Resource resource) {
-        int[] buyQuantities = model.getPlayer().getCurrent().getBuyFromRoomQuantities();
+        int[] buyQuantities = currentRoom.getBuyFromRoomQuantities();
         int maxBuyQuantity = buyQuantities[resource.ordinal()];
 
-        int[] buyPrices = model.getPlayer().getCurrent().getBuyFromRoomPrices();
+        int[] buyPrices = currentRoom.getBuyFromRoomPrices();
         int price = buyPrices[resource.ordinal()];
-        int credits = model.getPlayer().getCredits();
+        int credits = player.getCredits();
         maxBuyQuantity = Math.min(credits / price, maxBuyQuantity);
 
-        int remainingCargoSpace = model.getPlayer().getVehicle().calculateRemainingCargoSpace();
+        int remainingCargoSpace = vehicle.calculateRemainingCargoSpace();
 
         return Math.min(maxBuyQuantity, remainingCargoSpace);
     }
@@ -86,7 +95,7 @@ public class TradingViewModel {
      * @return the max sell quantity of the given resource
      */
     public int calculateMaxSellQuantity(Resource resource) {
-        int[] cargoHold = model.getPlayer().getVehicle().getCargoHold();
+        int[] cargoHold = vehicle.getCargoHold();
         return cargoHold[resource.ordinal()];
     }
 
@@ -99,22 +108,22 @@ public class TradingViewModel {
      * @param numToBuy how many to buy
      */
     public void buyResources(Resource resource, int numToBuy) {
-        int[] cargoHold = model.getPlayer().getVehicle().getCargoHold();
+        int[] cargoHold = vehicle.getCargoHold();
         cargoHold[resource.ordinal()] += numToBuy;
-        model.getPlayer().getVehicle().setCargoHold(cargoHold);
+        vehicle.setCargoHold(cargoHold);
 
-        int credits = model.getPlayer().getCredits();
-        int costPerUnit = model.getPlayer().getCurrent().getBuyFromRoomPrices()[resource.ordinal()];
-        model.getPlayer().setCredits(credits - (numToBuy * costPerUnit));
+        int credits = player.getCredits();
+        int costPerUnit = currentRoom.getBuyFromRoomPrices()[resource.ordinal()];
+        player.setCredits(credits - (numToBuy * costPerUnit));
 
-        int[] quantities = model.getPlayer().getCurrent().getBuyFromRoomQuantities();
+        int[] quantities = currentRoom.getBuyFromRoomQuantities();
         quantities[resource.ordinal()] -= numToBuy;
-        model.getPlayer().getCurrent().setBuyFromRoomQuantities(quantities);
+        currentRoom.setBuyFromRoomQuantities(quantities);
 
         Log.d("BUY", numToBuy + " " + resource.name()
                 + "(s) bought for " + getBuyPrice(resource) + " credits each ("
                 + numToBuy * getBuyPrice(resource) + " total). Player has "
-                + model.getPlayer().getCredits() + " credits remaining.");
+                + player.getCredits() + " credits remaining.");
     }
 
     /**
@@ -125,18 +134,18 @@ public class TradingViewModel {
      * @param numToSell how many to sell
      */
     public void sellResources(Resource resource, int numToSell) {
-        int[] cargoHold = model.getPlayer().getVehicle().getCargoHold();
+        int[] cargoHold = vehicle.getCargoHold();
         cargoHold[resource.ordinal()] -= numToSell;
-        model.getPlayer().getVehicle().setCargoHold(cargoHold);
+        vehicle.setCargoHold(cargoHold);
 
-        int credits = model.getPlayer().getCredits();
-        int payPerUnit = model.getPlayer().getCurrent().getSellToRoomPrices()[resource.ordinal()];
-        model.getPlayer().setCredits(credits + (numToSell * payPerUnit));
+        int credits = player.getCredits();
+        int payPerUnit = currentRoom.getSellToRoomPrices()[resource.ordinal()];
+        player.setCredits(credits + (numToSell * payPerUnit));
 
         Log.d("SELL", numToSell + " " + resource.name()
                 + "(s) sold for " + getSellPrice(resource) + " credits each ("
                 + numToSell * getSellPrice(resource) + " total). Player has "
-                + model.getPlayer().getCredits() + " credits remaining.");
+                + player.getCredits() + " credits remaining.");
     }
 
 }

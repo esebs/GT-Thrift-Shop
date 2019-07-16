@@ -21,8 +21,8 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
  * @version 1.0
  * @author Elio Gerges
  */
-public class SystemFragment extends Fragment {
-    private PlayerViewModel playerViewModel = new PlayerViewModel();
+class SystemFragment extends Fragment {
+    private final PlayerViewModel playerViewModel = new PlayerViewModel();
 
     @Nullable
     @Override
@@ -75,9 +75,10 @@ public class SystemFragment extends Fragment {
      *
      * @param isVisibleToUser is a boolean representing if a fragment is visible to the user
      */
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && getFragmentManager() != null) {
+        if (isVisibleToUser && (getFragmentManager() != null)) {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }

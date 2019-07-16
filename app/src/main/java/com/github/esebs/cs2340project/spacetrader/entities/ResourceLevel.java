@@ -1,6 +1,9 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 import java.util.Random;
 
+/**
+ * Enum for building resource levels
+ */
 public enum ResourceLevel {
     NO_SPECIAL_RESOURCES,
     MINERAL_RICH,
@@ -16,6 +19,10 @@ public enum ResourceLevel {
     ARTISTIC,
     WARLIKE;
 
+    /**
+     * Chooses a random resource level
+     * @return resource level
+     */
     public static ResourceLevel generateResources() {
         Random random = new Random();
         int key = random.nextInt(20);

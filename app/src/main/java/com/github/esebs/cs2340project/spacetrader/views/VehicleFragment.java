@@ -21,7 +21,7 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.TravelViewModel;
  * @version 1.0
  * @author Elio Gerges
  */
-public class VehicleFragment extends Fragment {
+class VehicleFragment extends Fragment {
 
     private TextView fuelInfo;
     private TextView fuelCost;
@@ -82,9 +82,10 @@ public class VehicleFragment extends Fragment {
      *
      * @param isVisibleToUser is a boolean representing if a fragment is visible to the user
      */
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && getFragmentManager() != null) {
+        if (isVisibleToUser && (getFragmentManager() != null)) {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }

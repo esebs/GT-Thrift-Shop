@@ -3,6 +3,8 @@ package com.github.esebs.cs2340project.spacetrader.views;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,7 +27,7 @@ import java.util.Arrays;
  */
 public class ConfigurationActivity extends AppCompatActivity {
 
-    private PlayerViewModel viewModel = new PlayerViewModel();
+    private final PlayerViewModel viewModel = new PlayerViewModel();
 
     // Player Name
     private EditText editPlayerName;
@@ -117,10 +119,12 @@ public class ConfigurationActivity extends AppCompatActivity {
 
                 // Creates player when total points equals 20
                 if (sumPoints != 20) {
-                    Toast.makeText(ConfigurationActivity.this,
-                            "Points must sum to 20", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(ConfigurationActivity.this,
+                            "Points must sum to 20", Toast.LENGTH_LONG);
+                    toast.show();
                 } else {
-                    viewModel.setPlayer(editPlayerName.getText().toString(),
+                    Editable playerName = editPlayerName.getText();
+                    viewModel.setPlayer(playerName.toString(),
                             (Difficulty) difficultySpinner.getSelectedItem(),
                             pilotPoints,
                             fighterPoints,
@@ -144,7 +148,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
     }
 
-    SeekBar.OnSeekBarChangeListener pilotListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener pilotListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes pilot points to new value and updates Points Remaining
          * @param seekBar editPilotPoints
@@ -171,7 +175,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    SeekBar.OnSeekBarChangeListener engineerListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener engineerListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes engineer points to new value and updates Points Remaining
          * @param seekBar editEngineerPoints
@@ -198,7 +202,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    SeekBar.OnSeekBarChangeListener fighterListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener fighterListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes fighter points to new value and updates Points Remaining
          * @param seekBar editFighterPoints
@@ -225,7 +229,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    SeekBar.OnSeekBarChangeListener traderListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener traderListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes Trader points to new value and updates Points Remaining
          * @param seekBar editTraderPoints

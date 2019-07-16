@@ -19,10 +19,10 @@ import com.github.esebs.cs2340project.spacetrader.entities.Resource;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
 
-public class SellFragment extends Fragment {
-    private Model model = Model.getModelInstance();
+class SellFragment extends Fragment {
+    private final Model model = Model.getModelInstance();
 
-    private TradingViewModel tradingViewModel = new TradingViewModel();
+    private final TradingViewModel tradingViewModel = new TradingViewModel();
 
     private Button waterButton;
     private Button fursButton;
@@ -97,9 +97,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Water.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -109,7 +109,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(waterQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(waterSeekBarListener);
@@ -167,9 +167,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Furs.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -179,7 +179,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(fursQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(fursSeekBarListener);
@@ -237,9 +237,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Food.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -249,7 +249,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(foodQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(foodSeekBarListener);
@@ -307,9 +307,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Ore.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -319,7 +319,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(oreQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(oreSeekBarListener);
@@ -377,9 +377,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Games.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -389,7 +389,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(gamesQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(gamesSeekBarListener);
@@ -447,9 +447,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Firearms.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -459,7 +459,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(firearmsQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(firearmsSeekBarListener);
@@ -518,9 +518,9 @@ public class SellFragment extends Fragment {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
 
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Medicine.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -530,7 +530,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(medicineQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(medicineSeekBarListener);
@@ -587,9 +587,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Machines.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -599,7 +599,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(machinesQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(machinesSeekBarListener);
@@ -657,9 +657,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Narcotics.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -669,7 +669,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(narcoticsQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(narcoticsSeekBarListener);
@@ -728,9 +728,9 @@ public class SellFragment extends Fragment {
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
+                textView1 = dialog.findViewById(R.id.text_view_1);
                 textView1.setText("You can sell up to " + maxSellQuantity + " units of Robots.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
+                textView2 = dialog.findViewById(R.id.text_view_2);
                 textView2.setText("How many would you like to sell?");
 
 
@@ -740,7 +740,7 @@ public class SellFragment extends Fragment {
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
+                textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(robotsQuantity + " units");
 
                 seekBar.setOnSeekBarChangeListener(robotsSeekBarListener);
@@ -776,7 +776,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Water
-    SeekBar.OnSeekBarChangeListener waterSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener waterSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes water quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -803,7 +803,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Furs
-    SeekBar.OnSeekBarChangeListener fursSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener fursSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes furs quantity to new value and updates seek bar counter
          *
@@ -831,7 +831,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Food
-    SeekBar.OnSeekBarChangeListener foodSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener foodSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes food quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -858,7 +858,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Ore
-    SeekBar.OnSeekBarChangeListener oreSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener oreSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes ore quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -885,7 +885,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Games
-    SeekBar.OnSeekBarChangeListener gamesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener gamesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes games quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -912,7 +912,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Firearms
-    SeekBar.OnSeekBarChangeListener firearmsSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener firearmsSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes firearms quantity to new value and updates seek bar counter
@@ -940,7 +940,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Medicine
-    SeekBar.OnSeekBarChangeListener medicineSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener medicineSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes medicine quantity to new value and updates seek bar counter
@@ -967,7 +967,7 @@ public class SellFragment extends Fragment {
     };
 
     //SeekBar handler for Selling Machines
-    SeekBar.OnSeekBarChangeListener machinesSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener machinesSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes machines quantity to new value and updates seek bar counter
@@ -995,7 +995,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Narcotics
-    SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes narcotics quantity to new value and updates seek bar counter
@@ -1023,7 +1023,7 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Robots
-    SeekBar.OnSeekBarChangeListener robotsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener robotsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes robots quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
@@ -1051,7 +1051,7 @@ public class SellFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
+        if (isVisibleToUser && (getFragmentManager() != null)) {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }

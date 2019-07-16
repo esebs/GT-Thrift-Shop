@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @author Elio Gerges
  */
-public class SectionsPageAdapter extends FragmentPagerAdapter {
+class SectionsPageAdapter extends FragmentPagerAdapter {
 
     private final ArrayList<Fragment> fragmentList = new ArrayList<>();
     private final ArrayList<String> fragmentTitleList = new ArrayList<>();

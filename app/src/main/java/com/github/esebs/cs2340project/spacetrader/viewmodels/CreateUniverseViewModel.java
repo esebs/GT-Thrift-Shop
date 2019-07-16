@@ -9,9 +9,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * ViewModel for universe creation
+ */
 public class CreateUniverseViewModel {
-    private Model model = Model.getModelInstance();
+    private final Model model = Model.getModelInstance();
 
+    /**
+     * Creates a random set of buildings and sets it as the model's buildings
+     */
     public void createUniverse() {
         // Instantiate the universe's buildings
         model.setBuildings(createBuildings());

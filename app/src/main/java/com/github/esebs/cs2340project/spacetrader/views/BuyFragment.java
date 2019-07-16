@@ -25,8 +25,8 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
  * @version 1.0
  * @author Elio Gerges
  */
-public class BuyFragment extends Fragment {
-    private TradingViewModel tradingViewModel = new TradingViewModel();
+class BuyFragment extends Fragment {
+    private final TradingViewModel tradingViewModel = new TradingViewModel();
 
     private Button waterButton;
     private Button fursButton;
@@ -130,8 +130,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 tradingViewModel.buyResources(Resource.WATER, waterQuantity);
@@ -139,15 +139,15 @@ public class BuyFragment extends Fragment {
                                         tradingViewModel.getBuyQuantity(Resource.WATER)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -197,8 +197,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -210,15 +210,15 @@ public class BuyFragment extends Fragment {
 
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -266,8 +266,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -278,15 +278,15 @@ public class BuyFragment extends Fragment {
                                         tradingViewModel.getBuyQuantity(Resource.FOOD)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -333,8 +333,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -345,15 +345,15 @@ public class BuyFragment extends Fragment {
                                         tradingViewModel.getBuyQuantity(Resource.ORE)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -402,8 +402,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -415,15 +415,15 @@ public class BuyFragment extends Fragment {
 
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -472,8 +472,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -485,15 +485,15 @@ public class BuyFragment extends Fragment {
 
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -542,8 +542,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -555,15 +555,15 @@ public class BuyFragment extends Fragment {
 
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -612,8 +612,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -624,15 +624,15 @@ public class BuyFragment extends Fragment {
                                         tradingViewModel.getBuyQuantity(Resource.MACHINES)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -681,8 +681,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -695,15 +695,15 @@ public class BuyFragment extends Fragment {
 
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -753,8 +753,8 @@ public class BuyFragment extends Fragment {
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Buys the resource
@@ -766,15 +766,15 @@ public class BuyFragment extends Fragment {
 
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -786,16 +786,17 @@ public class BuyFragment extends Fragment {
      *
      * @param isVisibleToUser is a boolean representing if a fragment is visible to the user
      */
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && getFragmentManager() != null) {
+        if (isVisibleToUser && (getFragmentManager() != null)) {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }
 
 
     //SeekBar handler for Buying Water
-    private SeekBar.OnSeekBarChangeListener waterSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener waterSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes water quantity to new value and updates seek bar counter
@@ -823,7 +824,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Furs
-    private SeekBar.OnSeekBarChangeListener fursSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener fursSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes furs quantity to new value and updates seek bar counter
@@ -852,7 +853,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Food
-    private SeekBar.OnSeekBarChangeListener foodSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener foodSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes food quantity to new value and updates seek bar counter
@@ -880,7 +881,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Ore
-    private SeekBar.OnSeekBarChangeListener oreSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener oreSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes ore quantity to new value and updates seek bar counter
@@ -908,7 +909,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Games
-    private SeekBar.OnSeekBarChangeListener gamesSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener gamesSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes games quantity to new value and updates seek bar counter
@@ -936,7 +937,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Firearms
-    private SeekBar.OnSeekBarChangeListener firearmsSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener firearmsSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes firearms quantity to new value and updates seek bar counter
@@ -964,7 +965,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Medicine
-    private SeekBar.OnSeekBarChangeListener medicineSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener medicineSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes medicine quantity to new value and updates seek bar counter
@@ -991,7 +992,7 @@ public class BuyFragment extends Fragment {
     };
 
     //SeekBar handler for Buying Machines
-    private SeekBar.OnSeekBarChangeListener machinesSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener machinesSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes machines quantity to new value and updates seek bar counter
@@ -1019,7 +1020,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Narcotics
-    private SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes narcotics quantity to new value and updates seek bar counter
@@ -1047,7 +1048,7 @@ public class BuyFragment extends Fragment {
 
 
     //SeekBar handler for Buying Robots
-    private SeekBar.OnSeekBarChangeListener robotsSeekBarListener =
+    private final SeekBar.OnSeekBarChangeListener robotsSeekBarListener =
             new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes robots quantity to new value and updates seek bar counter

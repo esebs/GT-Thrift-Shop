@@ -1,8 +1,10 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
-import android.os.TestLooperManager;
 
 import java.util.Random;
 
+/**
+ * Enum for building tech levels
+ */
 public enum TechLevel {
     PRE_AGRICULTURE,
     AGRICULTURE,
@@ -13,6 +15,10 @@ public enum TechLevel {
     POST_INDUSTRIAL,
     HI_TECH;
 
+    /**
+     * Chooses a random tech level
+     * @return tech level
+     */
     public static TechLevel generateTechLevel() {
         Random random = new Random();
         int key = random.nextInt(8);

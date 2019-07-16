@@ -1,6 +1,5 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
-import android.app.AlertDialog;
 import android.util.Log;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
@@ -14,14 +13,14 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class PlayerViewModel {
 
-    private Model model = Model.getModelInstance();
+    private final Model model = Model.getModelInstance();
 
     /**
      * Gets the player for the game
      * @return the player
      */
     public Player getPlayer() {
-        return Model.getModelInstance().getPlayer();
+        return model.getPlayer();
     }
 
     /**

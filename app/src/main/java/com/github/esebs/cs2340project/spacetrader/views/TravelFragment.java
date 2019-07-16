@@ -39,11 +39,11 @@ import java.util.List;
  * @version 1.0
  * @author Elio Gerges
  */
-public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerClickListener {
+class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerClickListener {
 
     private TravelViewModel viewModel;
-    private Model model = Model.getModelInstance();
-    private PlayerViewModel playerViewModel = new PlayerViewModel();
+    private final Model model = Model.getModelInstance();
+    private final PlayerViewModel playerViewModel = new PlayerViewModel();
     private String selectedRoomName;
     private Room selectedRoom;
 
@@ -89,7 +89,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
         SupportMapFragment mapView =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-        if (mapView == null && getFragmentManager() != null) {
+        if ((mapView == null) && (getFragmentManager() != null)) {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             mapView = new SupportMapFragment();
@@ -155,7 +155,7 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
      */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        if (marker.getTag() != null && marker.getTag().equals(0)) {
+        if ((marker.getTag() != null) && (marker.getTag().equals(0))) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
             alertDialog.setTitle("This is your current location!")
@@ -194,8 +194,8 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
 
                             //select the room object according to the name of the radio option
                             // selected
-                            if (selectedRoomName == null || selectedRoomName.equals(
-                                    rooms.get(0).getName())) {
+                            if ((selectedRoomName == null) || (selectedRoomName.equals(
+                                    rooms.get(0).getName()))) {
                                 selectedRoom = rooms.get(0);
                             } else if (selectedRoomName.equals(rooms.get(1).getName())) {
                                 selectedRoom = rooms.get(1);

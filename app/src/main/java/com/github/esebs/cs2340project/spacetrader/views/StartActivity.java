@@ -17,7 +17,7 @@ import com.github.esebs.cs2340project.spacetrader.viewmodels.CreateUniverseViewM
  */
 public class StartActivity extends AppCompatActivity {
     private Button startButton;
-    private CreateUniverseViewModel viewModel = new CreateUniverseViewModel();
+    private final CreateUniverseViewModel viewModel = new CreateUniverseViewModel();
 
     /**
      * Set up when activity starts
@@ -28,8 +28,8 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-
-        if (getIntent().getBooleanExtra("EXIT", false)) {
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("EXIT", false)) {
             finish();
         }
 

@@ -5,23 +5,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Represents a room inside one of the map's buildings
+ */
 public class Room {
 
     // Room characteristics
-    private String name;
-    private Building building;
-    private Size size;
-    private TechLevel techLevel;
-    private Government government;
-    private ResourceLevel resource;
-    private PolicePresence policePresence;
+    private final String name;
+    private final Building building;
+    private final Size size;
+    private final TechLevel techLevel;
+    private final Government government;
+    private final ResourceLevel resource;
+    private final PolicePresence policePresence;
 
     // Room trading arrays
-    private int[] buyFromRoomPrices;
-    private int[] sellToRoomPrices;
+    private final int[] buyFromRoomPrices;
+    private final int[] sellToRoomPrices;
     private int[] buyFromRoomQuantities;
 
-    public Room(String name, Building building) {
+    private Room(String name, Building building) {
         this.name = name;
         this.building = building;
         size = Size.generateSize();
@@ -53,21 +56,21 @@ public class Room {
      * @return the prices to buy from this Room
      */
     public int[] getBuyFromRoomPrices() {
-        return buyFromRoomPrices;
+        return buyFromRoomPrices.clone();
     }
 
     /**
      * @return the prices to sell to this Room
      */
     public int[] getSellToRoomPrices() {
-        return sellToRoomPrices;
+        return sellToRoomPrices.clone();
     }
 
     /**
      * @return the quantities of resources being sold
      */
     public int[] getBuyFromRoomQuantities() {
-        return buyFromRoomQuantities;
+        return buyFromRoomQuantities.clone();
     }
 
     /**
@@ -125,7 +128,7 @@ public class Room {
      * @param buyFromRoomQuantities array of resource quantities
      */
     public void setBuyFromRoomQuantities(int[] buyFromRoomQuantities) {
-        this.buyFromRoomQuantities = buyFromRoomQuantities;
+        this.buyFromRoomQuantities = buyFromRoomQuantities.clone();
     }
 
     /**
@@ -136,7 +139,8 @@ public class Room {
         int[] buyPrices = new int[10];
         for (Resource resource: Resource.values()) {
             int price;
-            if (techLevel.ordinal() >= resource.getMtlp().ordinal()) {
+            TechLevel mtlp = resource.getMtlp();
+            if (techLevel.ordinal() >= mtlp.ordinal()) {
                 price = resource.buyPriceCalc(techLevel);
             } else {
                 price = -1;
@@ -156,7 +160,8 @@ public class Room {
         for (Resource resource: Resource.values()) {
             int price;
             // If the Player can sell this resource to the Room
-            if (techLevel.ordinal() >= resource.getMtlu().ordinal()) {
+            TechLevel mtlu = resource.getMtlu();
+            if (techLevel.ordinal() >= mtlu.ordinal()) {
                 int buyPrice = buyFromRoomPrices[resource.ordinal()];
                 // If the Player cannot buy this resource from the Room, then calculate a sell price
                 if (buyPrice == -1) {
@@ -185,7 +190,8 @@ public class Room {
         int[] quantities = new int[10];
         for (Resource resource: Resource.values()) {
             int quantity;
-            if (techLevel.ordinal() >= resource.getMtlp().ordinal()) {
+            TechLevel mtlp = resource.getMtlp();
+            if (techLevel.ordinal() >= mtlp.ordinal()) {
                 quantity = r.nextInt(50) + 1;
             } else {
                 quantity = -1;
