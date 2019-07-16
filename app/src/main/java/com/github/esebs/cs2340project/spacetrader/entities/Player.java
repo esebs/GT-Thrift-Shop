@@ -26,8 +26,8 @@ public class Player {
      * @param traderPoints Trader Skill Points
      * @param engineerPoints Engineering Skill Points
      */
-    public Player(String name, Difficulty difficulty, Room current, int pilotPoints, int fighterPoints,
-                  int traderPoints, int engineerPoints) {
+    public Player(String name, Difficulty difficulty, Room current, int pilotPoints,
+                  int fighterPoints, int traderPoints, int engineerPoints) {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;

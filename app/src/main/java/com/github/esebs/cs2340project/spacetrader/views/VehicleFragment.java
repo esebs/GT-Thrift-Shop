@@ -41,7 +41,8 @@ public class VehicleFragment extends Fragment {
      */
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.vehicle_fragment, container, false);
         viewModel = new TravelViewModel();
         fuelInfo = view.findViewById(R.id.fuel_info);
@@ -60,7 +61,8 @@ public class VehicleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (viewModel.getCostToRefuel() > viewModel.getCredits()) {
-                    Toast.makeText(getActivity(), "Need more credits to refuel!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Need more credits to refuel!",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     viewModel.refillRange();
                     fuelInfo.setText(getString(R.string.tank_range, viewModel.getCurrentRange()));

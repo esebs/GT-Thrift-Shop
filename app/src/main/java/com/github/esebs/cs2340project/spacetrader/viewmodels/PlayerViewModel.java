@@ -38,8 +38,8 @@ public class PlayerViewModel {
                   int traderPoints, int engineerPoints) {
         Room current = model.getRandomRoom();
 
-        Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints, traderPoints,
-                engineerPoints);
+        Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints,
+                traderPoints, engineerPoints);
 
         Log.d("APP", "PlayerViewModel: created player: \n" + player);
 

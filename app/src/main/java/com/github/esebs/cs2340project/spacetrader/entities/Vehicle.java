@@ -11,7 +11,7 @@ public enum Vehicle {
     UNICYCLE("Unicycle", 10, 10, 25, 2000),
     SCOOTER("Scooter", 14, 15, 100, 10000),
     BIKE("Bike", 20, 20, 200, 25000),
-    GOLFCART("Golf Cart", 25, 60, 400, 50000),
+    GOLF_CART("Golf Cart", 25, 60, 400, 50000),
     MOPED("Moped", 50, 35, 350, 75000);
 
     private String vehicleType;

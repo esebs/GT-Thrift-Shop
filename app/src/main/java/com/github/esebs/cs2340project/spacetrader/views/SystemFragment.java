@@ -26,7 +26,8 @@ public class SystemFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.system_fragment, container, false);
         Player player  = playerViewModel.getPlayer();
         TextView buildingName;
@@ -60,7 +61,10 @@ public class SystemFragment extends Fragment {
         resources.setText(room.getResource().name());
         police.setText(room.getPolicePresence().name());
         pirates.setText("---");
-        cargoSpace.setText(getString(R.string.current_space, player.getVehicle().getCargoSize() - player.getVehicle().calculateRemainingCargoSpace(), player.getVehicle().getCargoSize()));
+        cargoSpace.setText(getString(R.string.current_space,
+                player.getVehicle().getCargoSize()
+                        - player.getVehicle().calculateRemainingCargoSpace(),
+                player.getVehicle().getCargoSize()));
         credits.setText(getString(R.string.current_credits, player.getCredits()));
 
         return view;

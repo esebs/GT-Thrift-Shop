@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SectionsPageAdapter sectionsPageAdapeter = new SectionsPageAdapter(getSupportFragmentManager());
-        System.out.println(sectionsPageAdapeter);
+        SectionsPageAdapter sectionsPageAdapter =
+                new SectionsPageAdapter(getSupportFragmentManager());
+        System.out.println(sectionsPageAdapter);
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.refreshDrawableState();

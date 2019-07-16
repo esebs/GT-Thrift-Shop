@@ -60,20 +60,20 @@ public class TradingViewModel {
      *  Returns -1 if the Resource cannot be bought from the current Room
      *
      * @param resource the resource being purchased
-     * @return the max buyable number of the given resource
+     * @return the max buy quantity of the given resource`
      */
-    public int calculateMaxBuyable(Resource resource) {
+    public int calculateMaxBuyQuantity(Resource resource) {
         int[] buyQuantities = model.getPlayer().getCurrent().getBuyFromRoomQuantities();
-        int numBuyable = buyQuantities[resource.ordinal()];
+        int maxBuyQuantity = buyQuantities[resource.ordinal()];
 
         int[] buyPrices = model.getPlayer().getCurrent().getBuyFromRoomPrices();
         int price = buyPrices[resource.ordinal()];
         int credits = model.getPlayer().getCredits();
-        numBuyable = Math.min(credits / price, numBuyable);
+        maxBuyQuantity = Math.min(credits / price, maxBuyQuantity);
 
         int remainingCargoSpace = model.getPlayer().getVehicle().calculateRemainingCargoSpace();
 
-        return Math.min(numBuyable, remainingCargoSpace);
+        return Math.min(maxBuyQuantity, remainingCargoSpace);
     }
 
     /**
@@ -83,9 +83,9 @@ public class TradingViewModel {
      * Returns -1 if the Resource cannot be sold to the current Room
      *
      * @param resource the resource being purchased
-     * @return the max sellable number of the given resource
+     * @return the max sell quantity of the given resource
      */
-    public int calculateMaxSellable(Resource resource) {
+    public int calculateMaxSellQuantity(Resource resource) {
         int[] cargoHold = model.getPlayer().getVehicle().getCargoHold();
         return cargoHold[resource.ordinal()];
     }

@@ -75,7 +75,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         traderPointsLabel = findViewById(R.id.traderLabel);
         totalSkillPoints = findViewById(R.id.skillPoints);
 
-        // Finds all point seekbars
+        // Finds all point seek bars
         editPilotPoints = findViewById(R.id.pilotBar);
         editEngineerPoints = findViewById(R.id.engineerBar);
         editFighterPoints = findViewById(R.id.fighterBar);
@@ -88,7 +88,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         startGame = findViewById(R.id.exitGame);
         cancel = findViewById(R.id.goBack);
 
-        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,
                 Arrays.asList(Difficulty.values()));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);

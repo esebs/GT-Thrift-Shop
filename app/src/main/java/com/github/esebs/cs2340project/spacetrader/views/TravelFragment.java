@@ -81,11 +81,13 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
      */
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.travel_fragment, container, false);
         viewModel = new TravelViewModel();
 
-        SupportMapFragment mapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapView =
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
         if (mapView == null && getFragmentManager() != null) {
             FragmentManager fm = getFragmentManager();
@@ -123,10 +125,13 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
                 Marker m;
 
                 if (b.equals(playerViewModel.getPlayer().getCurrent().getBuilding())) {
-                    m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(
+                            b.getName()).icon(BitmapDescriptorFactory.defaultMarker(
+                                    BitmapDescriptorFactory.HUE_BLUE)));
                     m.setTag(0);
                 } else {
-                    m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(b.getName()));
+                    m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(
+                            b.getName()));
                     m.setTag(b);
                 }
 
@@ -187,8 +192,10 @@ public class TravelFragment extends Fragment implements OnMapReadyCallback, OnMa
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //set the new location of the player
 
-                            //select the room object according to the name of the radio option selected
-                            if (selectedRoomName == null || selectedRoomName.equals(rooms.get(0).getName())) {
+                            //select the room object according to the name of the radio option
+                            // selected
+                            if (selectedRoomName == null || selectedRoomName.equals(
+                                    rooms.get(0).getName())) {
                                 selectedRoom = rooms.get(0);
                             } else if (selectedRoomName.equals(rooms.get(1).getName())) {
                                 selectedRoom = rooms.get(1);
