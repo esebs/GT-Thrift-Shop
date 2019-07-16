@@ -52,6 +52,7 @@ class BuyFragment extends Fragment {
     private int robotsQuantity;
 
     private TextView textView1;
+    private TextView textView2;
     private TextView textView3;
     private SeekBar seekBar;
 
@@ -85,6 +86,9 @@ class BuyFragment extends Fragment {
         TextView robotsPrice;
         View view = inflater.inflate(R.layout.buy_fragment, container,false);
         final View dialog = inflater.inflate(R.layout.trade_dialog, container,false);
+
+        textView2 = dialog.findViewById(R.id.text_view_2);
+        textView2.setText(getString(R.string.buy_text_2));
 
         waterButton = view.findViewById(R.id.water_qty);
         waterPrice = view.findViewById(R.id.water_price);

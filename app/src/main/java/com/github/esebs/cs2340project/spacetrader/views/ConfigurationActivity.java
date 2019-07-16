@@ -159,9 +159,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             pilotPoints = progress;
-            pilotPointsLabel.setText("Pilot: " + pilotPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            pilotPointsLabel.setText(getString(R.string.pilot_points, pilotPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
@@ -186,9 +186,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             engineerPoints = progress;
-            engineerPointsLabel.setText("Engineer: " + engineerPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            engineerPointsLabel.setText(getString(R.string.engineer_points, engineerPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
@@ -213,9 +213,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             fighterPoints = progress;
-            fighterPointsLabel.setText("Fighter " + fighterPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            fighterPointsLabel.setText(getString(R.string.fighter_points, fighterPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
@@ -240,9 +240,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             traderPoints = progress;
-            traderPointsLabel.setText("Trader: " + traderPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            traderPointsLabel.setText(getString(R.string.trader_points, traderPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
