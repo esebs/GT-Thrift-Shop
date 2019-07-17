@@ -4,7 +4,7 @@ import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.entities.Vehicle;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
-class VehicleViewModel {
+public class VehicleViewModel {
 
     private final Model model = Model.getModelInstance();
     private final Player player = model.getPlayer();
@@ -16,7 +16,7 @@ class VehicleViewModel {
      * @param vehicleForSale a Vehicle
      * @return the price of this Vehicle
      */
-    private int getVehiclePrice(Vehicle vehicleForSale) {
+    public int getVehiclePrice(Vehicle vehicleForSale) {
         return vehicleForSale.getPrice() - vehicle.getPrice();
     }
 
@@ -27,7 +27,7 @@ class VehicleViewModel {
      * @return whether the Player can purchase the Vehicle
      */
     public boolean canBuyVehicle(Vehicle vehicle) {
-        return getVehiclePrice(vehicle) >= 0;
+        return getVehiclePrice(vehicle) <= model.getPlayer().getCredits();
     }
 
     /**
