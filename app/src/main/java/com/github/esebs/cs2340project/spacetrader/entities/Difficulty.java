@@ -11,17 +11,17 @@ public enum Difficulty {
     HARD ("Hard", 3),
     BOB ("Bob Waters", 4);
 
-    private String diff;
-    private int mult;
+    private final String diff;
+    private final int multiple;
 
     /**
      * The different difficulty
      * @param diff String representation of Enum
-     * @param mult multiple of how hard the game is
+     * @param multiple multiple of how hard the game is
      */
-    Difficulty (String diff, int mult) {
+    Difficulty (String diff, int multiple) {
         this.diff = diff;
-        this.mult = mult;
+        this.multiple = multiple;
     }
 
     @Override
@@ -29,20 +29,20 @@ public enum Difficulty {
         return this.diff;
     }
 
-    /**
-     * Returns Multiple
-     * @return multiple
-     */
-    public int getMult() {
-        return mult;
-    }
-
-    /**
-     * Returns string representation of enum
-     * @return diff
-     */
-    public String getDiff() {
-    return diff;
-    }
+//    /**
+//     * Returns Multiple
+//     * @return multiple
+//     */
+//    public int getMultiple() {
+//        return multiple;
+//    }
+//
+//    /**
+//     * Returns string representation of enum
+//     * @return diff
+//     */
+//    public String getDiff() {
+//    return diff;
+//    }
 
 }

@@ -3,6 +3,8 @@ package com.github.esebs.cs2340project.spacetrader.views;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,7 +27,7 @@ import java.util.Arrays;
  */
 public class ConfigurationActivity extends AppCompatActivity {
 
-    private PlayerViewModel viewModel = new PlayerViewModel();
+    private final PlayerViewModel viewModel = new PlayerViewModel();
 
     // Player Name
     private EditText editPlayerName;
@@ -37,13 +39,6 @@ public class ConfigurationActivity extends AppCompatActivity {
     private TextView traderPointsLabel;
     private TextView totalSkillPoints;
 
-
-    // Seekbars
-    private SeekBar editPilotPoints;
-    private SeekBar editEngineerPoints;
-    private SeekBar editFighterPoints;
-    private SeekBar editTraderPoints;
-
     private int pilotPoints;
     private int fighterPoints;
     private int traderPoints;
@@ -51,10 +46,6 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     // Difficulty Spinner
     private Spinner difficultySpinner;
-
-    // Buttons
-    private Button startGame;
-    private Button cancel;
 
     /**
      * Set up when activity starts
@@ -75,20 +66,21 @@ public class ConfigurationActivity extends AppCompatActivity {
         traderPointsLabel = findViewById(R.id.traderLabel);
         totalSkillPoints = findViewById(R.id.skillPoints);
 
-        // Finds all point seekbars
-        editPilotPoints = findViewById(R.id.pilotBar);
-        editEngineerPoints = findViewById(R.id.engineerBar);
-        editFighterPoints = findViewById(R.id.fighterBar);
-        editTraderPoints = findViewById(R.id.traderBar);
+        // Finds all point seek bars
+        SeekBar editPilotPoints = findViewById(R.id.pilotBar);
+        SeekBar editEngineerPoints = findViewById(R.id.engineerBar);
+        SeekBar editFighterPoints = findViewById(R.id.fighterBar);
+        SeekBar editTraderPoints = findViewById(R.id.traderBar);
 
         // Finds Spinners
         difficultySpinner = findViewById(R.id.difficultySpinner);
 
         // Finds Buttons
-        startGame = findViewById(R.id.exitGame);
-        cancel = findViewById(R.id.goBack);
+        Button startGame = findViewById(R.id.exitGame);
+        Button cancel = findViewById(R.id.goBack);
 
-        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,
                 Arrays.asList(Difficulty.values()));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);
@@ -114,12 +106,15 @@ public class ConfigurationActivity extends AppCompatActivity {
                 int sumPoints = pilotPoints + fighterPoints + traderPoints
                         + engineerPoints;
 
-                // Creates player when total points equals 20
-                if (sumPoints != 20) {
-                    Toast.makeText(ConfigurationActivity.this,
-                            "Points must sum to 20", Toast.LENGTH_LONG).show();
+                // Creates player when total points equals MAX_POINTS
+                final int MAX_POINTS = 20;
+                if (sumPoints != MAX_POINTS) {
+                    Toast toast = Toast.makeText(ConfigurationActivity.this,
+                            "Points must sum to 20", Toast.LENGTH_LONG);
+                    toast.show();
                 } else {
-                    viewModel.setPlayer(editPlayerName.getText().toString(),
+                    Editable playerName = editPlayerName.getText();
+                    viewModel.setPlayer(playerName.toString(),
                             (Difficulty) difficultySpinner.getSelectedItem(),
                             pilotPoints,
                             fighterPoints,
@@ -143,7 +138,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
     }
 
-    SeekBar.OnSeekBarChangeListener pilotListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener pilotListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes pilot points to new value and updates Points Remaining
          * @param seekBar editPilotPoints
@@ -154,9 +150,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             pilotPoints = progress;
-            pilotPointsLabel.setText("Pilot: " + pilotPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            pilotPointsLabel.setText(getString(R.string.pilot_points, pilotPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
@@ -170,7 +166,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    SeekBar.OnSeekBarChangeListener engineerListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener engineerListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes engineer points to new value and updates Points Remaining
          * @param seekBar editEngineerPoints
@@ -181,9 +178,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             engineerPoints = progress;
-            engineerPointsLabel.setText("Engineer: " + engineerPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            engineerPointsLabel.setText(getString(R.string.engineer_points, engineerPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
@@ -197,7 +194,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    SeekBar.OnSeekBarChangeListener fighterListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener fighterListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes fighter points to new value and updates Points Remaining
          * @param seekBar editFighterPoints
@@ -208,9 +206,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             fighterPoints = progress;
-            fighterPointsLabel.setText("Fighter " + fighterPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            fighterPointsLabel.setText(getString(R.string.fighter_points, fighterPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override
@@ -224,7 +222,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     };
 
-    SeekBar.OnSeekBarChangeListener traderListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener traderListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes Trader points to new value and updates Points Remaining
          * @param seekBar editTraderPoints
@@ -235,9 +234,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
             traderPoints = progress;
-            traderPointsLabel.setText("Trader: " + traderPoints);
-            totalSkillPoints.setText("Points Remaining: " + (20 - (pilotPoints
-                    + fighterPoints + traderPoints + engineerPoints)));
+            traderPointsLabel.setText(getString(R.string.trader_points, traderPoints));
+            totalSkillPoints.setText(getString(R.string.points_remaining, (20 - (pilotPoints
+                    + fighterPoints + traderPoints + engineerPoints))));
         }
 
         @Override

@@ -6,16 +6,23 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class SectionsPageAdapeter extends FragmentPagerAdapter {
+/**
+ * This class is creates page adapters. This class can also be
+ * used to add a fragment to a tabbed activity
+ *
+ * @version 1.0
+ * @author Elio Gerges
+ */
+class SectionsPageAdapter extends FragmentPagerAdapter {
 
     private final ArrayList<Fragment> fragmentList = new ArrayList<>();
     private final ArrayList<String> fragmentTitleList = new ArrayList<>();
 
-    public SectionsPageAdapeter(FragmentManager fm) {
+    SectionsPageAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public void addFragment(Fragment fragment, String title) {
+    void addFragment(Fragment fragment, String title) {
         fragmentList.add(fragment);
         fragmentTitleList.add(title);
     }

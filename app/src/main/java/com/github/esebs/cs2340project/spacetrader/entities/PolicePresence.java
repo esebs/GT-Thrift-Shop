@@ -1,8 +1,10 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
-import android.widget.RadioGroup;
 
 import java.util.Random;
 
+/**
+ * Enum for building police presence
+ */
 public enum PolicePresence {
     NO_POLICE,
     LIGHT_POLICE,
@@ -11,6 +13,10 @@ public enum PolicePresence {
     POLICE_STATE,
     CORRUPT_POLICE;
 
+    /**
+     * Chooses a random police presence
+     * @return police presence
+     */
     public static PolicePresence generatePolicePresence() {
         Random random = new Random();
         int key = random.nextInt(10);

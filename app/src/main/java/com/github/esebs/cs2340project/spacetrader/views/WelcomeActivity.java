@@ -13,7 +13,6 @@ import com.github.esebs.cs2340project.spacetrader.R;
  * @author Sebastian Escobar
  */
 public class WelcomeActivity extends AppCompatActivity {
-    private Button exit;
 
     /**
      * Set up when activity starts
@@ -23,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        exit = findViewById(R.id.exitGame);
+        Button exit = findViewById(R.id.exitGame);
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override

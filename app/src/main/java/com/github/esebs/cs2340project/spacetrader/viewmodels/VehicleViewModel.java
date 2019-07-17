@@ -1,22 +1,23 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
+import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.entities.Vehicle;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
-public class VehicleViewModel {
+class VehicleViewModel {
 
-    private Model model = Model.getModelInstance();
+    private final Model model = Model.getModelInstance();
+    private final Player player = model.getPlayer();
+    private final Vehicle vehicle = player.getVehicle();
 
     /**
      * Gets the relative price of this Vehicle compared to the player's current Vehicle
      *
-     * @param vehicle a Vehicle
+     * @param vehicleForSale a Vehicle
      * @return the price of this Vehicle
      */
-    public int getVehiclePrice(Vehicle vehicle) {
-        Vehicle playerVehicle = model.getPlayer().getVehicle();
-
-        return vehicle.getPrice() - playerVehicle.getPrice();
+    private int getVehiclePrice(Vehicle vehicleForSale) {
+        return vehicleForSale.getPrice() - vehicle.getPrice();
     }
 
     /**
@@ -36,8 +37,8 @@ public class VehicleViewModel {
      * @param vehicle the Vehicle to purchase
      */
     public void buyVehicle(Vehicle vehicle) {
-        model.getPlayer().setVehicle(vehicle);
-        int credits = model.getPlayer().getCredits();
-        model.getPlayer().setCredits(credits - getVehiclePrice(vehicle));
+        player.setVehicle(vehicle);
+        int credits = player.getCredits();
+        player.setCredits(credits - getVehiclePrice(vehicle));
     }
 }

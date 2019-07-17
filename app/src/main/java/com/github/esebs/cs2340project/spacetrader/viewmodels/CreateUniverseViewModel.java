@@ -9,9 +9,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * ViewModel for universe creation
+ */
 public class CreateUniverseViewModel {
-    private Model model = Model.getModelInstance();
+    private final Model model = Model.getModelInstance();
 
+    /**
+     * Creates a random set of buildings and sets it as the model's buildings
+     */
     public void createUniverse() {
         // Instantiate the universe's buildings
         model.setBuildings(createBuildings());
@@ -28,53 +34,73 @@ public class CreateUniverseViewModel {
         List<Building> buildings = new ArrayList<>();
 
         // Create CULC
+        final double culcLatitude = 33.774889;
+        final double culcLongitude = -84.396417;
         Building culc = new Building("Clough Undergraduate Learning Commons",
-                33.774889, -84.396417, Arrays.asList("152", "244"));
+                culcLatitude, culcLongitude, Arrays.asList("152", "244"));
         buildings.add(culc);
 
         // Create Klaus
+        final double klausLatitude = 33.777167;
+        final double klausLongitude = -84.396239;
         Building klaus = new Building("Klaus Advanced Computing Building",
-                33.777167, -84.396239, Arrays.asList("1443", "2443"));
+                klausLatitude, klausLongitude, Arrays.asList("1443", "2443"));
         buildings.add(klaus);
 
         // Create Scheller
+        final double schellerLatitude = 33.776370;
+        final double schellerLongitude = -84.388151;
         Building scheller = new Building("Scheller College of Business",
-                33.776370, -84.388151, Arrays.asList("254", "432"));
+                schellerLatitude, schellerLongitude, Arrays.asList("254", "432"));
         buildings.add(scheller);
 
         // Create Mason
+        final double masonLatitude = 33.776616;
+        final double masonLongitude = -84.398816;
         Building mason = new Building("Mason Building",
-                33.776616,  -84.398816, Arrays.asList("101", "23"));
+                masonLatitude,  masonLongitude, Arrays.asList("101", "23"));
         buildings.add(mason);
 
         // Create Instructional Center
+        final double icLatitude = 33.775434;
+        final double icLongitude = -84.401269;
         Building ic = new Building("Instructional Center",
-                33.775434, -84.401269, Arrays.asList("205", "105"));
+                icLatitude, icLongitude, Arrays.asList("205", "105"));
         buildings.add(ic);
 
         // Create Skiles
+        final double skilesLatitude = 33.773587;
+        final double skilesLongitude = -84.396334;
         Building skiles = new Building("Skiles Classroom Building",
-                33.773587, -84.396334, Arrays.asList("314", "317"));
+                skilesLatitude, skilesLongitude, Arrays.asList("314", "317"));
         buildings.add(skiles);
 
         // Create CRC
+        final double crcLatitude = 33.775633;
+        final double crcLongitude = -84.403793;
         Building crc = new Building("Campus Recreation Center",
-                33.775633, -84.403793, Arrays.asList("5", "110"));
+                crcLatitude, crcLongitude, Arrays.asList("5", "110"));
         buildings.add(crc);
 
         // Create Architecture
+        final double archLatitude = 33.776049;
+        final double archLongitude = -84.395721;
         Building arch = new Building("Architecture Building",
-                33.776049,  -84.395721, Arrays.asList("123", "201"));
+                archLatitude,  archLongitude, Arrays.asList("123", "201"));
         buildings.add(arch);
 
         // Create Student Center
+        final double scLatitude = 33.773815;
+        final double scLongitude = -84.398708;
         Building sc = new Building("Student Center",
-                33.773815, -84.398708, Arrays.asList("Piedmont", "69"));
+                scLatitude, scLongitude, Arrays.asList("Piedmont", "69"));
         buildings.add(sc);
 
         // Create Ford ES&T
+        final double fordLatitude = 33.778795;
+        final double fordLongitude = -84.395953;
         Building ford = new Building("Ford ES&T Building",
-                33.778795,  -84.395953, Arrays.asList("341", "122"));
+                fordLatitude,  fordLongitude, Arrays.asList("341", "122"));
         buildings.add(ford);
 
         return buildings;

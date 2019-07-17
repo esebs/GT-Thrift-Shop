@@ -5,6 +5,7 @@ import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -12,14 +13,14 @@ import java.util.Random;
  * @version 1.0
  * @author Travis Adams
  */
-public class Model {
+public final class Model {
 
     // The player of the game
     private Player player;
     private List<Building> buildings = new ArrayList<>();
 
     // This class is only instantiated ONCE
-    private static Model modelInstance = new Model();
+    private static final Model modelInstance = new Model();
 
     /**
      * Returns the single, static Model instance
@@ -57,7 +58,7 @@ public class Model {
      * @return the buildings
      */
     public List<Building> getBuildings() {
-        return buildings;
+        return Collections.unmodifiableList(buildings);
     }
 
     /**
@@ -65,7 +66,7 @@ public class Model {
      * @param buildings a List of the universe's buildings
      */
     public void setBuildings(List<Building> buildings) {
-        this.buildings = buildings;
+        this.buildings = Collections.unmodifiableList(buildings);
     }
 
     /**
@@ -86,7 +87,9 @@ public class Model {
      */
     public Room getRandomRoom() {
         Random rn = new Random();
-        int random = rn.nextInt(getBuildings().size());
-        return getBuildings().get(random).getRooms().get(0);
+        int random = rn.nextInt(buildings.size());
+        Building randomBuilding = buildings.get(random);
+        List<Room> rooms = randomBuilding.getRooms();
+        return rooms.get(0);
     }
 }

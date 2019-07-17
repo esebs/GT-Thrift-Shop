@@ -1,6 +1,5 @@
 package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
-import android.app.AlertDialog;
 import android.util.Log;
 
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
@@ -14,14 +13,15 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class PlayerViewModel {
 
-    private Model model = Model.getModelInstance();
+    private final Model model = Model.getModelInstance();
+    private final Player player = model.getPlayer();
 
     /**
      * Gets the player for the game
      * @return the player
      */
     public Player getPlayer() {
-        return Model.getModelInstance().getPlayer();
+        return player;
     }
 
     /**
@@ -38,12 +38,20 @@ public class PlayerViewModel {
                   int traderPoints, int engineerPoints) {
         Room current = model.getRandomRoom();
 
-        Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints, traderPoints,
-                engineerPoints);
+        Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints,
+                traderPoints, engineerPoints);
 
         Log.d("APP", "PlayerViewModel: created player: \n" + player);
 
         model.setPlayer(player);
 
+    }
+
+    /**
+     * Get the player's current Room
+     * @return current Room
+     */
+    public Room getPlayerCurrentRoom() {
+        return player.getCurrent();
     }
 }

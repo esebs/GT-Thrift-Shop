@@ -2,6 +2,9 @@ package com.github.esebs.cs2340project.spacetrader.entities;
 
 import java.util.Random;
 
+/**
+ * Enum for building government types
+ */
 public enum Government {
     PACIFIST_STATE,
     EGALITARIAN_STATE,
@@ -11,6 +14,10 @@ public enum Government {
     COLONY_WORLD,
     ALIEN_WORLD;
 
+    /**
+     * Chooses a random government type
+     * @return government type
+     */
     public static Government generateGovernment() {
         Random random = new Random();
         int key = random.nextInt(7);

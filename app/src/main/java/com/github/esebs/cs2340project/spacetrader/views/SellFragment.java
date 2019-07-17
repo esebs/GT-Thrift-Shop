@@ -7,6 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +19,18 @@ import android.widget.TextView;
 
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Resource;
-import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.TradingViewModel;
 
-public class SellFragment extends Fragment {
-    private Model model = Model.getModelInstance();
+/**
+ * This class will generate and display the sell fragment
+ * when the 'Sell' tab is pressed
+ *
+ * @version 1.0
+ * @author Elio Gerges
+ */
+class SellFragment extends Fragment {
 
-    private TradingViewModel tradingViewModel = new TradingViewModel();
+    private final TradingViewModel tradingViewModel = new TradingViewModel();
 
     private Button waterButton;
     private Button fursButton;
@@ -35,28 +43,17 @@ public class SellFragment extends Fragment {
     private Button narcoticsButton;
     private Button robotsButton;
 
-    private TextView waterPrice;
-    private TextView fursPrice;
-    private TextView foodPrice;
-    private TextView orePrice;
-    private TextView gamesPrice;
-    private TextView firearmsPrice;
-    private TextView medicinePrice;
-    private TextView machinesPrice;
-    private TextView narcoticsPrice;
-    private TextView robotsPrice;
-
     //The amount the player wants to sell
-    private int waterQuanity;
-    private int fursQuanity;
-    private int foodQuanity;
-    private int oreQuanity;
-    private int gamesQuanity;
-    private int firearmsQuanity;
-    private int medicineQuanity;
-    private int machinesQuanity;
-    private int narcoticsQuanity;
-    private int robotsQuanity;
+    private int waterQuantity;
+    private int fursQuantity;
+    private int foodQuantity;
+    private int oreQuantity;
+    private int gamesQuantity;
+    private int firearmsQuantity;
+    private int medicineQuantity;
+    private int machinesQuantity;
+    private int narcoticsQuantity;
+    private int robotsQuantity;
 
     private TextView textView1;
     private TextView textView2;
@@ -64,76 +61,106 @@ public class SellFragment extends Fragment {
     private SeekBar seekBar;
 
 
+    /**
+     * When the 'Sell' tab is pressed, onCreateView method is executed
+     * and the contents of the 'Sell' tab are displayed. The items,
+     * number of items of sale and the item sale price are displayed.
+     * When the user presses the button with the item quantity, they
+     * are prompted with an alert asking the user how many items they
+     * would like to sell. The user can then select a number then press
+     * sell to make that transaction. The quantity buttons are then updated
+     * accordingly.
+     *
+     * @param inflater is the inflater for the layout
+     * @param container is the container for all items in the fragment
+     * @param savedInstanceState is the saved instance of the fragment
+     */
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sell_fragment, container, false);
         final View dialog = inflater.inflate(R.layout.trade_dialog, container,false);
+        TextView waterPrice;
+        TextView fursPrice;
+        TextView foodPrice;
+        TextView orePrice;
+        TextView gamesPrice;
+        TextView firearmsPrice;
+        TextView medicinePrice;
+        TextView machinesPrice;
+        TextView narcoticsPrice;
+        TextView robotsPrice;
+
+        textView2 = dialog.findViewById(R.id.text_view_2);
+        textView2.setText(getString(R.string.sell_text_2));
 
         //Selling Water
         waterButton = view.findViewById(R.id.water_qty);
         waterPrice = view.findViewById(R.id.water_price);
-        waterQuanity = 0;
+        waterQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.WATER) == -1) {
             //Room doesn't have the resources available, disable buying
-            waterButton.setText("" + tradingViewModel.getSellQuantity(Resource.WATER));
+            waterButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.WATER)));
             waterButton.setEnabled(false);
-            waterPrice.setText("--- cr.");
+            waterPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            waterButton.setText("" + tradingViewModel.getSellQuantity(Resource.WATER));
-            waterPrice.setText("" + tradingViewModel.getSellPrice(Resource.WATER) + " cr.");
+            waterButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.WATER)));
+            waterPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.WATER)));
         }
 
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.WATER);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.WATER);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Water.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "water"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(waterQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, waterQuantity));
 
                 seekBar.setOnSeekBarChangeListener(waterSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.WATER, waterQuanity);
-                                waterButton.setText("" + tradingViewModel.getSellQuantity(Resource.WATER));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.WATER, waterQuantity);
+                                waterButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.WATER)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -142,67 +169,68 @@ public class SellFragment extends Fragment {
         //Selling Furs
         fursButton = view.findViewById(R.id.furs_qty);
         fursPrice = view.findViewById(R.id.furs_price);
-        fursQuanity = 0;
+        fursQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.FURS) == -1) {
             //Room doesn't have the resources available, disable buying
-            fursButton.setText("" + tradingViewModel.getSellQuantity(Resource.FURS));
+            fursButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.FURS)));
             fursButton.setEnabled(false);
-            fursPrice.setText("--- cr.");
+            fursPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            fursButton.setText("" + tradingViewModel.getSellQuantity(Resource.FURS));
-            fursPrice.setText("" + tradingViewModel.getSellPrice(Resource.FURS) + " cr.");
+            fursButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.FURS)));
+            fursPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.FURS)));
         }
 
         fursButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.FURS);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.FURS);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Furs.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
 
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "furs"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(fursQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, fursQuantity));
 
                 seekBar.setOnSeekBarChangeListener(fursSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.FURS, fursQuanity);
-                                fursButton.setText("" + tradingViewModel.getSellQuantity(Resource.FURS));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.FURS, fursQuantity);
+                                fursButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.FURS)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -211,67 +239,68 @@ public class SellFragment extends Fragment {
         //Selling Food
         foodButton = view.findViewById(R.id.food_qty);
         foodPrice = view.findViewById(R.id.food_price);
-        foodQuanity = 0;
+        foodQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.FOOD) == -1) {
             //Room doesn't have the resources available, disable buying
-            foodButton.setText("" + tradingViewModel.getSellQuantity(Resource.FOOD));
+            foodButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.FOOD)));
             foodButton.setEnabled(false);
-            foodPrice.setText("--- cr.");
+            foodPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            foodButton.setText("" + tradingViewModel.getSellQuantity(Resource.FOOD));
-            foodPrice.setText("" + tradingViewModel.getSellPrice(Resource.FOOD) + " cr.");
+            foodButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.FOOD)));
+            foodPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.FOOD)));
         }
 
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.FOOD);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.FOOD);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Food.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
 
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "food"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(foodQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, foodQuantity));
 
                 seekBar.setOnSeekBarChangeListener(foodSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.FOOD, foodQuanity);
-                                foodButton.setText("" + tradingViewModel.getSellQuantity(Resource.FOOD));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.FOOD, foodQuantity);
+                                foodButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.FOOD)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -280,67 +309,68 @@ public class SellFragment extends Fragment {
         //Selling Ore
         oreButton = view.findViewById(R.id.ore_qty);
         orePrice = view.findViewById(R.id.ore_price);
-        oreQuanity = 0;
+        oreQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.ORE) == -1) {
             //Room doesn't have the resources available, disable buying
-            oreButton.setText("" + tradingViewModel.getSellQuantity(Resource.ORE));
+            oreButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.ORE)));
             oreButton.setEnabled(false);
-            orePrice.setText("--- cr.");
+            orePrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            oreButton.setText("" + tradingViewModel.getSellQuantity(Resource.ORE));
-            orePrice.setText("" + tradingViewModel.getSellPrice(Resource.ORE) + " cr.");
+            oreButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.ORE)));
+            orePrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.ORE)));
         }
 
         oreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.ORE);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.ORE);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Ore.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "ore"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(oreQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, oreQuantity));
 
                 seekBar.setOnSeekBarChangeListener(oreSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.ORE, oreQuanity);
-                                oreButton.setText("" + tradingViewModel.getSellQuantity(Resource.ORE));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.ORE, oreQuantity);
+                                oreButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.ORE)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -349,67 +379,68 @@ public class SellFragment extends Fragment {
         //Selling Games
         gamesButton = view.findViewById(R.id.games_qty);
         gamesPrice = view.findViewById(R.id.games_price);
-        gamesQuanity = 0;
+        gamesQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.GAMES) == -1) {
             //Room doesn't have the resources available, disable buying
-            gamesButton.setText("" + tradingViewModel.getSellQuantity(Resource.GAMES));
+            gamesButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.GAMES)));
             gamesButton.setEnabled(false);
-            gamesPrice.setText("--- cr.");
+            gamesPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            gamesButton.setText("" + tradingViewModel.getSellQuantity(Resource.GAMES));
-            gamesPrice.setText("" + tradingViewModel.getSellPrice(Resource.GAMES) + " cr.");
+            gamesButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.GAMES)));
+            gamesPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.GAMES)));
         }
 
         gamesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.GAMES);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.GAMES);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Games.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "games"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(gamesQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, gamesQuantity));
 
                 seekBar.setOnSeekBarChangeListener(gamesSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.GAMES, gamesQuanity);
-                                gamesButton.setText("" + tradingViewModel.getSellQuantity(Resource.GAMES));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.GAMES, gamesQuantity);
+                                gamesButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.GAMES)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -418,67 +449,68 @@ public class SellFragment extends Fragment {
         //Selling Firearms
         firearmsButton = view.findViewById(R.id.firearms_qty);
         firearmsPrice = view.findViewById(R.id.firearms_price);
-        firearmsQuanity = 0;
+        firearmsQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.FIREARMS) == -1) {
             //Room doesn't have the resources available, disable buying
-            firearmsButton.setText("" + tradingViewModel.getSellQuantity(Resource.FIREARMS));
+            firearmsButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.FIREARMS)));
             firearmsButton.setEnabled(false);
-            firearmsPrice.setText("--- cr.");
+            firearmsPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            firearmsButton.setText("" + tradingViewModel.getSellQuantity(Resource.FIREARMS));
-            firearmsPrice.setText("" + tradingViewModel.getSellPrice(Resource.FIREARMS) + " cr.");
+            firearmsButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.FIREARMS)));
+            firearmsPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.FIREARMS)));
         }
 
         firearmsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.FIREARMS);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.FIREARMS);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Firearms.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "firearms"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(firearmsQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, firearmsQuantity));
 
                 seekBar.setOnSeekBarChangeListener(firearmsSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.FIREARMS, firearmsQuanity);
-                                firearmsButton.setText("" + tradingViewModel.getSellQuantity(Resource.FIREARMS));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.FIREARMS, firearmsQuantity);
+                                firearmsButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.FIREARMS)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -487,68 +519,69 @@ public class SellFragment extends Fragment {
         //Selling Medicine
         medicineButton = view.findViewById(R.id.medicine_qty);
         medicinePrice = view.findViewById(R.id.medicine_price);
-        medicineQuanity = 0;
+        medicineQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.MEDICINE) == -1) {
             //Room doesn't have the resources available, disable buying
-            medicineButton.setText("" + tradingViewModel.getSellQuantity(Resource.MEDICINE));
+            medicineButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.MEDICINE)));
             medicineButton.setEnabled(false);
-            medicinePrice.setText("--- cr.");
+            medicinePrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            medicineButton.setText("" + tradingViewModel.getSellQuantity(Resource.MEDICINE));
-            medicinePrice.setText("" + tradingViewModel.getSellPrice(Resource.MEDICINE) + " cr.");
+            medicineButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.MEDICINE)));
+            medicinePrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.MEDICINE)));
         }
 
         medicineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.MEDICINE);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.MEDICINE);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
 
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Medicine.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "medicine"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(medicineQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, medicineQuantity));
 
                 seekBar.setOnSeekBarChangeListener(medicineSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.MEDICINE, medicineQuanity);
-                                medicineButton.setText("" + tradingViewModel.getSellQuantity(Resource.MEDICINE));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.MEDICINE, medicineQuantity);
+                                medicineButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.MEDICINE)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -556,67 +589,68 @@ public class SellFragment extends Fragment {
         //Selling Machine
         machinesButton = view.findViewById(R.id.machine_qty);
         machinesPrice = view.findViewById(R.id.machine_price);
-        machinesQuanity = 0;
+        machinesQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.MACHINES) == -1) {
             //Room doesn't have the resources available, disable buying
-            machinesButton.setText("" + tradingViewModel.getSellQuantity(Resource.MACHINES));
+            machinesButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.MACHINES)));
             machinesButton.setEnabled(false);
-            machinesPrice.setText("--- cr.");
+            machinesPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            machinesButton.setText("" + tradingViewModel.getSellQuantity(Resource.MACHINES));
-            machinesPrice.setText("" + tradingViewModel.getSellPrice(Resource.MACHINES) + " cr.");
+            machinesButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.MACHINES)));
+            machinesPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.MACHINES)));
         }
 
         machinesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.MACHINES);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.MACHINES);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Machines.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "machines"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(machinesQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, machinesQuantity));
 
                 seekBar.setOnSeekBarChangeListener(machinesSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.MACHINES, machinesQuanity);
-                                machinesButton.setText("" + tradingViewModel.getSellQuantity(Resource.MACHINES));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.MACHINES, machinesQuantity);
+                                machinesButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.MACHINES)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -625,67 +659,68 @@ public class SellFragment extends Fragment {
         //Selling Narcotics
         narcoticsButton = view.findViewById(R.id.narcotics_qty);
         narcoticsPrice = view.findViewById(R.id.narcotics_price);
-        narcoticsQuanity = 0;
+        narcoticsQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.NARCOTICS) == -1) {
             //Room doesn't have the resources available, disable buying
-            narcoticsButton.setText("" + tradingViewModel.getSellQuantity(Resource.NARCOTICS));
+            narcoticsButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.NARCOTICS)));
             narcoticsButton.setEnabled(false);
-            narcoticsPrice.setText("--- cr.");
+            narcoticsPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            narcoticsButton.setText("" + tradingViewModel.getSellQuantity(Resource.NARCOTICS));
-            narcoticsPrice.setText("" + tradingViewModel.getSellPrice(Resource.NARCOTICS) + " cr.");
+            narcoticsButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.NARCOTICS)));
+            narcoticsPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.NARCOTICS)));
         }
 
         narcoticsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.NARCOTICS);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.NARCOTICS);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Narcotics.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
-
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "narcotics"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(narcoticsQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, narcoticsQuantity));
 
                 seekBar.setOnSeekBarChangeListener(narcoticsSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.NARCOTICS, narcoticsQuanity);
-                                narcoticsButton.setText("" + tradingViewModel.getSellQuantity(Resource.NARCOTICS));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.NARCOTICS,
+                                        narcoticsQuantity);
+                                narcoticsButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.NARCOTICS)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -694,67 +729,68 @@ public class SellFragment extends Fragment {
         //Selling Robots
         robotsButton = view.findViewById(R.id.robots_qty);
         robotsPrice = view.findViewById(R.id.robots_price);
-        robotsQuanity = 0;
+        robotsQuantity = 0;
 
         //Check to see if Room has this resource
         if (tradingViewModel.getSellPrice(Resource.ROBOTS) == -1) {
             //Room doesn't have the resources available, disable buying
-            robotsButton.setText("" + tradingViewModel.getSellQuantity(Resource.ROBOTS));
+            robotsButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.ROBOTS)));
             robotsButton.setEnabled(false);
-            robotsPrice.setText("--- cr.");
+            robotsPrice.setText(getString(R.string.price_not_available));
         } else {
             //Room has the resources available, display the quantity and the price
-            robotsButton.setText("" + tradingViewModel.getSellQuantity(Resource.ROBOTS));
-            robotsPrice.setText("" + tradingViewModel.getSellPrice(Resource.ROBOTS) + " cr.");
+            robotsButton.setText(getString(R.string.sell_resource_quantity,
+                    tradingViewModel.getSellQuantity(Resource.ROBOTS)));
+            robotsPrice.setText(getString(R.string.sell_resource_price,
+                    tradingViewModel.getSellPrice(Resource.ROBOTS)));
         }
 
         robotsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                int maxSellable = tradingViewModel.calculateMaxSellable(Resource.ROBOTS);
+                int maxSell = tradingViewModel.calculateMaxSellQuantity(Resource.ROBOTS);
 
                 if (dialog.getParent() != null) {
                     ((ViewGroup) dialog.getParent()).removeView(dialog);
                 }
-                textView1 = (TextView) dialog.findViewById(R.id.text_view_1);
-                textView1.setText("You can sell up to " + maxSellable + " units of Robots.");
-                textView2 = (TextView) dialog.findViewById(R.id.text_view_2);
-                textView2.setText("How many would you like to sell?");
+                textView1 =  dialog.findViewById(R.id.text_view_1);
+                textView1.setText(getString(R.string.sell_text_1, maxSell, "robots"));
+                textView2 =  dialog.findViewById(R.id.text_view_2);
 
 
                 seekBar = dialog.findViewById(R.id.seek_bar);
                 //Sets the max of the seekBar to the max that you can buy
-                seekBar.setMax(maxSellable);
+                seekBar.setMax(maxSell);
                 seekBar.setProgress(0);
 
 
-                textView3 = (TextView) dialog.findViewById(R.id.quantity);
-                textView3.setText(robotsQuanity + " units");
+                textView3 =  dialog.findViewById(R.id.quantity);
+                textView3.setText(getString(R.string.buy_text_3, robotsQuantity));
 
                 seekBar.setOnSeekBarChangeListener(robotsSeekBarListener);
 
                 //Sets up the trade_dialog layout, "Buy" button, "Cancel" button.
                 //It then creates the AlertDialog and displays it.
-                alertDialog.setView(dialog)
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = alertDialog.setView(dialog);
+                alert.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tradingViewModel.sellResources(Resource.ROBOTS, robotsQuanity);
-                                robotsButton.setText("" + tradingViewModel.getSellQuantity(Resource.ROBOTS));
-
-                                System.out.println(model.getPlayer());
+                                tradingViewModel.sellResources(Resource.ROBOTS, robotsQuantity);
+                                robotsButton.setText(getString(R.string.sell_resource_quantity,
+                                        tradingViewModel.getSellQuantity(Resource.ROBOTS)));
                             }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
                             }
-                        })
-                        .create()
-                        .show();
+                        });
+                alert.create();
+                alert.show();
             }
         });
 
@@ -764,18 +800,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Water
-    SeekBar.OnSeekBarChangeListener waterSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener waterSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes water quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy water seekbar
+         * @param progress current progress of the buy water seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            waterQuanity = seekBar.getProgress();
-            textView3.setText(waterQuanity + " units");
+            waterQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, waterQuantity));
         }
 
         @Override
@@ -791,19 +828,20 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Furs
-    SeekBar.OnSeekBarChangeListener fursSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener fursSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes furs quantity to new value and updates seek bar counter
          *
          * @param seekBar  seekBar for Alert
-         * @param progress current progress of the buy furs seekbar
+         * @param progress current progress of the buy furs seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            fursQuanity = seekBar.getProgress();
-            textView3.setText(fursQuanity + " units");
+            fursQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, fursQuantity));
         }
 
         @Override
@@ -819,18 +857,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Food
-    SeekBar.OnSeekBarChangeListener foodSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener foodSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes food quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy food seekbar
+         * @param progress current progress of the buy food seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            foodQuanity = seekBar.getProgress();
-            textView3.setText(foodQuanity + " units");
+            foodQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, foodQuantity));
         }
 
         @Override
@@ -846,18 +885,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Ore
-    SeekBar.OnSeekBarChangeListener oreSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener oreSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes ore quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy ore seekbar
+         * @param progress current progress of the buy ore seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            oreQuanity = seekBar.getProgress();
-            textView3.setText(oreQuanity + " units");
+            oreQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, oreQuantity));
         }
 
         @Override
@@ -873,18 +913,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Games
-    SeekBar.OnSeekBarChangeListener gamesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener gamesSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
          * Changes games quantity to new value and updates seek bar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy games seekbar
+         * @param progress current progress of the buy games seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            gamesQuanity = seekBar.getProgress();
-            textView3.setText(gamesQuanity + " units");
+            gamesQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, gamesQuantity));
         }
 
         @Override
@@ -900,18 +941,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Firearms
-    SeekBar.OnSeekBarChangeListener firearmsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener firearmsSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
-         * Changes firearms quantity to new value and updates seek bar counter
+         * Changes firearms quantity to new value and updates seekBar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy firearms seekbar
+         * @param progress current progress of the buy firearms seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            firearmsQuanity = seekBar.getProgress();
-            textView3.setText(firearmsQuanity + " units");
+            firearmsQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, firearmsQuantity));
         }
 
         @Override
@@ -927,18 +969,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Medicine
-    SeekBar.OnSeekBarChangeListener medicineSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener medicineSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
-         * Changes medicine quantity to new value and updates seek bar counter
+         * Changes medicine quantity to new value and updates seekBar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy medicine seekbar
+         * @param progress current progress of the buy medicine seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            medicineQuanity = seekBar.getProgress();
-            textView3.setText(medicineQuanity + " units");
+            medicineQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, medicineQuantity));
         }
 
         @Override
@@ -953,18 +996,19 @@ public class SellFragment extends Fragment {
     };
 
     //SeekBar handler for Selling Machines
-    SeekBar.OnSeekBarChangeListener machinesSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener machinesSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
-         * Changes machines quantity to new value and updates seek bar counter
+         * Changes machines quantity to new value and updates seekBar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy machines seekbar
+         * @param progress current progress of the buy machines seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            machinesQuanity = seekBar.getProgress();
-            textView3.setText(machinesQuanity + " units");
+            machinesQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, machinesQuantity));
         }
 
         @Override
@@ -980,18 +1024,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Narcotics
-    SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener narcoticsSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
-         * Changes narcotics quantity to new value and updates seek bar counter
+         * Changes narcotics quantity to new value and updates seekBar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy narcotics seekbar
+         * @param progress current progress of the buy narcotics seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            narcoticsQuanity = seekBar.getProgress();
-            textView3.setText(narcoticsQuanity + " units");
+            narcoticsQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, narcoticsQuantity));
         }
 
         @Override
@@ -1007,18 +1052,19 @@ public class SellFragment extends Fragment {
 
 
     //SeekBar handler for Selling Robots
-    SeekBar.OnSeekBarChangeListener robotsSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener robotsSeekBarListener =
+            new SeekBar.OnSeekBarChangeListener() {
         /**
-         * Changes robots quantity to new value and updates seek bar counter
+         * Changes robots quantity to new value and updates seekBar counter
          * @param seekBar seekBar for Alert
-         * @param progress current progress of the buy robots seekbar
+         * @param progress current progress of the buy robots seekBar
          * @param fromUser if progress is from user
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // updated continuously as the user slides the thumb
-            robotsQuanity = seekBar.getProgress();
-            textView3.setText(robotsQuanity + " units");
+            robotsQuantity = seekBar.getProgress();
+            textView3.setText(getString(R.string.buy_text_3, robotsQuantity));
         }
 
         @Override
@@ -1032,11 +1078,20 @@ public class SellFragment extends Fragment {
         }
     };
 
+    /**
+     * This method will refresh the tabs each time the users revisits a tab
+     *
+     * @param isVisibleToUser is a boolean representing if a fragment is visible to the user
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        if (isVisibleToUser && (getFragmentManager() != null)) {
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.detach(this);
+            transaction.attach(this);
+            transaction.commit();
         }
     }
 }

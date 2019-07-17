@@ -1,14 +1,18 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents a building on the GT campus
+ */
 public class Building {
 
     // Building characteristics
-    private String name;
-    private double latitude;
-    private double longitude;
-    private List<Room> rooms;
+    private final String name;
+    private final double latitude;
+    private final double longitude;
+    private final List<Room> rooms;
 
     /**
      * Creates a Building
@@ -18,7 +22,7 @@ public class Building {
      * @param longitude longitude of the Building
      * @param roomNumbers a List of strings of the building's room numbers
      */
-    public Building (String name, double latitude, double longitude, List<String> roomNumbers) {
+    public Building (String name, double latitude, double longitude, Iterable<String> roomNumbers) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -58,7 +62,7 @@ public class Building {
      * @return the Building's rooms
      */
     public List<Room> getRooms() {
-        return rooms;
+        return Collections.unmodifiableList(rooms);
     }
 
     /**
@@ -68,9 +72,10 @@ public class Building {
      */
     @Override
     public String toString() {
-        String temp = "";
+        StringBuilder temp = new StringBuilder();
         for (Room room : rooms) {
-            temp += "\n\t" + room.toString();
+            temp.append("\n\t");
+            temp.append(room.toString());
         }
 
         return "\nBuilding{" +
