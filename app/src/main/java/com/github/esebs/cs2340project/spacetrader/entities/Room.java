@@ -24,7 +24,7 @@ public final class Room {
     private final int[] sellToRoomPrices;
     private int[] buyFromRoomQuantities;
 
-    private Room(String name, Building building) {
+    public Room(String name, Building building) {
         this.name = name;
         this.building = building;
         size = Size.generateSize();

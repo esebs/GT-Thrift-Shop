@@ -11,18 +11,25 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+/**
+ * Travis Adams JUnit Tests
+ */
 public class TravisUnitTests {
 
+    /**
+     * Tests the createBuyFromRoomPrices method in Room.java
+     */
     @Test
     public void testCreateBuyFromRoomPrices() {
         Building building  = new Building("TestBuildingName", 69, 69,
                 Arrays.asList("TestRoomName1", "TestRoomName2", "TestRoomName3"));
         List<Room> rooms = building.getRooms();
 
-        List<List> calculatedLists = new ArrayList<>();
-        List<List> actualLists = new ArrayList<>();
+        Collection<List> calculatedLists = new ArrayList<>();
+        Collection<List> actualLists = new ArrayList<>();
 
         for (Room room : rooms) {
             int[] buyFromRoomPrices = room.getBuyFromRoomPrices();
@@ -33,7 +40,8 @@ public class TravisUnitTests {
             List<Integer> calculatedIndices = new ArrayList<>();
             for (Resource resource: Resource.values()) {
                 TechLevel mtlp = resource.getMtlp();
-                if (mtlp.ordinal() > room.getTechLevel().ordinal()) {
+                TechLevel roomTechLevel = room.getTechLevel();
+                if (mtlp.ordinal() > roomTechLevel.ordinal()) {
                     calculatedIndices.add(resource.ordinal());
                 }
             }
@@ -53,12 +61,15 @@ public class TravisUnitTests {
 
         }
 
-        System.out.println("Indices in each room where price should be -1: " + calculatedLists);
-        System.out.println("Actual indices in each room where price is -1: " + actualLists);
+//        System.out.println("Indices in each room where price should be -1: " + calculatedLists);
+//        System.out.println("Actual indices in each room where price is -1: " + actualLists);
 
         Assert.assertEquals(calculatedLists, actualLists);
     }
 
+    /**
+     * Tests the calculateRemainingCargoSpace method in Vehicle.java
+     */
     @Test
     public void testCalculateRemainingCargoSpace() {
         int[] testCargoHold = {6, 9, 4, 2, 0, 7, 3, 0, 1, 5};
@@ -74,10 +85,10 @@ public class TravisUnitTests {
         int maxCargoSpace = golfCart.getCargoSize();
         int remainingCargoSpace = maxCargoSpace - numSpacesOccupied;
 
-        System.out.println("Remaining cargo space should be: " + remainingCargoSpace
-                + " out of " + golfCart.getCargoSize());
-        System.out.println("Actual remaining cargo space is: " + actualRemainingCargoSpace
-                + " out of " + golfCart.getCargoSize());
+//        System.out.println("Remaining cargo space should be: " + remainingCargoSpace
+//                + " out of " + golfCart.getCargoSize());
+//        System.out.println("Actual remaining cargo space is: " + actualRemainingCargoSpace
+//                + " out of " + golfCart.getCargoSize());
 
         Assert.assertEquals(actualRemainingCargoSpace, remainingCargoSpace);
     }
