@@ -3,7 +3,6 @@ package com.github.esebs.cs2340project.spacetrader;
 import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
-import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.entities.Vehicle;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.VehicleViewModel;
@@ -25,12 +24,11 @@ import static org.junit.Assert.*;
 public class ElioUnitTest {
     private Model model;
     private VehicleViewModel vehicleViewModel;
-    private Building building;
     private Player player;
 
     @Before
     public void setUp() {
-        building = new Building("Building", 1.0, 1.0, Arrays.asList("Room1", "Room2"));
+        Building building = new Building("Building", 1.0, 1.0, Arrays.asList("Room1", "Room2"));
         player = new Player("Player", Difficulty.BABY, building.getRooms().get(0), 1, 1, 1, 17);
         model = Model.getModelInstance();
         model.setPlayer(player);
