@@ -123,13 +123,13 @@ public class Player {
 //        this.fighterPoints = fighterPoints;
 //    }
 //
-//    /**
-//     * Returns player's trader points
-//     * @return
-//     */
-//    public int getTraderPoints() {
-//        return traderPoints;
-//    }
+    /**
+     * Returns player's trader points
+     * @return
+     */
+    public int getTraderPoints() {
+        return traderPoints;
+    }
 //
 //    /**
 //     * Sets trader points to a new value
@@ -198,7 +198,7 @@ public class Player {
     }
 
     /**
-     * Flees from an encountered vehicle
+     * Flees from an encountered vehicle (only Police or Pirates, not Traders)
      *
      * @param encounter encountered vehicle
      * @return True if the player successfully flees, False if the player
@@ -217,6 +217,38 @@ public class Player {
             flees = true;
         }
         return flees;
+    }
+
+    /**
+     * Trades with a Trader instance. The player can only buy a certain
+     * quantity if the trader has at least that quantity, if the player
+     * can afford to buy that quantity, and if the player's cargo hold
+     * has space for that quantity.
+     *
+     * @param trader the Trader to trade with
+     * @param quantity the amount of the Trader's resource to buy
+     */
+    public void trade(Trader trader, int quantity) {
+        int cost = quantity * trader.getPrice();
+        if ((quantity > trader.getQuantity())
+                || (cost > credits)
+                || (quantity > vehicle.calculateRemainingCargoSpace())) {
+            return;
+        }
+        credits -= cost;
+        int[] playerItems = vehicle.getCargoHold();
+        int resourceIndex = trader.getResource().ordinal();
+        playerItems[resourceIndex] += trader.getQuantity();
+        vehicle.setCargoHold(playerItems);
+    }
+
+    /**
+     * Returns whether the player has died
+     *
+     * @return health of player's vehicle
+     */
+    public boolean isDead() {
+        return vehicle.getCurrentHealth() <= 0;
     }
 
     /**

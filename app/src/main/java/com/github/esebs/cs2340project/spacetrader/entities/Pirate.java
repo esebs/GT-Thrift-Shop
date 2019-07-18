@@ -1,6 +1,17 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
+/**
+ * Represents a pirate that the player can encounter while traveling
+ */
 public class Pirate extends Encounterable {
+
+    /**
+     * Constructor for Pirate
+     */
+    public Pirate() {
+        this.vehicle = Vehicle.BIKE;
+    }
+
     /**
      * This method is called in surrender() in Player
      * The pirates will take all the first resource in your
