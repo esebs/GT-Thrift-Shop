@@ -172,28 +172,51 @@ public class Player {
     }
 
     /**
-     * Attacks a vehicle
+     * Attacks an encountered vehicle
      *
      * @param encounter encountered vehicle
      * @return True if the player attacks the vehicle, False if the player misses
      */
     public Boolean attack(Encounterable encounter) {
+        int damage = 10;
         boolean attacks;
 
         final double missMultiplier = 0.85;
-        int playerFighterPoints = getFighterPoints();
-        double missingChance = missMultiplier * playerFighterPoints;
+        double missingChance = missMultiplier * fighterPoints;
 
         double randomChance = Math.random();
 
         if (randomChance > missingChance) {
             attacks = true;
-            Vehicle vehicle = encounter.getVehicle();
+            Vehicle encounterVehicle = encounter.getVehicle();
+            int currentHealth = encounterVehicle.getCurrentHealth();
+            encounterVehicle.setCurrentHealth(currentHealth - damage);
         } else {
             attacks = false;
         }
-
         return attacks;
+    }
+
+    /**
+     * Flees from an encountered vehicle
+     *
+     * @param encounter encountered vehicle
+     * @return True if the player successfully flees, False if the player
+     * doesn't flee and is attacked
+     */
+    public Boolean flee(Encounterable encounter) {
+        boolean flees;
+        final double fleeChance = (5 * pilotPoints) * 0.01;
+
+        double randomChance = Math.random();
+
+        if (randomChance > fleeChance) {
+            flees = false;
+            encounter.attack();
+        } else {
+            flees = true;
+        }
+        return flees;
     }
 
     /**

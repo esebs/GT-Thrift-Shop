@@ -156,7 +156,7 @@ public enum Vehicle {
      * @param currentHealth new health
      */
     public void setCurrentHealth(int currentHealth) {
-        this.currentHealth = currentHealth;
+        this.currentHealth = currentHealth > 0 ? currentHealth : 0;
     }
 
     /**

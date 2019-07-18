@@ -14,6 +14,7 @@ public abstract class Encounterable {
     }
 
     public Boolean attack() {
+        int damage = 10;
         boolean attacks;
 
         Difficulty difficulty = player.getDifficulty();
@@ -25,10 +26,11 @@ public abstract class Encounterable {
         if (randomChance > missingChance) {
             attacks = true;
             Vehicle playerVehicle = player.getVehicle();
+            int currentHealth = playerVehicle.getCurrentHealth();
+            playerVehicle.setCurrentHealth(currentHealth - damage);
         } else {
             attacks = false;
         }
-
         return attacks;
     }
 
