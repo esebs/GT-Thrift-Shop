@@ -1,4 +1,9 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
+
+import java.util.Random;
+
+import static java.lang.Math.random;
+
 /**
  * Creates player class
  * @version 1.0
@@ -45,30 +50,14 @@ public class Player {
 //    public String getName() {
 //        return name;
 //    }
-//
-//    /**
-//     * sets name to new variable
-//     * @param name player's new name
-//     */
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    /**
-//     * Returns current difficulty
-//     * @return difficulty
-//     */
-//    public Difficulty getDifficulty() {
-//        return difficulty;
-//    }
-//
-//    /**
-//     * Sets new difficulty
-//     * @param difficulty enum difficulty
-//     */
-//    public void setDifficulty(Difficulty difficulty) {
-//        this.difficulty = difficulty;
-//    }
+
+    /**
+     * Returns current difficulty
+     * @return difficulty
+     */
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
 
     /**
      * Gets the Player's current location
@@ -118,13 +107,13 @@ public class Player {
 //        this.pilotPoints = pilotPoints;
 //    }
 //
-//    /**
-//     * Returns player's fighter points
-//     * @return fighterPoints
-//     */
-//    public int getFighterPoints() {
-//        return fighterPoints;
-//    }
+    /**
+     * Returns player's fighter points
+     * @return fighterPoints
+     */
+    public int getFighterPoints() {
+        return fighterPoints;
+    }
 //
 //    /**
 //     * Sets fighter points to a new value
@@ -180,6 +169,31 @@ public class Player {
      */
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    /**
+     * Attacks a vehicle
+     *
+     * @param encounter encountered vehicle
+     * @return True if the player attacks the vehicle, False if the player misses
+     */
+    public Boolean attack(Encounterable encounter) {
+        boolean attacks;
+
+        final double missMultiplier = 0.85;
+        int playerFighterPoints = getFighterPoints();
+        double missingChance = missMultiplier * playerFighterPoints;
+
+        double randomChance = Math.random();
+
+        if (randomChance > missingChance) {
+            attacks = true;
+            Vehicle vehicle = encounter.getVehicle();
+        } else {
+            attacks = false;
+        }
+
+        return attacks;
     }
 
     /**
