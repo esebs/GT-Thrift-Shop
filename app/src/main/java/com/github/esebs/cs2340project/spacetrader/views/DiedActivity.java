@@ -33,18 +33,12 @@ public class DiedActivity extends AppCompatActivity {
         );
 
         @Override
-<<<<<<< HEAD
-        restart.setOnClickListener(e -> {
-            Intent intent = new Intent(DiedActivity.this, WelcomeActivity.class);
-            startActivity(intent);
-=======
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DiedActivity.this, WelcomeActivity.class);
                 startActivity(intent);
             }
->>>>>>> b0e4da03179ebd87e3baafbcce49fa4a8c72fc1d
         });
 
     }
