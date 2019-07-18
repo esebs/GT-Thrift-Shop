@@ -3,7 +3,7 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 import java.util.Random;
 
-public class AlbinoSquirrel {
+public class AlbinoSquirrel extends Encounterable {
     private Model model;
     private Player player;
     Random rand = new Random();

@@ -2,7 +2,7 @@ package com.github.esebs.cs2340project.spacetrader.entities;
 
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
-public class BobWaters {
+public class BobWaters extends Encounterable {
     private Model model;
     private Player player;
     private double random;
