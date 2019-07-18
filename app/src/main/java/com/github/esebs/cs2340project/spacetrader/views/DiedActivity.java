@@ -28,7 +28,7 @@ public class DiedActivity extends AppCompatActivity {
         });
 
         @Override
-        restart.setOnClickListener(e->{
+        restart.setOnClickListener(e -> {
             Intent intent = new Intent(DiedActivity.this, WelcomeActivity.class);
             startActivity(intent);
         });
