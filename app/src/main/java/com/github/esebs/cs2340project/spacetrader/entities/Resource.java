@@ -77,4 +77,13 @@ public enum Resource {
         return mtlu;
     }
 
+    /**
+     * Gets the resource's base price (for use in price calculation)
+     *
+     * @return base price of this resource
+     */
+    public int getBasePrice() {
+        return basePrice;
+    }
+
 }
