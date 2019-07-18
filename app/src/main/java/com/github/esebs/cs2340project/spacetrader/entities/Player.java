@@ -229,13 +229,12 @@ public class Player {
      * @param quantity the amount of the Trader's resource to buy
      */
     public void trade(Trader trader, int quantity) {
-        int cost = quantity * trader.getPrice();
-        if ((quantity > trader.getQuantity())
-                || (cost > credits)
-                || (quantity > vehicle.calculateRemainingCargoSpace())) {
+        if (quantity > trader.calculateMaxBuyQuantity()) {
             return;
         }
+        int cost = quantity * trader.getPrice();
         credits -= cost;
+
         int[] playerItems = vehicle.getCargoHold();
         int resourceIndex = trader.getResource().ordinal();
         playerItems[resourceIndex] += trader.getQuantity();

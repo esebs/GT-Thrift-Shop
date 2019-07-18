@@ -14,12 +14,12 @@ public class AlbinoSquirrel extends Encounterable {
         player = model.getPlayer();
     }
 
-    public Player doesKill(int die) {
+    public boolean doesKill(int die) {
         if (die == 0) {
             player.getVehicle().setCurrentHealth(0);
-            return player;
+            return true;
         } else {
-            return player;
+            return false;
         }
     }
 }

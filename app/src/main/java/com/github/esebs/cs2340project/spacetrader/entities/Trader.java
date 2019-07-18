@@ -29,6 +29,26 @@ public class Trader extends Encounterable {
     }
 
     /**
+     * Calculates the maximum number of the Trader's resource that the Player can buy
+     *
+     * Returns the minimum of the following options:
+     *  -Number offered by the Trader
+     *  -Number that the Player can purchase with their credits
+     *  -Number of cargo spaces left in the Player's Vehicle
+     *
+     * @return the max buy quantity of the given resource`
+     */
+    public int calculateMaxBuyQuantity() {
+
+        int credits = player.getCredits();
+        int maxBuyQuantity = Math.min(credits / price, quantity);
+
+        int remainingCargoSpace = vehicle.calculateRemainingCargoSpace();
+
+        return Math.min(maxBuyQuantity, remainingCargoSpace);
+    }
+
+    /**
      * Gets the Resource that this Trader sells
      *
      * @return trader's Resource
