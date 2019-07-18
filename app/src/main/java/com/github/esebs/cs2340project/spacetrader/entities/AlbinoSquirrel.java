@@ -16,7 +16,7 @@ public class AlbinoSquirrel {
 
     public Player doesKill(int die) {
          if (die == 0) {
-             player.setHealth(0);
+             player.getVehicle().setCurrentHealth(0);
              return player;
          } else {
              return player;

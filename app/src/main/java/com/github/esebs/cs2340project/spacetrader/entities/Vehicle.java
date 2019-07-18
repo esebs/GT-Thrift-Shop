@@ -20,7 +20,7 @@ public enum Vehicle {
     private final int cargoSize;
     private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final int maxHealth;
-    private final int currentHealth;
+    private int currentHealth;
     private final int price;
 
     /**
@@ -71,13 +71,7 @@ public enum Vehicle {
         return maxRange;
     }
 
-//    /**
-//     * Sets the range of vehicle to a new range
-//     * @param maxRange range of vehicle
-//     */
-//    public void setMaxRange(int maxRange) {
-//        this.maxRange = maxRange;
-//    }
+
 
     /**
      * Gets the Vehicle's current range of travel
@@ -103,13 +97,7 @@ public enum Vehicle {
         return cargoSize;
     }
 
-//    /**
-//     * Sets cargo size to a new size
-//     * @param cargoSize new size of cargo
-//     */
-//    public void setCargoSize(int cargoSize) {
-//        this.cargoSize = cargoSize;
-//    }
+
 
     /**
      * Gets the player's cargo items
@@ -127,37 +115,31 @@ public enum Vehicle {
         this.cargoHold = cargoHold.clone();
     }
 
-//    /**
+    /**
 //     * Returns the max health of the vehicle
 //     * @return max health
 //     */
-//    public int getMaxHealth() {
-//        return maxHealth;
-//    }
-//
-//    /**
-//     * Sets the max health of vehicle
-//     * @param maxHealth new max health
-//     */
-//    public void setMaxHealth(int maxHealth) {
-//        this.maxHealth = maxHealth;
-//    }
-//
-//    /**
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+
+
+   /**
 //     * Returns vehicle's current health
 //     * @return current health
 //     */
-//    public int getCurrentHealth() {
-//        return currentHealth;
-//    }
-//
-//    /**
+    public int getCurrentHealth() {
+       return currentHealth;
+    }
+
+    /**
 //     * Sets the Vehicle's current health
 //     * @param currentHealth new health
 //     */
-//    public void setCurrentHealth(int currentHealth) {
-//        this.currentHealth = currentHealth;
-//    }
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+   }
 
     /**
      * Gets the cost to purchase this vehicle
