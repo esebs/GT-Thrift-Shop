@@ -5,8 +5,8 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
 public abstract class Encounterable {
 
     private Model model;
-    public Player player;
-    private Vehicle vehicle;
+    protected Player player;
+    protected Vehicle vehicle;
 
     public Encounterable() {
         model = Model.getModelInstance();
