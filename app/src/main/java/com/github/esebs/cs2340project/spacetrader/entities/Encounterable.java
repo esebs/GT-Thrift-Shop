@@ -2,17 +2,28 @@ package com.github.esebs.cs2340project.spacetrader.entities;
 
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
+/**
+ * A vehicle that the player can encounter while traveling
+ */
 public abstract class Encounterable {
 
     private Model model;
-    public Player player;
-    private Vehicle vehicle;
+    protected Player player;
+    protected Vehicle vehicle;
 
+    /**
+     * Constructor for Encounterable
+     */
     public Encounterable() {
         model = Model.getModelInstance();
         player = model.getPlayer();
     }
 
+    /**
+     * Make the vehicle attack the player
+     * 
+     * @return True if the vehicle attacks the player, False if it misses
+     */
     public Boolean attack() {
         int damage = 10;
         boolean attacks;
@@ -34,6 +45,10 @@ public abstract class Encounterable {
         return attacks;
     }
 
+    /**
+     * Get the vehicle represented by this Encounterable object
+     * @return
+     */
     public Vehicle getVehicle() {
         return this.vehicle;
     }
