@@ -23,7 +23,6 @@ public class DiedActivity extends AppCompatActivity {
         exit = findViewById(R.id.button_exit);
         restart = findViewById(R.id.button_reset);
 
-        @Override
         exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -31,8 +30,7 @@ public class DiedActivity extends AppCompatActivity {
                     }
                 }
         );
-
-        @Override
+        
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
