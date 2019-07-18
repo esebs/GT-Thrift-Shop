@@ -5,7 +5,7 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
 public abstract class Encounterable {
 
     private Model model;
-    private Player player;
+    public Player player;
     private Vehicle vehicle;
 
     public Encounterable() {
