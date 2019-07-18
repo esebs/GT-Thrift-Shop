@@ -20,7 +20,7 @@ public enum Vehicle {
     private final int cargoSize;
     private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final int maxHealth;
-    private final int currentHealth;
+    private int currentHealth;
     private final int price;
 
     /**
@@ -143,21 +143,21 @@ public enum Vehicle {
 //        this.maxHealth = maxHealth;
 //    }
 //
-//    /**
-//     * Returns vehicle's current health
-//     * @return current health
-//     */
-//    public int getCurrentHealth() {
-//        return currentHealth;
-//    }
-//
-//    /**
-//     * Sets the Vehicle's current health
-//     * @param currentHealth new health
-//     */
-//    public void setCurrentHealth(int currentHealth) {
-//        this.currentHealth = currentHealth;
-//    }
+    /**
+     * Returns vehicle's current health
+     * @return current health
+     */
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    /**
+     * Sets the Vehicle's current health
+     * @param currentHealth new health
+     */
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
 
     /**
      * Gets the cost to purchase this vehicle
