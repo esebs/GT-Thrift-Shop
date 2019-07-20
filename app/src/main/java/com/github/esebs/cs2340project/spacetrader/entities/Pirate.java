@@ -9,7 +9,8 @@ public class Pirate extends Encounterable {
      * Constructor for Pirate
      */
     public Pirate() {
-        this.vehicle = Vehicle.BIKE;
+        this.health = 200;
+        this.vehicleName = Vehicle.BIKE.getVehicleType();
     }
 
     /**

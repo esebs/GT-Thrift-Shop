@@ -88,8 +88,8 @@ public class EncounterActivity extends AppCompatActivity {
         } else {
             playerVehicle.setText("Vehicle: " + player.getVehicle().getVehicleType());
             playerVehicleHealth.setText("Health: " + player.getVehicle().getCurrentHealth());
-            opponentVehicle.setText("Vehicle: " + e.getVehicle().getVehicleType());
-            opponentVehicleHealth.setText("Health: " + e.getVehicle().getCurrentHealth());
+            opponentVehicle.setText("Vehicle: " + e.getVehicleName());
+            opponentVehicleHealth.setText("Health: " + e.getHealth());
 
             if (e instanceof Trader) {
                 handleTrader((Trader) e);
@@ -154,7 +154,7 @@ public class EncounterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         playerVehicleHealth.setText("Health: " + player.getVehicle().getCurrentHealth());
-                        opponentVehicleHealth.setText("Health: " + trader.getVehicle().getCurrentHealth());
+                        opponentVehicleHealth.setText("Health: " + trader.getHealth());
                         checkTraderDefeat(trader);
                     }
                 });
@@ -266,7 +266,7 @@ public class EncounterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         playerVehicleHealth.setText("Health: " + player.getVehicle().getCurrentHealth());
-                        opponentVehicleHealth.setText("Health: " + pirate.getVehicle().getCurrentHealth());
+                        opponentVehicleHealth.setText("Health: " + pirate.getHealth());
                         checkPirateDefeat(pirate);
                     }
                 });
@@ -297,7 +297,7 @@ public class EncounterActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             playerVehicleHealth.setText("Health: " + player.getVehicle().getCurrentHealth());
-                            opponentVehicleHealth.setText("Health: " + pirate.getVehicle().getCurrentHealth());
+                            opponentVehicleHealth.setText("Health: " + pirate.getHealth());
                             checkPirateDefeat(pirate);
                         }
                     });
@@ -400,7 +400,7 @@ public class EncounterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         playerVehicleHealth.setText("Health: " + player.getVehicle().getCurrentHealth());
-                        opponentVehicleHealth.setText("Health: " + police.getVehicle().getCurrentHealth());
+                        opponentVehicleHealth.setText("Health: " + police.getHealth());
                         checkPoliceDefeat(police);
                     }
                 });
@@ -431,7 +431,7 @@ public class EncounterActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             playerVehicleHealth.setText("Health: " + player.getVehicle().getCurrentHealth());
-                            opponentVehicleHealth.setText("Health: " + police.getVehicle().getCurrentHealth());
+                            opponentVehicleHealth.setText("Health: " + police.getHealth());
                             checkPoliceDefeat(police);
                         }
                     });

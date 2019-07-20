@@ -9,7 +9,8 @@ public abstract class Encounterable {
 
     private Model model;
     protected Player player;
-    protected Vehicle vehicle;
+    protected int health;
+    protected String vehicleName;
 
     /**
      * Constructor for Encounterable
@@ -17,7 +18,6 @@ public abstract class Encounterable {
     public Encounterable() {
         model = Model.getModelInstance();
         player = model.getPlayer();
-        vehicle = Vehicle.UNICYCLE;
     }
 
     /**
@@ -47,11 +47,27 @@ public abstract class Encounterable {
     }
 
     /**
-     * Get the vehicle represented by this Encounterable object
-     * @return
+     * Get the health of this Encounterable object
+     * @return health
      */
-    public Vehicle getVehicle() {
-        return this.vehicle;
+    public int getHealth() {
+        return health;
+    }
+
+    /**
+     * Set this Encounterable's health
+     * @param newHealth new health
+     */
+    public void setHealth(int newHealth) {
+        health = newHealth > 0 ? newHealth : 0;
+    }
+
+    /**
+     * Get this encounterable's vehicle name
+     * @return name of vehicle
+     */
+    public String getVehicleName() {
+        return vehicleName;
     }
 
     /**
@@ -60,7 +76,7 @@ public abstract class Encounterable {
      * @return true if dead
      */
     public boolean isDead() {
-        return vehicle.getCurrentHealth() == 0;
+        return health == 0;
     }
 
 }

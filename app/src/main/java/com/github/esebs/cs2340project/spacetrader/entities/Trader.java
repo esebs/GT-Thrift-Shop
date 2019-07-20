@@ -25,7 +25,8 @@ public class Trader extends Encounterable {
         int basePrice = resource.getBasePrice();
         this.price = basePrice - (int)(basePrice * player.getTraderPoints() * 0.01);
 
-        this.vehicle = Vehicle.UNICYCLE;
+        this.health = 25;
+        this.vehicleName = Vehicle.UNICYCLE.getVehicleType();
     }
 
     /**
@@ -43,7 +44,8 @@ public class Trader extends Encounterable {
         int credits = player.getCredits();
         int maxBuyQuantity = Math.min(credits / price, quantity);
 
-        int remainingCargoSpace = vehicle.calculateRemainingCargoSpace();
+        Vehicle playerVehicle = player.getVehicle();
+        int remainingCargoSpace = playerVehicle.calculateRemainingCargoSpace();
 
         return Math.min(maxBuyQuantity, remainingCargoSpace);
     }

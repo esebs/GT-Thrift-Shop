@@ -1,9 +1,5 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
-import java.util.Random;
-
-import static java.lang.Math.random;
-
 /**
  * Creates player class
  * @version 1.0
@@ -182,15 +178,14 @@ public class Player {
         boolean attacks;
 
         final double missMultiplier = 0.85;
-        double missingChance = missMultiplier * fighterPoints;
+        double missingChance = missMultiplier / fighterPoints;
 
         double randomChance = Math.random();
 
         if (randomChance > missingChance) {
             attacks = true;
-            Vehicle encounterVehicle = encounter.getVehicle();
-            int currentHealth = encounterVehicle.getCurrentHealth();
-            encounterVehicle.setCurrentHealth(currentHealth - damage);
+            int encounterHealth = encounter.getHealth();
+            encounter.setHealth(encounterHealth - damage);
         } else {
             attacks = false;
         }
@@ -205,17 +200,10 @@ public class Player {
      * doesn't flee
      */
     public Boolean flee(Encounterable encounter) {
-        boolean flees;
         final double fleeChance = (5 * pilotPoints) * 0.01;
 
         double randomChance = Math.random();
-
-        if (randomChance > fleeChance) {
-            flees = false;
-        } else {
-            flees = true;
-        }
-        return flees;
+        return !(randomChance > fleeChance);
     }
 
     /**

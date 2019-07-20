@@ -9,7 +9,8 @@ public class Police extends Encounterable {
     private double random = Math.random();
 
     public Police() {
-        this.vehicle = Vehicle.MOPED;
+        this.health = 350;
+        this.vehicleName = Vehicle.MOPED.getVehicleType();
     }
 
     /**
