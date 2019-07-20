@@ -17,6 +17,7 @@ public abstract class Encounterable {
     public Encounterable() {
         model = Model.getModelInstance();
         player = model.getPlayer();
+        vehicle = Vehicle.UNICYCLE;
     }
 
     /**
@@ -24,7 +25,7 @@ public abstract class Encounterable {
      * 
      * @return True if the vehicle attacks the player, False if it misses
      */
-    public Boolean attack() {
+    public boolean attack() {
         int damage = 10;
         boolean attacks;
 
@@ -51,6 +52,15 @@ public abstract class Encounterable {
      */
     public Vehicle getVehicle() {
         return this.vehicle;
+    }
+
+    /**
+     * If the encounterable object is dead
+     *
+     * @return true if dead
+     */
+    public boolean isDead() {
+        return vehicle.getCurrentHealth() == 0;
     }
 
 }

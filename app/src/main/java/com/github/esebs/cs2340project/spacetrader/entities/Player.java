@@ -202,7 +202,7 @@ public class Player {
      *
      * @param encounter encountered vehicle
      * @return True if the player successfully flees, False if the player
-     * doesn't flee and is attacked
+     * doesn't flee
      */
     public Boolean flee(Encounterable encounter) {
         boolean flees;
@@ -212,7 +212,6 @@ public class Player {
 
         if (randomChance > fleeChance) {
             flees = false;
-            encounter.attack();
         } else {
             flees = true;
         }
@@ -237,7 +236,7 @@ public class Player {
 
         int[] playerItems = vehicle.getCargoHold();
         int resourceIndex = trader.getResource().ordinal();
-        playerItems[resourceIndex] += trader.getQuantity();
+        playerItems[resourceIndex] += quantity;
         vehicle.setCargoHold(playerItems);
     }
 

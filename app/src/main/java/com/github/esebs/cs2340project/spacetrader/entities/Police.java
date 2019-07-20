@@ -21,14 +21,15 @@ public class Police extends Encounterable {
      * @return true if illegal goods are found, false otherwise
      */
     public boolean searchCargoHold() {
-
         if (playerItems[firearmsIndex] != 0 || playerItems[narcoticsIndex] != 0) {
             //take away firearms and/or narcotics
             playerItems[firearmsIndex] = 0;
             playerItems[narcoticsIndex] = 0;
+            player.getVehicle().setCargoHold(playerItems);
 
             //fine the player 25% of there credits
             player.setCredits(playerCredits - (int) (playerCredits * .25));
+
 
             return true;
         } else {

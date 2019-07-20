@@ -30,7 +30,7 @@ public class DiedActivity extends AppCompatActivity {
                     }
                 }
         );
-        
+
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
