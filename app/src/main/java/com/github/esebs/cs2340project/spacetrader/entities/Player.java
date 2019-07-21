@@ -8,6 +8,7 @@ public class Player {
     private final String name;
     private final Difficulty difficulty;
     private Room current;
+    private Building currentBuilding;
     private Vehicle vehicle;
     private final int pilotPoints;
     private final int fighterPoints;
@@ -25,11 +26,12 @@ public class Player {
      * @param traderPoints Trader Skill Points
      * @param engineerPoints Engineering Skill Points
      */
-    public Player(String name, Difficulty difficulty, Room current, int pilotPoints,
+    public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
                   int fighterPoints, int traderPoints, int engineerPoints) {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;
+        this.currentBuilding = currentBuilding;
         this.pilotPoints = pilotPoints;
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
@@ -180,6 +182,21 @@ public class Player {
      */
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    /**
+     * gets the building
+     */
+    public Building getCurrentBuilding() {
+        return currentBuilding;
+    }
+
+    /**
+     * sets it to a new building
+     * @param currentBuilding new building
+     */
+    public void setCurrentBuilding(Building currentBuilding) {
+        this.currentBuilding = currentBuilding;
     }
 
     /**

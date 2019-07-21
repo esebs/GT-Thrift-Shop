@@ -18,6 +18,7 @@ public final class Model {
     // The player of the game
     private Player player;
     private List<Building> buildings = new ArrayList<>();
+    private boolean loaded = false;
 
     // This class is only instantiated ONCE
     private static final Model modelInstance = new Model();
@@ -80,16 +81,21 @@ public final class Model {
                 "buildings=" + buildings +
                 '}';
     }
-
     /**
      * Returns a random room, used to initialize player
      * @return random room
      */
-    public Room getRandomRoom() {
+    public Building getRandomBuilding() {
         Random rn = new Random();
         int random = rn.nextInt(buildings.size());
-        Building randomBuilding = buildings.get(random);
-        List<Room> rooms = randomBuilding.getRooms();
-        return rooms.get(0);
+        return buildings.get(random);
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
     }
 }

@@ -62,7 +62,7 @@ class SystemFragment extends Fragment {
         cargoSpace = view.findViewById(R.id.cargo_bays);
         credits = view.findViewById(R.id.player_cr);
 
-        buildingName.setText(getString(R.string.current_building, room.getBuilding().getName()));
+        buildingName.setText(getString(R.string.current_building, playerViewModel.getPlayer().getCurrentBuilding().getName()));
         roomName.setText(getString(R.string.current_room, room.getName()));
 
         Size roomSize = room.getSize();

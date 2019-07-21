@@ -39,7 +39,8 @@
     <string name="tank_range">You have enough range to travel %1$d meter(s).</string>
     <string name="empty_tank">A full tank cost %1$d cr.</string>
     <string name="full_tank">You have a full tank!</string>
-    <string name='start'>Start</string>
+    <string name='new_game'>New Game</string>
+    <string name='load_game'>Load Game</string>
     <string name='welcome'>Welcome to Space Traders</string>
     <string name='exit'>Exit</string>
     <string name="size">Size: </string>

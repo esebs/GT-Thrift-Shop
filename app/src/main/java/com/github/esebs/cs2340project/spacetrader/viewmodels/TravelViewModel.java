@@ -2,10 +2,15 @@ package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
 import android.util.Log;
 
+import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.entities.Vehicle;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * ViewModel for travel
@@ -80,13 +85,15 @@ public class TravelViewModel {
      * vehicle's range
      * @param newRoom player's new room
      */
-    public void travelTo(Room newRoom) {
+    public void travelTo(Room newRoom, Building building) {
         player.setCurrent(newRoom);
+        player.setCurrentBuilding(building);
         vehicle.setCurrentRange(
                 (vehicle.getCurrentRange() - 5));
         Log.d("APP", "TravelViewModel: Player Travelled to: "
                 + currentRoom.getName() + ". You have "
                 + vehicle.getCurrentRange() + "fuel left.");
+
     }
 
 }

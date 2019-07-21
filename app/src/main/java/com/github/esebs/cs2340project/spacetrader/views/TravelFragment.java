@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
+import com.github.esebs.cs2340project.spacetrader.viewmodels.UniverseViewModel;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.TravelViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,6 +31,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +48,7 @@ import java.util.List;
 class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerClickListener {
 
     private TravelViewModel viewModel;
+    private UniverseViewModel universeViewModel = new UniverseViewModel();
     private final Model model = Model.getModelInstance();
     private final PlayerViewModel playerViewModel = new PlayerViewModel();
     private String selectedRoomName;
@@ -124,7 +131,7 @@ class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerCli
                 LatLng currentBuilding = new LatLng(b.getLatitude(), b.getLongitude());
                 Marker m;
 
-                if (b.equals(playerViewModel.getPlayer().getCurrent().getBuilding())) {
+                if (b.equals(playerViewModel.getPlayer().getCurrentBuilding())) {
                     m = googleMap.addMarker(new MarkerOptions().position(currentBuilding).title(
                             b.getName()).icon(BitmapDescriptorFactory.defaultMarker(
                                     BitmapDescriptorFactory.HUE_BLUE)));
@@ -206,7 +213,37 @@ class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerCli
                                 Toast.makeText(getActivity(),
                                         "Not enough fuel left to Travel", Toast.LENGTH_LONG).show();
                             } else {
-                                viewModel.travelTo(selectedRoom);
+                                viewModel.travelTo(selectedRoom, building);
+                                Gson gson = new Gson();
+
+                                File path = getActivity().getFilesDir();
+                                String json = gson.toJson(playerViewModel.getPlayer());
+                                File file = new File(path, "Player.json");
+                                try {
+                                    FileOutputStream stream = new FileOutputStream(file);
+                                    stream.write(json.getBytes());
+                                    stream.close();
+                                    Log.d("Saved", "Player");
+                                } catch (Exception e) {
+                                    Log.d("Error", "Travel Fragment Saving Player");
+                                    e.printStackTrace();
+                                }
+
+                                List<Building> buildings = universeViewModel.getUniverse();
+
+                                String jsonBuildings = gson.toJson(buildings);
+                                File fileBuildings = new File(path, "Buildings.json");
+
+                                //write to file
+                                try {
+                                    FileOutputStream stream = new FileOutputStream(fileBuildings);
+                                    stream.write(jsonBuildings.getBytes());
+                                    stream.close();
+                                    Log.d("Saved", "Buildings");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.d("Error", "Travel Fragment Saving Buildings");
+                                }
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
                             }
