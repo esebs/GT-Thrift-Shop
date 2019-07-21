@@ -76,6 +76,8 @@ public class VehicleActivity extends AppCompatActivity {
             } else if (vehicleViewModel.canBuyVehicle(Vehicle.UNICYCLE)) {
                 vehicleViewModel.buyVehicle(Vehicle.UNICYCLE);
                 setAllText();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
             } else {
                 Toast.makeText(getBaseContext(),"Sorry, you don't have enough money.", Toast.LENGTH_LONG).show();
             }
@@ -87,6 +89,8 @@ public class VehicleActivity extends AppCompatActivity {
             } else if (vehicleViewModel.canBuyVehicle(Vehicle.SCOOTER)) {
                 vehicleViewModel.buyVehicle(Vehicle.SCOOTER);
                 setAllText();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
 
             } else {
                 Toast.makeText(getBaseContext(),"Sorry, you don't have enough money.", Toast.LENGTH_LONG).show();
@@ -99,6 +103,8 @@ public class VehicleActivity extends AppCompatActivity {
             } else if (vehicleViewModel.canBuyVehicle(Vehicle.BIKE)) {
                 vehicleViewModel.buyVehicle(Vehicle.BIKE);
                 setAllText();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
             } else {
                 Toast.makeText(getBaseContext(),"Sorry, you don't have enough money.", Toast.LENGTH_LONG).show();
             }
@@ -110,6 +116,8 @@ public class VehicleActivity extends AppCompatActivity {
             } else if (vehicleViewModel.canBuyVehicle(Vehicle.GOLF_CART)) {
                 vehicleViewModel.buyVehicle(Vehicle.GOLF_CART);
                 setAllText();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
             } else {
                 Toast.makeText(getBaseContext(),"Sorry, you don't have enough money.", Toast.LENGTH_SHORT).show();
             }
@@ -121,6 +129,8 @@ public class VehicleActivity extends AppCompatActivity {
             } else if (vehicleViewModel.canBuyVehicle(Vehicle.MOPED)) {
                 vehicleViewModel.buyVehicle(Vehicle.MOPED);
                 setAllText();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
             } else {
                 Toast.makeText(getBaseContext(),"Sorry, you don't have enough money.", Toast.LENGTH_LONG).show();
             }
