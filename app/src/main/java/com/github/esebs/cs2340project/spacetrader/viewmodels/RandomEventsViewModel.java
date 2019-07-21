@@ -32,11 +32,11 @@ public class RandomEventsViewModel {
             double randomChance = Math.random();
             if (randomChance <= 0.32) {
                 newEncounters.add(new Trader());
-            } else if (randomChance <= 0.64) {
+            } /*else if (randomChance <= 0.64) {
                 newEncounters.add(new Police());
             } else if (randomChance <= 0.96) {
                 newEncounters.add(new Pirate());
-            } else if (randomChance <= 0.98) {
+            } */else if (true/*randomChance <= 0.98*/) {
                 newEncounters.add(new AlbinoSquirrel());
             } else {
                 newEncounters.add(new BobWaters());

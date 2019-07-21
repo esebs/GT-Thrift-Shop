@@ -26,7 +26,7 @@ public class DiedActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        System.exit(0);
+                        finishAffinity();
                     }
                 }
         );
@@ -34,7 +34,7 @@ public class DiedActivity extends AppCompatActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DiedActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(DiedActivity.this, StartActivity.class);
                 startActivity(intent);
             }
         });
