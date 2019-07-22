@@ -13,7 +13,14 @@ import java.util.List;
  * ViewModel for universe creation
  */
 public class UniverseViewModel {
-    private final Model model = Model.getModelInstance();
+    private final Model model;
+
+    /**
+     * Constructor for UniverseViewModel
+     */
+    public UniverseViewModel() {
+        model = Model.getModelInstance();
+    }
 
     public List<Building> getUniverse() {
         return model.getBuildings();

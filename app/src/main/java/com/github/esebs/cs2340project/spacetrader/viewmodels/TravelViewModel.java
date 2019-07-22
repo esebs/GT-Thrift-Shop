@@ -17,10 +17,20 @@ import java.io.FileOutputStream;
  */
 public class TravelViewModel {
 
-    private final Model model = Model.getModelInstance();
-    private final Player player = model.getPlayer();
-    private final Room currentRoom = player.getCurrent();
-    private final Vehicle vehicle = player.getVehicle();
+    private final Model model;
+    private final Player player;
+    private final Room currentRoom;
+    private final Vehicle vehicle;
+
+    /**
+     * Constructor for TravelViewModel
+     */
+    public TravelViewModel() {
+        model = Model.getModelInstance();
+        player = model.getPlayer();
+        currentRoom = player.getCurrent();
+        vehicle = player.getVehicle();
+    }
 
     /**
      * Calculates the difference between the maximum range and current range of the Player's Vehicle

@@ -13,10 +13,20 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class TradingViewModel {
 
-    private final Model model = Model.getModelInstance();
-    private final Player player = model.getPlayer();
-    private final Room currentRoom = player.getCurrent();
-    private final Vehicle vehicle = player.getVehicle();
+    private final Model model;
+    private final Player player;
+    private final Room currentRoom;
+    private final Vehicle vehicle;
+
+    /**
+     * Constructor for TradingViewModel
+     */
+    public TradingViewModel() {
+        model = Model.getModelInstance();
+        player = model.getPlayer();
+        currentRoom = player.getCurrent();
+        vehicle = player.getVehicle();
+    }
 
     /**
      * Gets how many of a resource is offered by the Player's current Room

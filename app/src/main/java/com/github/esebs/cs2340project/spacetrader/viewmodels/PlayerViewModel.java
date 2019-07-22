@@ -14,8 +14,16 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class PlayerViewModel {
 
-    private final Model model = Model.getModelInstance();
-    private final Player player = model.getPlayer();
+    private final Model model;
+    private final Player player;
+
+    /**
+     * Constructor for PlayerViewModel
+     */
+    public PlayerViewModel() {
+        model = Model.getModelInstance();
+        player = model.getPlayer();
+    }
 
     /**
      * Gets the player for the game
