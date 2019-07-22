@@ -65,6 +65,15 @@ public class Building {
         return Collections.unmodifiableList(rooms);
     }
 
+    @Override
+    public boolean equals (Object other) {
+        if (other == null || other.getClass() != Building.class) {
+            return false;
+        }
+        Building that = (Building) other;
+        return this.getName().equals(that.getName());
+    }
+
     /**
      * toString method for Building
      *
