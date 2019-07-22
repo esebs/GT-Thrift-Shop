@@ -16,7 +16,7 @@ public enum Vehicle {
 
     private final String vehicleType;
     private final int maxRange;
-    private int currentRange;
+
     private final int cargoSize;
     private final int maxHealth;
     private int currentHealth;
@@ -34,7 +34,6 @@ public enum Vehicle {
         this.vehicleType = vehicleType;
         this.maxRange = maxRange;
         // currentRange always starts at its maximum, which is determined by maxRange
-        this.currentRange = maxRange;
         this.cargoSize = cargoSize;
         this.maxHealth = maxHealth;
         // currentHealth always starts at its maximum, which is determined by maxHealth
@@ -59,24 +58,6 @@ public enum Vehicle {
      */
     public int getMaxRange() {
         return maxRange;
-    }
-
-
-
-    /**
-     * Gets the Vehicle's current range of travel
-     * @return current range
-     */
-    public int getCurrentRange() {
-        return currentRange;
-    }
-
-    /**
-     * Sets the Vehicle's current range of travel
-     * @param currentRange new current range
-     */
-    public void setCurrentRange(int currentRange) {
-        this.currentRange = currentRange;
     }
 
     /**

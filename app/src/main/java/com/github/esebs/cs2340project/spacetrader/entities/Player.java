@@ -19,6 +19,7 @@ public class Player {
     private final int engineerPoints;
     private int credits;
     private int[] cargoHold;
+    private int currentRange;
 
     /**
      * Creates a new instance of a player
@@ -32,11 +33,12 @@ public class Player {
      */
     public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
                   int fighterPoints, int traderPoints, int engineerPoints) {
-        this(name, difficulty, current, currentBuilding, pilotPoints, fighterPoints, traderPoints,engineerPoints, new int[10]);
+        this(name, difficulty, current, currentBuilding, pilotPoints, fighterPoints, traderPoints,engineerPoints, new int[10], Vehicle.SCOOTER.getMaxRange());
+        this.currentRange = vehicle.getMaxRange();
     }
 
     public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
-                  int fighterPoints, int traderPoints, int engineerPoints, int[] cargoHold) {
+                  int fighterPoints, int traderPoints, int engineerPoints, int[] cargoHold, int currentRange) {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;
@@ -48,6 +50,7 @@ public class Player {
         this.credits = 1000;
         this.vehicle = Vehicle.SCOOTER;
         this.cargoHold = cargoHold;
+        this.currentRange = currentRange;
     }
 
 //    /**
@@ -81,6 +84,23 @@ public class Player {
 //    public void setDifficulty(Difficulty difficulty) {
 //        this.difficulty = difficulty;
 //    }
+
+    /**
+     * Gets the Vehicle's current range of travel
+     * @return current range
+     */
+    public int getCurrentRange() {
+        return currentRange;
+    }
+
+    /**
+     * Sets the Vehicle's current range of travel
+     * @param currentRange new current range
+     */
+    public void setCurrentRange(int currentRange) {
+        this.currentRange = currentRange;
+    }
+
 
     /**
      * Gets the Player's current location

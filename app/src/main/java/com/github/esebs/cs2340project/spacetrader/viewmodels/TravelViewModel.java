@@ -38,7 +38,7 @@ public class TravelViewModel {
      */
     private int calculateRangeUsed() {
         int maxRange = vehicle.getMaxRange();
-        int currentRange = vehicle.getCurrentRange();
+        int currentRange = player.getCurrentRange();
         return maxRange - currentRange;
     }
 
@@ -55,7 +55,7 @@ public class TravelViewModel {
      * @return remaining range
      */
     public int getCurrentRange() {
-        return vehicle.getCurrentRange();
+        return player.getCurrentRange();
     }
 
     /**
@@ -83,9 +83,9 @@ public class TravelViewModel {
 
         player.setCredits(getCredits() - this.getCostToRefuel());
         
-        vehicle.setCurrentRange(maxRange);
+        player.setCurrentRange(maxRange);
         Log.d("APP", "TravelViewModel: Player's range: "
-                + vehicle.getCurrentRange() + ". Credits remaining "
+                + player.getCurrentRange() + ". Credits remaining "
                 + getCredits() + " cr.");
 
     }
@@ -98,11 +98,11 @@ public class TravelViewModel {
     public void travelTo(Room newRoom, Building building) {
         player.setCurrent(newRoom);
         player.setCurrentBuilding(building);
-        vehicle.setCurrentRange(
-                (vehicle.getCurrentRange() - 5));
+        player.setCurrentRange(
+                (player.getCurrentRange() - 5));
         Log.d("APP", "TravelViewModel: Player Travelled to: "
                 + currentRoom.getName() + ". You have "
-                + vehicle.getCurrentRange() + "fuel left.");
+                + player.getCurrentRange() + "fuel left.");
 
     }
 
