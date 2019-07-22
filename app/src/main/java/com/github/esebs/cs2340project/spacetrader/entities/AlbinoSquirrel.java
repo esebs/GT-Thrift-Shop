@@ -1,26 +1,27 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
 
+import com.github.esebs.cs2340project.spacetrader.views.MainActivity;
+
 import java.util.Random;
 
-public class AlbinoSquirrel {
+public class AlbinoSquirrel extends Encounterable {
     private Model model;
     private Player player;
-    Random rand = new Random();
-    int die = rand.nextInt(2);
+    double die = Math.random();
 
     public AlbinoSquirrel(){
         model = Model.getModelInstance();
         player = model.getPlayer();
     }
 
-    public Player doesKill(int die) {
-         if (die == 0) {
-             player.getVehicle().setCurrentHealth(0);
-             return player;
-         } else {
-             return player;
-         }
-    }
 
+    public boolean doesKill() {
+        if (die >= .5) {
+            player.getVehicle().setCurrentHealth(0);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

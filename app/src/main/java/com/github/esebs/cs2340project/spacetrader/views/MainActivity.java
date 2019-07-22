@@ -45,4 +45,5 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new TravelFragment(), "Travel");
         viewPager.setAdapter(adapter);
     }
+
 }

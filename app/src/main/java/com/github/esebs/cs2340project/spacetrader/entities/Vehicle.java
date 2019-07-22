@@ -77,23 +77,22 @@ public enum Vehicle {
         return maxHealth;
     }
 
-
-
-   /**
-//     * Returns vehicle's current health
-//     * @return current health
-//     */
+    /**
+     * Returns vehicle's current health
+     * @return current health
+     */
     public int getCurrentHealth() {
-       return currentHealth;
+        return currentHealth;
     }
 
     /**
-//     * Sets the Vehicle's current health
-//     * @param currentHealth new health
-//     */
+     * Sets the Vehicle's current health
+     * @param currentHealth new health
+     */
     public void setCurrentHealth(int currentHealth) {
-        this.currentHealth = currentHealth;
-   }
+        this.currentHealth = currentHealth > 0 ? currentHealth : 0;
+    }
+
 
     /**
      * Gets the cost to purchase this vehicle

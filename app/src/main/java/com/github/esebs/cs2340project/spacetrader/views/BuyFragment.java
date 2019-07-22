@@ -128,7 +128,6 @@ class BuyFragment extends Fragment {
                 seekBar.setMax(maxBuyQuantity);
                 seekBar.setProgress(0);
 
-
                 textView3 = dialog.findViewById(R.id.quantity);
                 textView3.setText(getString(R.string.buy_text_3, waterQuantity));
 

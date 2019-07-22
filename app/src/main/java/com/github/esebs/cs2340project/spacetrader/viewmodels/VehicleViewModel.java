@@ -36,7 +36,7 @@ public class VehicleViewModel {
      * @return whether the Player can purchase the Vehicle
      */
     public boolean canBuyVehicle(Vehicle vehicle) {
-        return getVehiclePrice(vehicle) <= model.getPlayer().getCredits();
+            return getVehiclePrice(vehicle) <= model.getPlayer().getCredits();
     }
 
     /**
@@ -46,6 +46,8 @@ public class VehicleViewModel {
      * @param vehicle the Vehicle to purchase
      */
     public void buyVehicle(Vehicle vehicle) {
+        int[] emptyCargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        this.vehicle.setCargoHold(emptyCargoHold);
         player.setVehicle(vehicle);
         int credits = player.getCredits();
         player.setCredits(credits - getVehiclePrice(vehicle));
