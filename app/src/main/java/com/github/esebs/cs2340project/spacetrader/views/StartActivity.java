@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Type;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,6 +120,9 @@ public class StartActivity extends AppCompatActivity {
                     in.close();
                     if (!contents.equals("")) {
                         Player previousPlayer = gson.fromJson(contents, Player.class);
+                        for (int l : previousPlayer.getCargoHold()) {
+                            System.out.println(l);
+                        }
                         playerViewModel.setPlayer(previousPlayer);
                         Log.d("Loading Player", contents);
                         playerViewModel.setLoaded(true);

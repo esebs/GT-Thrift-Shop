@@ -18,7 +18,6 @@ public enum Vehicle {
     private final int maxRange;
     private int currentRange;
     private final int cargoSize;
-    private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final int maxHealth;
     private int currentHealth;
     private final int price;
@@ -41,19 +40,10 @@ public enum Vehicle {
         // currentHealth always starts at its maximum, which is determined by maxHealth
         this.currentHealth = maxHealth;
         this.price = price;
+
     }
 
-    /**
-     * Calculates the number of cargo space left in this Vehicle based on cargoHold's contents
-     * @return number of remaining cargo space
-     */
-    public int calculateRemainingCargoSpace() {
-        int spacesUsed = 0;
-        for (int quantity : cargoHold) {
-            spacesUsed += quantity;
-        }
-        return cargoSize - spacesUsed;
-    }
+
 
     /**
      * Returns Vehicle's name
@@ -97,23 +87,6 @@ public enum Vehicle {
         return cargoSize;
     }
 
-
-
-    /**
-     * Gets the player's cargo items
-     * @return a Map of the player's cargo items
-     */
-    public int[] getCargoHold() {
-        return cargoHold.clone();
-    }
-
-    /**
-     * Sets the player's cargo items
-     * @param cargoHold a Map of the player's new cargo items
-     */
-    public void setCargoHold(int[] cargoHold) {
-        this.cargoHold = cargoHold.clone();
-    }
 
     /**
 //     * Returns the max health of the vehicle
@@ -160,7 +133,6 @@ public enum Vehicle {
                 "vehicleType='" + vehicleType + '\'' +
                 ", maxRange=" + maxRange +
                 ", cargoSize=" + cargoSize +
-                ", cargoHold=" + Arrays.toString(cargoHold) +
                 ", maxHealth=" + maxHealth +
                 ", currentHealth=" + currentHealth +
                 ", price=" + price +

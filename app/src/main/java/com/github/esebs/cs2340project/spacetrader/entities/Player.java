@@ -1,4 +1,7 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
+
+import java.util.Arrays;
+
 /**
  * Creates player class
  * @version 1.0
@@ -15,6 +18,7 @@ public class Player {
     private final int traderPoints;
     private final int engineerPoints;
     private int credits;
+    private int[] cargoHold;
 
     /**
      * Creates a new instance of a player
@@ -28,6 +32,11 @@ public class Player {
      */
     public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
                   int fighterPoints, int traderPoints, int engineerPoints) {
+        this(name, difficulty, current, currentBuilding, pilotPoints, fighterPoints, traderPoints,engineerPoints, new int[10]);
+    }
+
+    public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
+                  int fighterPoints, int traderPoints, int engineerPoints, int[] cargoHold) {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;
@@ -38,6 +47,7 @@ public class Player {
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
         this.vehicle = Vehicle.SCOOTER;
+        this.cargoHold = cargoHold;
     }
 
 //    /**
@@ -200,6 +210,34 @@ public class Player {
     }
 
     /**
+     * Calculates the number of cargo space left in this Vehicle based on cargoHold's contents
+     * @return number of remaining cargo space
+     */
+    public int calculateRemainingCargoSpace() {
+        int spacesUsed = 0;
+        for (int quantity : cargoHold) {
+            spacesUsed += quantity;
+        }
+        return vehicle.getCargoSize() - spacesUsed;
+    }
+
+    /**
+     * Gets the player's cargo items
+     * @return a Map of the player's cargo items
+     */
+    public int[] getCargoHold() {
+        return cargoHold.clone();
+    }
+
+    /**
+     * Sets the player's cargo items
+     * @param cargoHold a Map of the player's new cargo items
+     */
+    public void setCargoHold(int[] cargoHold) {
+        this.cargoHold = cargoHold.clone();
+    }
+
+    /**
      * toString method for Player
      *
      * @return string representation of this Player
@@ -216,6 +254,7 @@ public class Player {
                 "\n\ttraderPoints: " + traderPoints +
                 "\n\tengineerPoints: " + engineerPoints +
                 "\n\tcredits: " + credits +
+                ", cargoHold=" + Arrays.toString(cargoHold) +
                 "\n }";
     }
 }

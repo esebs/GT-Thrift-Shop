@@ -84,7 +84,7 @@ class SystemFragment extends Fragment {
         Vehicle vehicle = player.getVehicle();
         cargoSpace.setText(getString(R.string.current_space,
                 vehicle.getCargoSize()
-                        - vehicle.calculateRemainingCargoSpace(),
+                        - player.calculateRemainingCargoSpace(),
                 vehicle.getCargoSize()));
         credits.setText(getString(R.string.current_credits, player.getCredits()));
 

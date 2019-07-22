@@ -57,6 +57,14 @@ public class PlayerViewModel {
     }
 
     /**
+     * Does magic
+     * @param cargoHold new cargohold
+     */
+    public void setCargoHold(int[] cargoHold) {
+        model.getPlayer().setCargoHold(cargoHold);
+    }
+
+    /**
      * Get the player's current Room
      * @return current Room
      */
