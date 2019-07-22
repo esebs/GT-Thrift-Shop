@@ -6,9 +6,18 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
 
 public class VehicleViewModel {
 
-    private final Model model = Model.getModelInstance();
-    private final Player player = model.getPlayer();
-    private final Vehicle vehicle = player.getVehicle();
+    private final Model model;
+    private final Player player;
+    private final Vehicle vehicle;
+
+    /**
+     * Constructor for VehicleViewModel
+     */
+    public VehicleViewModel() {
+        model = Model.getModelInstance();
+        player = model.getPlayer();
+        vehicle = player.getVehicle();
+    }
 
     /**
      * Gets the relative price of this Vehicle compared to the player's current Vehicle
@@ -38,7 +47,7 @@ public class VehicleViewModel {
      */
     public void buyVehicle(Vehicle vehicle) {
         int[] emptyCargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        this.vehicle.setCargoHold(emptyCargoHold);
+        this.player.setCargoHold(emptyCargoHold);
         player.setVehicle(vehicle);
         int credits = player.getCredits();
         player.setCredits(credits - getVehiclePrice(vehicle));

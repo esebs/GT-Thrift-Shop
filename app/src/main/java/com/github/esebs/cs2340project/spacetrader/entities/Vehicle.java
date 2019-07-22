@@ -16,9 +16,8 @@ public enum Vehicle {
 
     private final String vehicleType;
     private final int maxRange;
-    private int currentRange;
+
     private final int cargoSize;
-    private int[] cargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final int maxHealth;
     private int currentHealth;
     private final int price;
@@ -35,25 +34,15 @@ public enum Vehicle {
         this.vehicleType = vehicleType;
         this.maxRange = maxRange;
         // currentRange always starts at its maximum, which is determined by maxRange
-        this.currentRange = maxRange;
         this.cargoSize = cargoSize;
         this.maxHealth = maxHealth;
         // currentHealth always starts at its maximum, which is determined by maxHealth
         this.currentHealth = maxHealth;
         this.price = price;
+
     }
 
-    /**
-     * Calculates the number of cargo space left in this Vehicle based on cargoHold's contents
-     * @return number of remaining cargo space
-     */
-    public int calculateRemainingCargoSpace() {
-        int spacesUsed = 0;
-        for (int quantity : cargoHold) {
-            spacesUsed += quantity;
-        }
-        return cargoSize - spacesUsed;
-    }
+
 
     /**
      * Returns Vehicle's name
@@ -71,30 +60,6 @@ public enum Vehicle {
         return maxRange;
     }
 
-//    /**
-//     * Sets the range of vehicle to a new range
-//     * @param maxRange range of vehicle
-//     */
-//    public void setMaxRange(int maxRange) {
-//        this.maxRange = maxRange;
-//    }
-
-    /**
-     * Gets the Vehicle's current range of travel
-     * @return current range
-     */
-    public int getCurrentRange() {
-        return currentRange;
-    }
-
-    /**
-     * Sets the Vehicle's current range of travel
-     * @param currentRange new current range
-     */
-    public void setCurrentRange(int currentRange) {
-        this.currentRange = currentRange;
-    }
-
     /**
      * Returns the value for the size of cargo
      * @return cargoSize
@@ -103,46 +68,15 @@ public enum Vehicle {
         return cargoSize;
     }
 
-//    /**
-//     * Sets cargo size to a new size
-//     * @param cargoSize new size of cargo
-//     */
-//    public void setCargoSize(int cargoSize) {
-//        this.cargoSize = cargoSize;
-//    }
 
     /**
-     * Gets the player's cargo items
-     * @return a Map of the player's cargo items
-     */
-    public int[] getCargoHold() {
-        return cargoHold.clone();
-    }
-
-    /**
-     * Sets the player's cargo items
-     * @param cargoHold a Map of the player's new cargo items
-     */
-    public void setCargoHold(int[] cargoHold) {
-        this.cargoHold = cargoHold.clone();
-    }
-
-//    /**
 //     * Returns the max health of the vehicle
 //     * @return max health
 //     */
-//    public int getMaxHealth() {
-//        return maxHealth;
-//    }
-//
-//    /**
-//     * Sets the max health of vehicle
-//     * @param maxHealth new max health
-//     */
-//    public void setMaxHealth(int maxHealth) {
-//        this.maxHealth = maxHealth;
-//    }
-//
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
     /**
      * Returns vehicle's current health
      * @return current health
@@ -158,6 +92,7 @@ public enum Vehicle {
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth > 0 ? currentHealth : 0;
     }
+
 
     /**
      * Gets the cost to purchase this vehicle
@@ -178,7 +113,6 @@ public enum Vehicle {
                 "vehicleType='" + vehicleType + '\'' +
                 ", maxRange=" + maxRange +
                 ", cargoSize=" + cargoSize +
-                ", cargoHold=" + Arrays.toString(cargoHold) +
                 ", maxHealth=" + maxHealth +
                 ", currentHealth=" + currentHealth +
                 ", price=" + price +

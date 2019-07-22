@@ -1,5 +1,6 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 import com.github.esebs.cs2340project.spacetrader.model.Model;
+
 import com.github.esebs.cs2340project.spacetrader.views.MainActivity;
 
 import java.util.Random;
@@ -13,6 +14,7 @@ public class AlbinoSquirrel extends Encounterable {
         model = Model.getModelInstance();
         player = model.getPlayer();
     }
+
 
     public boolean doesKill() {
         if (die >= .5) {

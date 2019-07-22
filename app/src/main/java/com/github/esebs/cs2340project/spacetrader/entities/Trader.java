@@ -44,8 +44,7 @@ public class Trader extends Encounterable {
         int credits = player.getCredits();
         int maxBuyQuantity = Math.min(credits / price, quantity);
 
-        Vehicle playerVehicle = player.getVehicle();
-        int remainingCargoSpace = playerVehicle.calculateRemainingCargoSpace();
+        int remainingCargoSpace = player.calculateRemainingCargoSpace();
 
         return Math.min(maxBuyQuantity, remainingCargoSpace);
     }

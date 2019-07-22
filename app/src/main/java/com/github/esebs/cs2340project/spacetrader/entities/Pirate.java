@@ -23,14 +23,14 @@ public class Pirate extends Encounterable {
      */
     public Resource surrender() {
         //{0,0,0,0,5,...}
-        int[] playerItems = player.getVehicle().getCargoHold();
+        int[] playerItems = player.getCargoHold();
         Resource resourceTaken;
 
         for (int i = 0; i < playerItems.length; i++) {
             if (playerItems[i] != 0) {
                 resourceTaken = Resource.values()[i];
                 playerItems[i] = 0;
-                player.getVehicle().setCargoHold(playerItems);
+                player.setCargoHold(playerItems);
                 return resourceTaken;
             }
         }

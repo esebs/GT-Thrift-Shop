@@ -1,4 +1,5 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
+import java.util.Arrays;
 
 /**
  * Creates player class
@@ -9,12 +10,15 @@ public class Player {
     private final String name;
     private final Difficulty difficulty;
     private Room current;
+    private Building currentBuilding;
     private Vehicle vehicle;
     private final int pilotPoints;
     private final int fighterPoints;
     private final int traderPoints;
     private final int engineerPoints;
     private int credits;
+    private int[] cargoHold;
+    private int currentRange;
 
     /**
      * Creates a new instance of a player
@@ -26,17 +30,26 @@ public class Player {
      * @param traderPoints Trader Skill Points
      * @param engineerPoints Engineering Skill Points
      */
-    public Player(String name, Difficulty difficulty, Room current, int pilotPoints,
+    public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
                   int fighterPoints, int traderPoints, int engineerPoints) {
+        this(name, difficulty, current, currentBuilding, pilotPoints, fighterPoints, traderPoints,engineerPoints, new int[10], Vehicle.SCOOTER.getMaxRange());
+        this.currentRange = vehicle.getMaxRange();
+    }
+
+    public Player(String name, Difficulty difficulty, Room current, Building currentBuilding, int pilotPoints,
+                  int fighterPoints, int traderPoints, int engineerPoints, int[] cargoHold, int currentRange) {
         this.name = name;
         this.difficulty = difficulty;
         this.current = current;
+        this.currentBuilding = currentBuilding;
         this.pilotPoints = pilotPoints;
         this.fighterPoints = fighterPoints;
         this.traderPoints = traderPoints;
         this.engineerPoints = engineerPoints;
         this.credits = 1000;
         this.vehicle = Vehicle.SCOOTER;
+        this.cargoHold = cargoHold;
+        this.currentRange = currentRange;
     }
 
 //    /**
@@ -54,6 +67,23 @@ public class Player {
     public Difficulty getDifficulty() {
         return difficulty;
     }
+
+    /**
+     * Gets the Vehicle's current range of travel
+     * @return current range
+     */
+    public int getCurrentRange() {
+        return currentRange;
+    }
+
+    /**
+     * Sets the Vehicle's current range of travel
+     * @param currentRange new current range
+     */
+    public void setCurrentRange(int currentRange) {
+        this.currentRange = currentRange;
+    }
+
 
     /**
      * Gets the Player's current location
@@ -168,6 +198,48 @@ public class Player {
     }
 
     /**
+     * gets the building
+     */
+    public Building getCurrentBuilding() {
+        return currentBuilding;
+    }
+
+    /**
+     * sets it to a new building
+     * @param currentBuilding new building
+     */
+    public void setCurrentBuilding(Building currentBuilding) {
+        this.currentBuilding = currentBuilding;
+    }
+
+    /**
+     * Calculates the number of cargo space left in this Vehicle based on cargoHold's contents
+     * @return number of remaining cargo space
+     */
+    public int calculateRemainingCargoSpace() {
+        int spacesUsed = 0;
+        for (int quantity : cargoHold) {
+            spacesUsed += quantity;
+        }
+        return vehicle.getCargoSize() - spacesUsed;
+    }
+
+    /**
+     * Gets the player's cargo items
+     * @return a Map of the player's cargo items
+     */
+    public int[] getCargoHold() {
+        return cargoHold.clone();
+    }
+
+    /**
+     * Sets the player's cargo items
+     * @param cargoHold a Map of the player's new cargo items
+     */
+    public void setCargoHold(int[] cargoHold) {
+        this.cargoHold = cargoHold.clone();
+    }
+    /**
      * Attacks an encountered vehicle
      *
      * @param encounter encountered vehicle
@@ -222,10 +294,10 @@ public class Player {
         int cost = quantity * trader.getPrice();
         credits -= cost;
 
-        int[] playerItems = vehicle.getCargoHold();
+        int[] playerItems = this.getCargoHold();
         int resourceIndex = trader.getResource().ordinal();
         playerItems[resourceIndex] += quantity;
-        vehicle.setCargoHold(playerItems);
+        this.setCargoHold(playerItems);
     }
 
     /**
@@ -254,6 +326,7 @@ public class Player {
                 "\n\ttraderPoints: " + traderPoints +
                 "\n\tengineerPoints: " + engineerPoints +
                 "\n\tcredits: " + credits +
+                ", cargoHold=" + Arrays.toString(cargoHold) +
                 "\n }";
     }
 }

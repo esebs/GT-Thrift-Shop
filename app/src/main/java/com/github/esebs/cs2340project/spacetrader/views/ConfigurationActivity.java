@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,8 +18,11 @@ import android.widget.Toast;
 import com.github.esebs.cs2340project.spacetrader.R;
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.viewmodels.PlayerViewModel;
+import com.google.gson.Gson;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 
 /**
@@ -28,6 +32,7 @@ import java.util.Arrays;
 public class ConfigurationActivity extends AppCompatActivity {
 
     private final PlayerViewModel viewModel = new PlayerViewModel();
+    private Gson gson;
 
     // Player Name
     private EditText editPlayerName;
@@ -55,6 +60,12 @@ public class ConfigurationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_player);
+
+        if (viewModel.isLoaded()) {
+            Intent intent = new Intent(ConfigurationActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         // Finds name text edit
         editPlayerName = findViewById(R.id.playerName);
@@ -112,6 +123,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(ConfigurationActivity.this,
                             "Points must sum to 20", Toast.LENGTH_LONG);
                     toast.show();
+
                 } else {
                     Editable playerName = editPlayerName.getText();
                     viewModel.setPlayer(playerName.toString(),
@@ -120,6 +132,20 @@ public class ConfigurationActivity extends AppCompatActivity {
                             fighterPoints,
                             traderPoints,
                             engineerPoints);
+
+                    gson = new Gson();
+                    File path = getApplicationContext().getFilesDir();
+                    String json = gson.toJson(viewModel.getPlayer());
+                    File file = new File(path, "Player.json");
+
+                    try {
+                        FileOutputStream stream = new FileOutputStream(file);
+                        stream.write(json.getBytes());
+                        stream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("Save:", "Player");
                     Intent intent = new Intent(ConfigurationActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

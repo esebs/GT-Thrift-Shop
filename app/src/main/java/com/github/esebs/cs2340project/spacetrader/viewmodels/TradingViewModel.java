@@ -13,10 +13,20 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class TradingViewModel {
 
-    private final Model model = Model.getModelInstance();
-    private final Player player = model.getPlayer();
-    private final Room currentRoom = player.getCurrent();
-    private final Vehicle vehicle = player.getVehicle();
+    private final Model model;
+    private final Player player;
+    private final Room currentRoom;
+    private final Vehicle vehicle;
+
+    /**
+     * Constructor for TradingViewModel
+     */
+    public TradingViewModel() {
+        model = Model.getModelInstance();
+        player = model.getPlayer();
+        currentRoom = player.getCurrent();
+        vehicle = player.getVehicle();
+    }
 
     /**
      * Gets how many of a resource is offered by the Player's current Room
@@ -35,7 +45,7 @@ public class TradingViewModel {
      * @return the quantity of the resource owned by the Player
      */
     public int getSellQuantity(Resource resource) {
-        return vehicle.getCargoHold()[resource.ordinal()];
+        return player.getCargoHold()[resource.ordinal()];
     }
 
     /**
@@ -80,7 +90,7 @@ public class TradingViewModel {
         int credits = player.getCredits();
         maxBuyQuantity = Math.min(credits / price, maxBuyQuantity);
 
-        int remainingCargoSpace = vehicle.calculateRemainingCargoSpace();
+        int remainingCargoSpace = player.calculateRemainingCargoSpace();
 
         return Math.min(maxBuyQuantity, remainingCargoSpace);
     }
@@ -95,7 +105,7 @@ public class TradingViewModel {
      * @return the max sell quantity of the given resource
      */
     public int calculateMaxSellQuantity(Resource resource) {
-        int[] cargoHold = vehicle.getCargoHold();
+        int[] cargoHold = player.getCargoHold();
         return cargoHold[resource.ordinal()];
     }
 
@@ -108,9 +118,9 @@ public class TradingViewModel {
      * @param numToBuy how many to buy
      */
     public void buyResources(Resource resource, int numToBuy) {
-        int[] cargoHold = vehicle.getCargoHold();
+        int[] cargoHold = player.getCargoHold();
         cargoHold[resource.ordinal()] += numToBuy;
-        vehicle.setCargoHold(cargoHold);
+        player.setCargoHold(cargoHold);
 
         int credits = player.getCredits();
         int costPerUnit = currentRoom.getBuyFromRoomPrices()[resource.ordinal()];
@@ -134,9 +144,9 @@ public class TradingViewModel {
      * @param numToSell how many to sell
      */
     public void sellResources(Resource resource, int numToSell) {
-        int[] cargoHold = vehicle.getCargoHold();
+        int[] cargoHold = player.getCargoHold();
         cargoHold[resource.ordinal()] -= numToSell;
-        vehicle.setCargoHold(cargoHold);
+        player.setCargoHold(cargoHold);
 
         int credits = player.getCredits();
         int payPerUnit = currentRoom.getSellToRoomPrices()[resource.ordinal()];

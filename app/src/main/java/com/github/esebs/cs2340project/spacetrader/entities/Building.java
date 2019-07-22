@@ -26,7 +26,7 @@ public class Building {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.rooms = Room.createRooms(roomNumbers, this);
+        this.rooms = Room.createRooms(roomNumbers);
     }
 
     /**
@@ -63,6 +63,15 @@ public class Building {
      */
     public List<Room> getRooms() {
         return Collections.unmodifiableList(rooms);
+    }
+
+    @Override
+    public boolean equals (Object other) {
+        if (other == null || other.getClass() != Building.class) {
+            return false;
+        }
+        Building that = (Building) other;
+        return this.getName().equals(that.getName());
     }
 
     /**

@@ -2,6 +2,7 @@ package com.github.esebs.cs2340project.spacetrader.viewmodels;
 
 import android.util.Log;
 
+import com.github.esebs.cs2340project.spacetrader.entities.Building;
 import com.github.esebs.cs2340project.spacetrader.entities.Difficulty;
 import com.github.esebs.cs2340project.spacetrader.entities.Player;
 import com.github.esebs.cs2340project.spacetrader.entities.Room;
@@ -13,8 +14,16 @@ import com.github.esebs.cs2340project.spacetrader.model.Model;
  */
 public class PlayerViewModel {
 
-    private final Model model = Model.getModelInstance();
-    private final Player player = model.getPlayer();
+    private final Model model;
+    private final Player player;
+
+    /**
+     * Constructor for PlayerViewModel
+     */
+    public PlayerViewModel() {
+        model = Model.getModelInstance();
+        player = model.getPlayer();
+    }
 
     /**
      * Gets the player for the game
@@ -36,15 +45,31 @@ public class PlayerViewModel {
      */
     public void setPlayer(String name, Difficulty difficulty, int pilotPoints, int fighterPoints,
                   int traderPoints, int engineerPoints) {
-        Room current = model.getRandomRoom();
+        Building building = model.getRandomBuilding();
+        Room current = building.getRooms().get(0);
 
-        Player player = new Player(name, difficulty, current, pilotPoints, fighterPoints,
+        Player player = new Player(name, difficulty, current, building, pilotPoints, fighterPoints,
                 traderPoints, engineerPoints);
 
         Log.d("APP", "PlayerViewModel: created player: \n" + player);
 
         model.setPlayer(player);
+    }
 
+    /**
+     *
+     * @param player new player
+     */
+    public void setPlayer(Player player) {
+        model.setPlayer(player);
+    }
+
+    /**
+     * Does magic
+     * @param cargoHold new cargohold
+     */
+    public void setCargoHold(int[] cargoHold) {
+        model.getPlayer().setCargoHold(cargoHold);
     }
 
     /**
@@ -53,5 +78,12 @@ public class PlayerViewModel {
      */
     public Room getPlayerCurrentRoom() {
         return player.getCurrent();
+    }
+    public void setLoaded(boolean loaded) {
+        model.setLoaded(loaded);
+    }
+
+    public boolean isLoaded() {
+        return model.isLoaded();
     }
 }
