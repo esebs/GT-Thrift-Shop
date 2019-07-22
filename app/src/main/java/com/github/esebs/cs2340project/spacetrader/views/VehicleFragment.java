@@ -1,5 +1,7 @@
 package com.github.esebs.cs2340project.spacetrader.views;
+import com.github.esebs.cs2340project.spacetrader.views.VehicleActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,8 @@ class VehicleFragment extends Fragment {
     private Button refuel;
     private TravelViewModel viewModel;
 
+    private Button viewVehicle;
+
 
     /**
      * OnCreateView is called when the user switches to the 'Vehicle' tab.
@@ -51,6 +55,7 @@ class VehicleFragment extends Fragment {
         fuelInfo = view.findViewById(R.id.fuel_info);
         fuelCost = view.findViewById(R.id.fuel_cost);
         refuel = view.findViewById(R.id.refuel_button);
+        viewVehicle = view.findViewById(R.id.view_vehicle);
 
         fuelInfo.setText(getString(R.string.tank_range, viewModel.getCurrentRange()));
         if (viewModel.isRangeMax()) {
@@ -73,6 +78,15 @@ class VehicleFragment extends Fragment {
                     fuelCost.setText(getString(R.string.full_tank));
                     refuel.setEnabled(false);
                 }
+            }
+        });
+
+        viewVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VehicleFragment.this.getActivity(), VehicleActivity.class);
+                startActivity(intent);
+
             }
         });
 
