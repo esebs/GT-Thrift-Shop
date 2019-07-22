@@ -207,7 +207,7 @@ class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerCli
                                         "Not enough fuel left to Travel", Toast.LENGTH_LONG).show();
                             } else {
                                 viewModel.travelTo(selectedRoom);
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                Intent intent = new Intent(getActivity(), EncounterActivity.class);
                                 startActivity(intent);
                             }
 

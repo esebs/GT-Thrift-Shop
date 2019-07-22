@@ -1,4 +1,5 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
+
 /**
  * Creates player class
  * @version 1.0
@@ -45,30 +46,14 @@ public class Player {
 //    public String getName() {
 //        return name;
 //    }
-//
-//    /**
-//     * sets name to new variable
-//     * @param name player's new name
-//     */
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    /**
-//     * Returns current difficulty
-//     * @return difficulty
-//     */
-//    public Difficulty getDifficulty() {
-//        return difficulty;
-//    }
-//
-//    /**
-//     * Sets new difficulty
-//     * @param difficulty enum difficulty
-//     */
-//    public void setDifficulty(Difficulty difficulty) {
-//        this.difficulty = difficulty;
-//    }
+
+    /**
+     * Returns current difficulty
+     * @return difficulty
+     */
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
 
     /**
      * Gets the Player's current location
@@ -118,13 +103,13 @@ public class Player {
 //        this.pilotPoints = pilotPoints;
 //    }
 //
-//    /**
-//     * Returns player's fighter points
-//     * @return fighterPoints
-//     */
-//    public int getFighterPoints() {
-//        return fighterPoints;
-//    }
+    /**
+     * Returns player's fighter points
+     * @return fighterPoints
+     */
+    public int getFighterPoints() {
+        return fighterPoints;
+    }
 //
 //    /**
 //     * Sets fighter points to a new value
@@ -134,13 +119,13 @@ public class Player {
 //        this.fighterPoints = fighterPoints;
 //    }
 //
-//    /**
-//     * Returns player's trader points
-//     * @return
-//     */
-//    public int getTraderPoints() {
-//        return traderPoints;
-//    }
+    /**
+     * Returns player's trader points
+     * @return
+     */
+    public int getTraderPoints() {
+        return traderPoints;
+    }
 //
 //    /**
 //     * Sets trader points to a new value
@@ -180,6 +165,76 @@ public class Player {
      */
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    /**
+     * Attacks an encountered vehicle
+     *
+     * @param encounter encountered vehicle
+     * @return True if the player attacks the vehicle, False if the player misses
+     */
+    public Boolean attack(Encounterable encounter) {
+        int damage = 10;
+        boolean attacks;
+
+        final double missMultiplier = 0.85;
+        double missingChance = missMultiplier / fighterPoints;
+
+        double randomChance = Math.random();
+
+        if (randomChance > missingChance) {
+            attacks = true;
+            int encounterHealth = encounter.getHealth();
+            encounter.setHealth(encounterHealth - damage);
+        } else {
+            attacks = false;
+        }
+        return attacks;
+    }
+
+    /**
+     * Flees from an encountered vehicle (only Police or Pirates, not Traders)
+     *
+     * @param encounter encountered vehicle
+     * @return True if the player successfully flees, False if the player
+     * doesn't flee
+     */
+    public Boolean flee(Encounterable encounter) {
+        final double fleeChance = (5 * pilotPoints) * 0.01;
+
+        double randomChance = Math.random();
+        return !(randomChance > fleeChance);
+    }
+
+    /**
+     * Trades with a Trader instance. The player can only buy a certain
+     * quantity if the trader has at least that quantity, if the player
+     * can afford to buy that quantity, and if the player's cargo hold
+     * has space for that quantity.
+     *
+     * @param trader the Trader to trade with
+     * @param quantity the amount of the Trader's resource to buy
+     */
+    public void trade(Trader trader, int quantity) {
+        if (quantity > trader.calculateMaxBuyQuantity()) {
+            return;
+        }
+        int cost = quantity * trader.getPrice();
+        credits -= cost;
+
+        int[] playerItems = vehicle.getCargoHold();
+        int resourceIndex = trader.getResource().ordinal();
+        playerItems[resourceIndex] += quantity;
+        vehicle.setCargoHold(playerItems);
+    }
+
+    /**
+     * Returns whether the player has died
+     *
+     * @return health of player's vehicle
+     */
+    public boolean isDead() {
+        return vehicle.getCurrentHealth() <= 0;
     }
 
     /**

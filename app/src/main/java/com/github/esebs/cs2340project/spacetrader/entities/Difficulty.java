@@ -29,13 +29,13 @@ public enum Difficulty {
         return this.diff;
     }
 
-//    /**
-//     * Returns Multiple
-//     * @return multiple
-//     */
-//    public int getMultiple() {
-//        return multiple;
-//    }
+    /**
+     * Returns Multiple
+     * @return multiple
+     */
+    public int getMultiple() {
+        return multiple;
+    }
 //
 //    /**
 //     * Returns string representation of enum
