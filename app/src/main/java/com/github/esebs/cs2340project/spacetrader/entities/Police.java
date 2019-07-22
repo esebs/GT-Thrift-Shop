@@ -1,7 +1,7 @@
 package com.github.esebs.cs2340project.spacetrader.entities;
 
 public class Police extends Encounterable {
-    private int[] playerItems = player.getVehicle().getCargoHold();
+    private int[] playerItems = player.getCargoHold();
     private int firearmsIndex = Resource.FIREARMS.ordinal();
     private int narcoticsIndex = Resource.NARCOTICS.ordinal();
     private int playerCredits = player.getCredits();
@@ -26,7 +26,7 @@ public class Police extends Encounterable {
             //take away firearms and/or narcotics
             playerItems[firearmsIndex] = 0;
             playerItems[narcoticsIndex] = 0;
-            player.getVehicle().setCargoHold(playerItems);
+            player.setCargoHold(playerItems);
 
             //fine the player 25% of there credits
             player.setCredits(playerCredits - (int) (playerCredits * .25));

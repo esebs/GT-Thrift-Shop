@@ -47,7 +47,7 @@ public class VehicleViewModel {
      */
     public void buyVehicle(Vehicle vehicle) {
         int[] emptyCargoHold = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        this.vehicle.setCargoHold(emptyCargoHold);
+        this.player.setCargoHold(emptyCargoHold);
         player.setVehicle(vehicle);
         int credits = player.getCredits();
         player.setCredits(credits - getVehiclePrice(vehicle));
