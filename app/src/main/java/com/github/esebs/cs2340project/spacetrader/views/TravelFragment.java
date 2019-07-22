@@ -244,7 +244,7 @@ class TravelFragment extends Fragment implements OnMapReadyCallback, OnMarkerCli
                                     e.printStackTrace();
                                     Log.d("Error", "Travel Fragment Saving Buildings");
                                 }
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                Intent intent = new Intent(getActivity(), EncounterActivity.class);
                                 startActivity(intent);
                             }
 
